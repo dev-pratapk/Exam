@@ -1,3 +1,12 @@
+# Anna University previous year papers and pattern analysis
+
+| Subject | Analysis PDF | Folder |
+|---|---|---|
+| MA3354 Discrete Mathematics | [PDF](MA3354_Exam_Pattern_Analysis.pdf) | this page (below) |
+| CS3551 Distributed Computing | [PDF](CS3551-Distributed-Computing/CS3551_Exam_Pattern_Analysis.pdf) | [CS3551-Distributed-Computing/](CS3551-Distributed-Computing/) |
+
+---
+
 # MA3354 Discrete Mathematics: Previous Year Papers and Pattern Analysis
 
 Anna University · B.E./B.Tech · Regulation 2021, 3rd semester
