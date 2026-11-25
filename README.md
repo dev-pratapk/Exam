@@ -4,6 +4,13 @@ Anna University · B.E./B.Tech · Regulation 2021, 3rd semester
 
 **Download the analysis PDF: [MA3354_Exam_Pattern_Analysis.pdf](MA3354_Exam_Pattern_Analysis.pdf)**
 
+**Model question papers (exact exam format): [MA3354_Model_Question_Papers.pdf](MA3354_Model_Question_Papers.pdf)**. These are three full papers laid out like the real Anna University paper (Part A 10 × 2, Part B 5 × 16 with (a) Or (b)). Every question is a real question from a previous paper:
+- Paper 1: the most-repeated questions.
+- Paper 2: the next most frequent questions.
+- Paper 3: "due" topics and R2021-style questions.
+
+The last page lists where each question came from.
+
 It has:
 - the most-repeated questions,
 - a priority list of what to study first,
@@ -46,7 +53,8 @@ The earlier subjects MA6566 (R2013) and MA8351 (R2017) cover the same five units
 - `analysis/papers.py`: every Part B sub-question of the 14 papers, tagged with the skill it needs and its marks.
 - `python3 analysis/run.py`: shows how often each skill appears, and the backtest (how many Part B marks a study list would have scored in each paper).
 - `python3 analysis/validate.py`: the out-of-sample test, where old papers predict the R2021 papers.
-- `REPO_URL=https://github.com/<owner>/<repo> report/build.sh`: rebuilds the PDF (needs Python 3 and Node with Playwright).
+- `REPO_URL=https://github.com/<owner>/<repo> report/build.sh`: rebuilds the analysis PDF (needs Python 3 and Node with Playwright).
+- `model-papers/build.sh`: rebuilds the model question papers. The questions are in `model-papers/build_model.py`; figures are cropped from the original papers.
 
 ## Credits
 
