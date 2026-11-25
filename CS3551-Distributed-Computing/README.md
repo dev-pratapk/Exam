@@ -4,6 +4,12 @@ Anna University · Regulation 2021 · Semester 5
 
 **Download the analysis PDF: [CS3551_Exam_Pattern_Analysis.pdf](CS3551_Exam_Pattern_Analysis.pdf)**
 
+**Model question papers (exact exam format): [CS3551_Model_Question_Papers.pdf](CS3551_Model_Question_Papers.pdf)**. Two full papers laid out like the real Anna University paper: Part A 10 × 2, Part B 5 × 13 with (a) Or (b), and Part C 1 × 15 with (a) Or (b). Every question is a real question from a previous paper:
+- Paper 1: the most-repeated questions.
+- Paper 2: the next most frequent questions.
+
+The last page lists which paper each question came from.
+
 It contains the top 15 topics to study (3 per unit) and every question from the past papers grouped by topic. It also explains the Part C case-study pattern and how the analysis was done.
 
 ## What was found
@@ -32,6 +38,7 @@ CS8603 Distributed Systems (R2017) shares Units I–IV with CS3551. Its Unit V (
 ## Re-running
 - `python3 analysis/run.py` shows topic frequency.
 - `python3 analysis/validate.py` runs the leave-one-out test.
-- `report/build.sh` rebuilds the PDF.
+- `report/build.sh` rebuilds the analysis PDF.
+- `model-papers/build.sh` rebuilds the model question papers. The questions are in `model-papers/build_model.py`.
 
 Unofficial; not affiliated with Anna University.
