@@ -1,0 +1,17 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper header: B.E./B.Tech. MA3354 Discrete Mathematics, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 13 (a) — answer every sub-part below (one <div class="ans"> per sub-part, data-q like "13 (a) (i)").
+
+13 (a) (i) [8 marks]: Prove that the number of vertices of odd degree in a graph G is always even.
+
+13 (a) (ii) [8 marks]: Check whether the graphs are isomorphic or not.
+FIGURE (draw it yourself in SVG; the reader of the question sees this picture):
+G1: 8 vertices. Outer square TL, TR, BR, BL (edges TL–TR, TR–BR, BR–BL, BL–TL). Inner square tl, tr, br, bl (edges tl–tr, tr–br, br–bl, bl–tl).
+    Two connecting edges: TR–tr and BL–bl.  (10 edges)
+G2: 8 vertices. Same outer square and inner square, but the two connecting edges are TL–tl and TR–tr.  (10 edges)
+Correct conclusion: NOT isomorphic. Both have 8 vertices, 10 edges, degree sequence (3,3,3,3,2,2,2,2), but in G2 the four
+degree-3 vertices TL, TR, tr, tl form a 4-cycle (4 edges among them), while in G1 the degree-3 vertices TR, tr, BL, bl have only
+2 edges among them (TR–tr, BL–bl). An isomorphism preserves adjacency between degree-3 vertices, so no isomorphism exists.
+(Name the vertices u1..u8 for G1 and v1..v8 for G2 in your answer and show the comparison table.)
+
+Write the file out/13a.html.

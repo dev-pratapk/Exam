@@ -1,0 +1,9 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper header: B.E./B.Tech. MA3354 Discrete Mathematics, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 14 (b) — answer every sub-part below (one <div class="ans"> per sub-part, data-q like "14 (b) (i)").
+
+14 (b) (i) [8 marks]: Prove that the intersection of two normal subgroups of a group G is again a normal subgroup of G.
+
+14 (b) (ii) [8 marks]: Prove that every subgroup of a cyclic group is cyclic.
+
+Write the file out/14b.html.

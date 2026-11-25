@@ -1,0 +1,10 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper header: B.E./B.Tech. MA3354 Discrete Mathematics, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 15 (b) — answer every sub-part below (one <div class="ans"> per sub-part, data-q like "15 (b) (i)").
+
+15 (b) (i) [8 marks]: State and prove De Morgan’s laws in any Boolean algebra.
+
+15 (b) (ii) [8 marks]: Let D_30 = {1, 2, 3, 5, 6, 10, 15, 30} with the relation x ≤ y if and only if x divides y. Find (1) all lower bounds of 10 and 15 (2) GLB of 10 and 15 (3) all upper bounds of 10 and 15 (4) LUB of 10 and 15 (5) draw the Hasse diagram for D_30.
+Check values: lower bounds of 10 and 15 = {1, 5}; GLB = 5; upper bounds = {30}; LUB = 30. Hasse diagram of D30 is a cube.
+
+Write the file out/15b.html.

@@ -1,0 +1,112 @@
+<div class="ans" data-q="15 (a) (i)" data-pages="2.5">
+<h4>Given / To prove</h4>
+<p><b>Given:</b> A chain (L, ≤), that is, a partially ordered set in which every two elements are comparable. <b>To prove:</b> L is a distributive lattice — first that every pair of elements has a meet (glb) and a join (lub), and then that the distributive law holds.</p>
+
+<h4>Definitions used</h4>
+<ul>
+<li><b>Chain (totally ordered set):</b> a poset (L, ≤) in which, for all a, b ∈ L, either a ≤ b or b ≤ a.</li>
+<li><b>Lattice:</b> a poset in which every pair a, b has a greatest lower bound a ∧ b (the <i>meet</i>) and a least upper bound a ∨ b (the <i>join</i>).</li>
+<li><b>Distributive lattice:</b> a lattice in which meet distributes over join,
+<div class="eq">a ∧ (b ∨ c) = (a ∧ b) ∨ (a ∧ c) for all a, b, c ∈ L.</div></li>
+</ul>
+
+<h4>Part 1: Every chain is a lattice</h4>
+<p>Let a, b ∈ L. Since L is a chain, either a ≤ b or b ≤ a.</p>
+<ol>
+<li><b>Case a ≤ b.</b> Then a is a lower bound of {a, b} and b is an upper bound. Any lower bound x must satisfy x ≤ a (because a is one of the two elements), so a is the <i>greatest</i> lower bound: a ∧ b = a. Likewise every upper bound x satisfies b ≤ x, so b is the <i>least</i> upper bound: a ∨ b = b.</li>
+<li><b>Case b ≤ a.</b> The same reasoning, with a and b interchanged, gives a ∧ b = b and a ∨ b = a.</li>
+</ol>
+<p>Hence in a chain the meet is the smaller element and the join is the larger element:</p>
+<div class="eq">a ∧ b = min(a, b),&nbsp;&nbsp;&nbsp; a ∨ b = max(a, b).</div>
+<p>Since a ∧ b and a ∨ b exist for every pair a, b, the chain L is a lattice.</p>
+
+<figure class="dg">
+<svg width="130" height="210" viewBox="0 0 130 210" xmlns="http://www.w3.org/2000/svg">
+<line x1="55" y1="20" x2="55" y2="75" stroke="#000" stroke-width="1.6"/>
+<line x1="55" y1="75" x2="55" y2="130" stroke="#000" stroke-width="1.6"/>
+<line x1="55" y1="130" x2="55" y2="185" stroke="#000" stroke-width="1.6"/>
+<circle cx="55" cy="20" r="4" fill="#000"/>
+<circle cx="55" cy="75" r="4" fill="#000"/>
+<circle cx="55" cy="130" r="4" fill="#000"/>
+<circle cx="55" cy="185" r="4" fill="#000"/>
+<text x="70" y="25" font-size="14" font-family="serif">a<tspan dy="3" font-size="10">4</tspan></text>
+<text x="70" y="80" font-size="14" font-family="serif">a<tspan dy="3" font-size="10">3</tspan></text>
+<text x="70" y="135" font-size="14" font-family="serif">a<tspan dy="3" font-size="10">2</tspan></text>
+<text x="70" y="190" font-size="14" font-family="serif">a<tspan dy="3" font-size="10">1</tspan></text>
+</svg>
+<figcaption>A chain of four elements: every pair is comparable, and the meet (join) of any two is the lower (upper) one.</figcaption>
+</figure>
+
+<h4>Part 2: The lattice is distributive</h4>
+<p>Let a, b, c ∈ L. We prove a ∧ (b ∨ c) = (a ∧ b) ∨ (a ∧ c). Since L is a chain, b and c are comparable, and for each pair the meet is the minimum and the join is the maximum. Two cases arise.</p>
+
+<p><b>Case 1: b ≤ c.</b> Then b ∨ c = c, and a is comparable with both.</p>
+<table class="tt">
+<tr><th>Position of a</th><th>a ∧ (b ∨ c)</th><th>(a ∧ b) ∨ (a ∧ c)</th></tr>
+<tr><td>a ≤ b (so a ≤ b ≤ c)</td><td>a ∧ c = a</td><td>a ∨ a = a</td></tr>
+<tr><td>b ≤ a ≤ c</td><td>a ∧ c = a</td><td>b ∨ a = a</td></tr>
+<tr><td>c ≤ a</td><td>a ∧ c = c</td><td>b ∨ c = c</td></tr>
+</table>
+<p>Both sides agree in every sub-case.</p>
+
+<p><b>Case 2: c ≤ b.</b> Then b ∨ c = b.</p>
+<table class="tt">
+<tr><th>Position of a</th><th>a ∧ (b ∨ c)</th><th>(a ∧ b) ∨ (a ∧ c)</th></tr>
+<tr><td>a ≤ c (so a ≤ c ≤ b)</td><td>a ∧ b = a</td><td>a ∨ a = a</td></tr>
+<tr><td>c ≤ a ≤ b</td><td>a ∧ b = a</td><td>a ∨ c = a</td></tr>
+<tr><td>b ≤ a</td><td>a ∧ b = b</td><td>b ∨ c = b</td></tr>
+</table>
+<p>Again both sides agree. In every case a ∧ (b ∨ c) = (a ∧ b) ∨ (a ∧ c).</p>
+<p>The dual law a ∨ (b ∧ c) = (a ∨ b) ∧ (a ∨ c) now follows by the principle of duality (interchange ∧ with ∨ and ≤ with ≥ throughout). Hence the lattice is distributive.</p>
+
+<div class="result">Therefore every chain is a distributive lattice. ∎</div>
+</div>
+
+<div class="ans" data-q="15 (a) (ii)" data-pages="3">
+<h4>Given / To prove</h4>
+<p><b>Given:</b> A distributive complemented lattice (L, ∧, ∨, ′, 0, 1). For x ∈ L, let x′ denote the complement of x (the bar notation x̄), so that</p>
+<div class="eq">x ∧ x′ = 0,&nbsp;&nbsp;&nbsp; x ∨ x′ = 1.</div>
+<p><b>To prove:</b> for any a, b ∈ L the following four statements are equivalent:</p>
+<ol>
+<li>a ≤ b</li>
+<li>a ∧ b′ = 0</li>
+<li>a′ ∨ b = 1</li>
+<li>b′ ≤ a′</li>
+</ol>
+
+<h4>Definitions and results used</h4>
+<ul>
+<li><b>Complement laws:</b> x ∧ x′ = 0, x ∨ x′ = 1; also 0′ = 1, 1′ = 0.</li>
+<li><b>Bounded identities:</b> x ∧ 0 = 0, x ∧ 1 = x, x ∨ 0 = x, x ∨ 1 = 1.</li>
+<li><b>Uniqueness of complement</b> (in a distributive lattice), together with the consequences (x′)′ = x and De Morgan's laws
+<div class="eq">(x ∧ y)′ = x′ ∨ y′,&nbsp;&nbsp;&nbsp; (x ∨ y)′ = x′ ∧ y′.</div></li>
+</ul>
+
+<h4>Lemma: complements are unique</h4>
+<p>Suppose x has two complements y and z. Then</p>
+<div class="eq">y = y ∧ 1 = y ∧ (x ∨ z) = (y ∧ x) ∨ (y ∧ z) = 0 ∨ (y ∧ z) = y ∧ z,</div>
+<p>so y ≤ z. Interchanging y and z gives z ≤ y. Hence y = z. Therefore each element has exactly one complement, and x is the unique complement of x′, so (x′)′ = x. Applying uniqueness to the element x ∧ y shows that x′ ∨ y′ is its complement, which is De Morgan's first law; the second is dual.</p>
+
+<h4>Proof of the equivalences</h4>
+<p>We prove the cycle of implications (1) ⇒ (2) ⇒ (3) ⇒ (4) ⇒ (1). Each step uses distributivity, the complement laws and uniqueness of complement.</p>
+
+<p><b>(1) ⇒ (2).</b> Assume a ≤ b. Then a ∧ b = a, and</p>
+<div class="eq">a ∧ b′ = (a ∧ b) ∧ b′ = a ∧ (b ∧ b′) = a ∧ 0 = 0.</div>
+
+<p><b>(2) ⇒ (3).</b> Assume a ∧ b′ = 0. Taking complements and using De Morgan's law and (b′)′ = b,</p>
+<div class="eq">a′ ∨ b = a′ ∨ (b′)′ = (a ∧ b′)′ = 0′ = 1.</div>
+
+<p><b>(3) ⇒ (4).</b> Assume a′ ∨ b = 1. Then</p>
+<div class="eq">b′ = b′ ∧ 1 = b′ ∧ (a′ ∨ b) = (b′ ∧ a′) ∨ (b′ ∧ b) = (b′ ∧ a′) ∨ 0 = b′ ∧ a′.</div>
+<p>Since b′ = b′ ∧ a′, b′ is a lower bound of a′, that is, b′ ≤ a′.</p>
+
+<p><b>(4) ⇒ (1).</b> Assume b′ ≤ a′. Then a ∧ b′ is a lower bound of both a and a′, so</p>
+<div class="eq">a ∧ b′ ≤ a ∧ a′ = 0, hence a ∧ b′ = 0.</div>
+<p>Now</p>
+<div class="eq">a = a ∧ 1 = a ∧ (b ∨ b′) = (a ∧ b) ∨ (a ∧ b′) = (a ∧ b) ∨ 0 = a ∧ b,</div>
+<p>and a = a ∧ b means a ≤ b.</p>
+
+<p>Thus (1) ⇒ (2) ⇒ (3) ⇒ (4) ⇒ (1). Since the last statement implies the first, all four statements imply one another and are therefore equivalent.</p>
+
+<div class="result">Hence in a distributive complemented lattice, a ≤ b ⇔ a ∧ b′ = 0 ⇔ a′ ∨ b = 1 ⇔ b′ ≤ a′. ∎</div>
+</div>

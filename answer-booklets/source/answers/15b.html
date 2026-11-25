@@ -1,0 +1,115 @@
+<div class="ans" data-q="15 (b) (i)" data-pages="2.5">
+<h4>Statement</h4>
+<p>Let (B, +, ·, ′, 0, 1) be a Boolean algebra. Then for all a, b ∈ B,</p>
+<div class="eq">(i)&nbsp; (a + b)′ = a′ · b′,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ii)&nbsp; (a · b)′ = a′ + b′.</div>
+<p>In words: the complement of a sum is the product of the complements, and the complement of a product is the sum of the complements.</p>
+
+<h4>Axioms and results used</h4>
+<ul>
+<li><b>Commutative laws:</b> a + b = b + a, a · b = b · a.</li>
+<li><b>Distributive laws:</b> a + (b · c) = (a + b) · (a + c), a · (b + c) = (a · b) + (a · c).</li>
+<li><b>Complement laws:</b> a + a′ = 1, a · a′ = 0.</li>
+<li><b>Identity and domination laws:</b> a + 0 = a, a · 1 = a, a + 1 = 1, a · 0 = 0.</li>
+</ul>
+
+<h4>Lemma: the complement is unique</h4>
+<p>Suppose an element x has two complements c and d, that is x + c = 1, x · c = 0 and x + d = 1, x · d = 0. Then</p>
+<div class="eq">c = c · 1 = c · (x + d) = (c · x) + (c · d) = 0 + (c · d) = c · d,</div>
+<p>so c ≤ d (since c · d = c). Interchanging c and d gives d ≤ c. Hence c = d, so the complement of any element is unique.</p>
+
+<h4>Proof of (i)</h4>
+<p>Put c = a′ · b′. It is enough to show that c is a complement of a + b; by the lemma there is then only one complement, so (a + b)′ = c.</p>
+<p><b>Step 1 (the sum is 1).</b> Using the distributive law x + y·z = (x + y)·(x + z),</p>
+<div class="eq">(a + b) + c = (a + b) + a′b′ = (a + b + a′)(a + b + b′) = (1 + b)(a + 1) = 1 · 1 = 1.</div>
+<p><b>Step 2 (the product is 0).</b></p>
+<div class="eq">(a + b) · c = (a + b) · a′b′ = a·a′·b′ + b·a′·b′ = (a·a′)b′ + (b·b′)a′ = 0·b′ + 0·a′ = 0.</div>
+<p>Thus (a + b) + c = 1 and (a + b) · c = 0, so c = a′b′ is the complement of a + b. By uniqueness,</p>
+<div class="eq">(a + b)′ = a′ · b′.</div>
+
+<h4>Proof of (ii)</h4>
+<p>A Boolean algebra is self-dual: the dual of any true statement, obtained by interchanging + with · and 0 with 1 (leaving ′, a, b unchanged), is also true, because every axiom has its dual among the axioms. Applying duality to law (i) gives immediately</p>
+<div class="eq">(a · b)′ = a′ + b′.</div>
+<p>Direct check with d = a′ + b′: on one hand (a·b) + d = ab + a′ + b′ = (a + a′)(b + a′) + b′ = 1·(b + a′) + b′ = a′ + (b + b′) = a′ + 1 = 1; on the other hand (a·b)·d = ab(a′ + b′) = aa′b + abb′ = 0 + 0 = 0. Hence d is the complement of a·b.</p>
+
+<div class="result">Hence in every Boolean algebra (a + b)′ = a′·b′ and (a·b)′ = a′ + b′. These are De Morgan's laws. ∎</div>
+</div>
+
+<div class="ans" data-q="15 (b) (ii)" data-pages="2.5">
+<h4>Given</h4>
+<p>D<sub>30</sub> = {1, 2, 3, 5, 6, 10, 15, 30} with x ≤ y ⇔ x divides y (written x | y). This is the divisibility poset of the divisors of 30; in it a ∧ b = gcd(a, b) and a ∨ b = lcm(a, b).</p>
+
+<h4>Definitions used</h4>
+<ul>
+<li><b>Lower bound</b> of a and b: an element l with l ≤ a and l ≤ b, i.e. l | a and l | b.</li>
+<li><b>GLB</b> (greatest lower bound): the lower bound that is divisible by every other lower bound.</li>
+<li><b>Upper bound</b> of a and b: an element u with a ≤ u and b ≤ u, i.e. a | u and b | u.</li>
+<li><b>LUB</b> (least upper bound): the upper bound that divides every other upper bound.</li>
+</ul>
+
+<h4>(1) All lower bounds of 10 and 15</h4>
+<p>Divisors of 10 in D<sub>30</sub>: 1, 2, 5, 10. Divisors of 15: 1, 3, 5, 15. The common divisors, which divide both 10 and 15, are 1 and 5.</p>
+<div class="eq">Lower bounds of 10 and 15 = {1, 5}.</div>
+
+<h4>(2) GLB of 10 and 15</h4>
+<p>Of the lower bounds 1 and 5, we have 1 | 5, so 5 is the greatest (it is divisible by 1).</p>
+<div class="eq">GLB(10, 15) = 5 = gcd(10, 15).</div>
+
+<h4>(3) All upper bounds of 10 and 15</h4>
+<p>Multiples of 10 in D<sub>30</sub>: 10, 30. Multiples of 15: 15, 30. The common multiples are 30 only.</p>
+<div class="eq">Upper bounds of 10 and 15 = {30}.</div>
+
+<h4>(4) LUB of 10 and 15</h4>
+<div class="eq">LUB(10, 15) = 30 = lcm(10, 15).</div>
+
+<h4>(5) Hasse diagram of D<sub>30</sub></h4>
+<p>Write 30 = 2 × 3 × 5. An element x is covered by y exactly when y / x is prime. The covering relations are:</p>
+<table class="tt">
+<tr><th>Element x</th><th>Elements covering x</th></tr>
+<tr><td>1</td><td>2, 3, 5</td></tr>
+<tr><td>2</td><td>6, 10</td></tr>
+<tr><td>3</td><td>6, 15</td></tr>
+<tr><td>5</td><td>10, 15</td></tr>
+<tr><td>6</td><td>30</td></tr>
+<tr><td>10</td><td>30</td></tr>
+<tr><td>15</td><td>30</td></tr>
+</table>
+<p>Since 30 is a product of three distinct primes, D<sub>30</sub> is isomorphic to the Boolean lattice B<sub>3</sub> of subsets of a 3-element set, the correspondence being x ↔ the set of prime divisors of x:</p>
+<div class="eq">1 ↔ ∅, 2 ↔ {2}, 3 ↔ {3}, 5 ↔ {5}, 6 ↔ {2,3}, 10 ↔ {2,5}, 15 ↔ {3,5}, 30 ↔ {2,3,5}.</div>
+<p>Hence its Hasse diagram is a <b>cube</b>: 1 at the bottom, the atoms 2, 3, 5 on the first level, the elements 6, 10, 15 on the second level, and 30 at the top.</p>
+
+<figure class="dg">
+<svg width="360" height="420" viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg">
+<line x1="190" y1="385" x2="85" y2="275" stroke="#000" stroke-width="1.6"/>
+<line x1="190" y1="385" x2="190" y2="275" stroke="#000" stroke-width="1.6"/>
+<line x1="190" y1="385" x2="295" y2="275" stroke="#000" stroke-width="1.6"/>
+<line x1="85" y1="275" x2="85" y2="165" stroke="#000" stroke-width="1.6"/>
+<line x1="85" y1="275" x2="190" y2="165" stroke="#000" stroke-width="1.6"/>
+<line x1="190" y1="275" x2="85" y2="165" stroke="#000" stroke-width="1.6"/>
+<line x1="190" y1="275" x2="295" y2="165" stroke="#000" stroke-width="1.6"/>
+<line x1="295" y1="275" x2="190" y2="165" stroke="#000" stroke-width="1.6"/>
+<line x1="295" y1="275" x2="295" y2="165" stroke="#000" stroke-width="1.6"/>
+<line x1="85" y1="165" x2="190" y2="55" stroke="#000" stroke-width="1.6"/>
+<line x1="190" y1="165" x2="190" y2="55" stroke="#000" stroke-width="1.6"/>
+<line x1="295" y1="165" x2="190" y2="55" stroke="#000" stroke-width="1.6"/>
+<circle cx="190" cy="385" r="4" fill="#000"/>
+<circle cx="85" cy="275" r="4" fill="#000"/>
+<circle cx="190" cy="275" r="4" fill="#000"/>
+<circle cx="295" cy="275" r="4" fill="#000"/>
+<circle cx="85" cy="165" r="4" fill="#000"/>
+<circle cx="190" cy="165" r="4" fill="#000"/>
+<circle cx="295" cy="165" r="4" fill="#000"/>
+<circle cx="190" cy="55" r="4" fill="#000"/>
+<text x="202" y="396" font-size="14" font-family="serif">1</text>
+<text x="60" y="281" font-size="14" font-family="serif">2</text>
+<text x="165" y="286" font-size="14" font-family="serif">3</text>
+<text x="308" y="281" font-size="14" font-family="serif">5</text>
+<text x="60" y="170" font-size="14" font-family="serif">6</text>
+<text x="158" y="159" font-size="14" font-family="serif">10</text>
+<text x="308" y="170" font-size="14" font-family="serif">15</text>
+<text x="200" y="49" font-size="14" font-family="serif">30</text>
+</svg>
+<figcaption>Hasse diagram of D<sub>30</sub>; it is the cube B<sub>3</sub>. Each edge joins a divisor to the divisor obtained by multiplying it by one prime.</figcaption>
+</figure>
+
+<div class="result">Lower bounds = {1, 5}; GLB = 5. Upper bounds = {30}; LUB = 30. The Hasse diagram of D<sub>30</sub> is a cube. ∎</div>
+</div>

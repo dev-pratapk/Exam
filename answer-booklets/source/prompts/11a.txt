@@ -1,0 +1,9 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper header: B.E./B.Tech. MA3354 Discrete Mathematics, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 11 (a) — answer every sub-part below (one <div class="ans"> per sub-part, data-q like "11 (a) (i)").
+
+11 (a) (i) [8 marks]: Show that (¬P ∧ (¬Q ∧ R)) ∨ (Q ∧ R) ∨ (P ∧ R) ⇔ R, without using truth table.
+
+11 (a) (ii) [8 marks]: Show that the premises “A student in this class has not read the book” and “Everyone in this class passed the first exam” imply the conclusion “Someone who passed the first exam has not read the book”.
+
+Write the file out/11a.html.

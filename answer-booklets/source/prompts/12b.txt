@@ -1,0 +1,9 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper header: B.E./B.Tech. MA3354 Discrete Mathematics, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 12 (b) — answer every sub-part below (one <div class="ans"> per sub-part, data-q like "12 (b) (i)").
+
+12 (b) (i) [8 marks]: Use mathematical induction to show that 1^2 + 2^2 + 3^2 + ⋯ + n^2 = n(n + 1)(2n + 1)/6, whenever n is a positive integer.
+
+12 (b) (ii) [8 marks]: Show that if n is an integer greater than 1, then n can be written as the product of primes.
+
+Write the file out/12b.html.

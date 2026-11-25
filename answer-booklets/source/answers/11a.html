@@ -1,0 +1,67 @@
+<div class="ans" data-q="11 (a) (i)" data-pages="2.5">
+<h4>Problem</h4>
+<p><b>To prove:</b> (¬P ∧ (¬Q ∧ R)) ∨ (Q ∧ R) ∨ (P ∧ R) ⇔ R, using the laws of logic only (no truth table).</p>
+<p><b>Method.</b> Simplify the left-hand side step by step, quoting the law used at every step, and reduce it to R.</p>
+<h4>Laws used</h4>
+<ul>
+<li><b>Associative law:</b> (A ∧ B) ∧ C ⇔ A ∧ (B ∧ C); and (A ∨ B) ∨ C ⇔ A ∨ (B ∨ C).</li>
+<li><b>Commutative law:</b> A ∨ B ⇔ B ∨ A.</li>
+<li><b>Distributive law:</b> (A ∧ C) ∨ (B ∧ C) ⇔ (A ∨ B) ∧ C.</li>
+<li><b>De Morgan's law:</b> ¬(A ∨ B) ⇔ ¬A ∧ ¬B.</li>
+<li><b>Negation (complement) law:</b> A ∨ ¬A ⇔ T.</li>
+<li><b>Identity law:</b> T ∧ A ⇔ A.</li>
+</ul>
+<h4>Proof</h4>
+<table class="tt">
+<tr><th>Step</th><th>Statement</th><th>Reason</th></tr>
+<tr><td>1</td><td>(¬P ∧ (¬Q ∧ R)) ∨ (Q ∧ R) ∨ (P ∧ R)</td><td>Given LHS</td></tr>
+<tr><td>2</td><td>⇔ (¬P ∧ ¬Q ∧ R) ∨ [(Q ∧ R) ∨ (P ∧ R)]</td><td>Associative law</td></tr>
+<tr><td>3</td><td>⇔ (¬P ∧ ¬Q ∧ R) ∨ [(Q ∨ P) ∧ R]</td><td>Distributive law on (Q ∧ R) ∨ (P ∧ R)</td></tr>
+<tr><td>4</td><td>⇔ [(¬P ∧ ¬Q) ∧ R] ∨ [(P ∨ Q) ∧ R]</td><td>Associative law; Commutative law Q ∨ P ⇔ P ∨ Q</td></tr>
+<tr><td>5</td><td>⇔ [(¬P ∧ ¬Q) ∨ (P ∨ Q)] ∧ R</td><td>Distributive law (R taken common)</td></tr>
+<tr><td>6</td><td>⇔ [¬(P ∨ Q) ∨ (P ∨ Q)] ∧ R</td><td>De Morgan's law: ¬P ∧ ¬Q ⇔ ¬(P ∨ Q)</td></tr>
+<tr><td>7</td><td>⇔ T ∧ R</td><td>Negation law: A ∨ ¬A ⇔ T with A = P ∨ Q</td></tr>
+<tr><td>8</td><td>⇔ R</td><td>Identity law: T ∧ R ⇔ R</td></tr>
+</table>
+<p>Every step is a logical equivalence, so the given expression is logically equivalent to R. Since the steps are reversible, conversely R also reduces to the original expression; hence the equivalence holds both ways.</p>
+<div class="result">Hence (¬P ∧ (¬Q ∧ R)) ∨ (Q ∧ R) ∨ (P ∧ R) ⇔ R. ∎</div>
+<h4>Remark</h4>
+<p>The key idea is to group the last two terms, factor out R, and then recognise ¬P ∧ ¬Q as the negation of P ∨ Q, so the bracketed part becomes a tautology T, leaving T ∧ R ⇔ R.</p>
+</div>
+
+<div class="ans" data-q="11 (a) (ii)" data-pages="2.5">
+<h4>Problem</h4>
+<p><b>Given premises:</b></p>
+<ol>
+<li>“A student in this class has not read the book.”</li>
+<li>“Everyone in this class passed the first exam.”</li>
+</ol>
+<p><b>To prove (conclusion):</b> “Someone who passed the first exam has not read the book.”</p>
+<h4>Notation</h4>
+<p>Let the universe of discourse be all students, and define the predicates</p>
+<ul>
+<li>C(x): x is a student in this class,</li>
+<li>B(x): x has read the book,</li>
+<li>P(x): x passed the first exam.</li>
+</ul>
+<p>The premises and conclusion are then written as:</p>
+<div class="eq">Premise 1: ∃x (C(x) ∧ ¬B(x))</div>
+<div class="eq">Premise 2: ∀x (C(x) → P(x))</div>
+<div class="eq">Conclusion: ∃x (P(x) ∧ ¬B(x))</div>
+<h4>Proof by rules of inference</h4>
+<table class="tt">
+<tr><th>Step</th><th>Statement</th><th>Reason</th></tr>
+<tr><td>1</td><td>∃x (C(x) ∧ ¬B(x))</td><td>Rule P (Premise 1)</td></tr>
+<tr><td>2</td><td>C(a) ∧ ¬B(a)</td><td>Rule ES on step 1 (a is a particular student)</td></tr>
+<tr><td>3</td><td>C(a)</td><td>Rule T (Simplification) on step 2</td></tr>
+<tr><td>4</td><td>¬B(a)</td><td>Rule T (Simplification) on step 2</td></tr>
+<tr><td>5</td><td>∀x (C(x) → P(x))</td><td>Rule P (Premise 2)</td></tr>
+<tr><td>6</td><td>C(a) → P(a)</td><td>Rule US on step 5</td></tr>
+<tr><td>7</td><td>P(a)</td><td>Rule T (Modus Ponens) on steps 3 and 6</td></tr>
+<tr><td>8</td><td>P(a) ∧ ¬B(a)</td><td>Rule T (Conjunction) on steps 7 and 4</td></tr>
+<tr><td>9</td><td>∃x (P(x) ∧ ¬B(x))</td><td>Rule EG on step 8</td></tr>
+</table>
+<p><b>Note on order.</b> Existential instantiation (step 2) is applied before universal instantiation (step 6), and the same name a is used in both. This is legitimate: the individual a obtained from Premise 1 is a fixed (though unspecified) student, and Premise 2 applies to every student, hence to a as well.</p>
+<p>Step 9 is exactly the symbolic form of “Someone who passed the first exam has not read the book.” Therefore the conclusion follows validly from the two premises.</p>
+<div class="result">Hence the premises “A student in this class has not read the book” and “Everyone in this class passed the first exam” imply the conclusion “Someone who passed the first exam has not read the book.” ∎</div>
+</div>

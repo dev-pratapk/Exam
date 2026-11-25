@@ -1,0 +1,11 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper header: B.E./B.Tech. MA3354 Discrete Mathematics, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 12 (a) — answer every sub-part below (one <div class="ans"> per sub-part, data-q like "12 (a) (i)").
+
+12 (a) (i) [8 marks]: Solve: T(k) − 7T(k − 1) + 10T(k − 2) = 6 + 8k, T(0) = 1, T(1) = 2.
+Check value: T(k) = −9·2^k + 2·5^k + 2k + 8 (T(2) = 26, T(3) = 192).
+
+12 (a) (ii) [8 marks]: Find the number of integers between 1 and 250 that are not divisible by any of the integers 2, 3, 5 and 7.
+Check value: divisible by at least one of 2,3,5,7 = 293 − 117 + 18 − 1 = 193, so the answer is 250 − 193 = 57.
+
+Write the file out/12a.html.

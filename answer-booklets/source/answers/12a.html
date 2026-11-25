@@ -1,0 +1,91 @@
+<div class="ans" data-q="12 (a) (i)" data-pages="3">
+<h4>Problem</h4>
+<p><b>Given:</b> The non-homogeneous linear recurrence relation with constant coefficients</p>
+<div class="eq">T(k) − 7T(k − 1) + 10T(k − 2) = 6 + 8k, &nbsp; k ≥ 2,</div>
+<p>with the initial conditions T(0) = 1, T(1) = 2. <b>To find:</b> the solution T(k) for all k ≥ 0.</p>
+<p>The general solution has the form T(k) = T<sub>h</sub>(k) + T<sub>p</sub>(k), where T<sub>h</sub> is the solution of the associated homogeneous equation and T<sub>p</sub> is any particular solution of the given equation.</p>
+
+<h4>Step 1: Homogeneous solution T<sub>h</sub>(k)</h4>
+<p>The associated homogeneous equation is T(k) − 7T(k − 1) + 10T(k − 2) = 0. Its characteristic equation is</p>
+<div class="eq">r<sup>2</sup> − 7r + 10 = 0 &nbsp;⇒&nbsp; (r − 2)(r − 5) = 0,</div>
+<p>so the roots are r<sub>1</sub> = 2 and r<sub>2</sub> = 5, distinct. Hence, with arbitrary constants A and B,</p>
+<div class="eq">T<sub>h</sub>(k) = A · 2<sup>k</sup> + B · 5<sup>k</sup>.</div>
+
+<h4>Step 2: Particular solution T<sub>p</sub>(k)</h4>
+<p>The right-hand side is the linear function 6 + 8k, and <b>1</b> is not a characteristic root. Therefore we try a particular solution of the same linear form</p>
+<div class="eq">T<sub>p</sub>(k) = ck + d,</div>
+<p>where c and d are constants to be determined. Substituting into the recurrence,</p>
+<div class="eq">T<sub>p</sub>(k) − 7T<sub>p</sub>(k − 1) + 10T<sub>p</sub>(k − 2)</div>
+<div class="eq">= (ck + d) − 7[c(k − 1) + d] + 10[c(k − 2) + d]</div>
+<div class="eq">= ck + d − 7ck + 7c − 7d + 10ck − 20c + 10d</div>
+<div class="eq">= (c − 7c + 10c)k + (d − 7d + 10d) + (7c − 20c)</div>
+<div class="eq">= 4c·k + (4d − 13c).</div>
+<p>This must equal 6 + 8k for all k. Comparing coefficients of k and the constant terms:</p>
+<div class="eq">4c = 8 &nbsp;⇒&nbsp; c = 2, &nbsp;&nbsp;&nbsp; 4d − 13c = 6 &nbsp;⇒&nbsp; 4d − 26 = 6 &nbsp;⇒&nbsp; d = 8.</div>
+<p>Thus the particular solution is</p>
+<div class="eq">T<sub>p</sub>(k) = 2k + 8.</div>
+
+<h4>Step 3: General solution and evaluation of the constants</h4>
+<p>Adding the two parts, the general solution is</p>
+<div class="eq">T(k) = A · 2<sup>k</sup> + B · 5<sup>k</sup> + 2k + 8.</div>
+<p>Apply T(0) = 1:</p>
+<div class="eq">A + B + 8 = 1 &nbsp;⇒&nbsp; A + B = −7 &nbsp;… (1)</div>
+<p>Apply T(1) = 2:</p>
+<div class="eq">2A + 5B + 2 + 8 = 2 &nbsp;⇒&nbsp; 2A + 5B = −8 &nbsp;… (2)</div>
+<p>From (1), A = −7 − B. Substituting in (2):</p>
+<div class="eq">2(−7 − B) + 5B = −8 &nbsp;⇒&nbsp; −14 − 2B + 5B = −8 &nbsp;⇒&nbsp; 3B = 6 &nbsp;⇒&nbsp; B = 2.</div>
+<p>Then A = −7 − 2 = −9.</p>
+
+<h4>Step 4: Solution and verification</h4>
+<p>Therefore</p>
+<div class="eq">T(k) = −9 · 2<sup>k</sup> + 2 · 5<sup>k</sup> + 2k + 8.</div>
+<p><b>Check.</b> T(2) = −9(4) + 2(25) + 4 + 8 = −36 + 50 + 12 = 26 and T(3) = −9(8) + 2(125) + 6 + 8 = −72 + 250 + 14 = 192. Also T(2) − 7T(1) + 10T(0) = 26 − 14 + 10 = 22 = 6 + 8(2), which satisfies the relation.</p>
+<div class="result">T(k) = −9 · 2<sup>k</sup> + 2 · 5<sup>k</sup> + 2k + 8, &nbsp; k ≥ 0.</div>
+</div>
+
+<div class="ans" data-q="12 (a) (ii)" data-pages="2.5">
+<h4>Problem</h4>
+<p><b>Given:</b> The integers 1, 2, 3, …, 250. <b>To find:</b> how many of them are not divisible by any of the integers 2, 3, 5, 7.</p>
+<p>Let the universal set be U = {1, 2, …, 250}, so |U| = 250. Define the four sets</p>
+<div class="eq">A<sub>2</sub> = {n ∈ U : 2 | n}, &nbsp; A<sub>3</sub> = {n ∈ U : 3 | n}, &nbsp; A<sub>5</sub> = {n ∈ U : 5 | n}, &nbsp; A<sub>7</sub> = {n ∈ U : 7 | n}.</div>
+<p>We require the number of integers divisible by at least one of 2, 3, 5, 7, that is |A<sub>2</sub> ∪ A<sub>3</sub> ∪ A<sub>5</sub> ∪ A<sub>7</sub>|; the required answer is 250 minus this count.</p>
+
+<h4>Method: Principle of Inclusion–Exclusion</h4>
+<p>For four sets the principle states</p>
+<div class="eq">|A<sub>2</sub> ∪ A<sub>3</sub> ∪ A<sub>5</sub> ∪ A<sub>7</sub>| = Σ|A<sub>i</sub>| − Σ|A<sub>i</sub> ∩ A<sub>j</sub>| + Σ|A<sub>i</sub> ∩ A<sub>j</sub> ∩ A<sub>k</sub>| − |A<sub>2</sub> ∩ A<sub>3</sub> ∩ A<sub>5</sub> ∩ A<sub>7</sub>|.</div>
+<p>The number of integers in U divisible by both a and b is the number divisible by lcm(a, b), namely ⌊250 / lcm(a, b)⌋; similarly for three or four integers.</p>
+
+<h4>Step 1: Sum of single counts</h4>
+<div class="eq">|A<sub>2</sub>| = ⌊250/2⌋ = 125, &nbsp; |A<sub>3</sub>| = ⌊250/3⌋ = 83, &nbsp; |A<sub>5</sub>| = ⌊250/5⌋ = 50, &nbsp; |A<sub>7</sub>| = ⌊250/7⌋ = 35.</div>
+<div class="eq">Σ|A<sub>i</sub>| = 125 + 83 + 50 + 35 = 293.</div>
+
+<h4>Step 2: Sum of pairwise intersections</h4>
+<table class="tt">
+<tr><th>Pair</th><th>lcm</th><th>Count</th></tr>
+<tr><td>2, 3</td><td>6</td><td>⌊250/6⌋ = 41</td></tr>
+<tr><td>2, 5</td><td>10</td><td>⌊250/10⌋ = 25</td></tr>
+<tr><td>2, 7</td><td>14</td><td>⌊250/14⌋ = 17</td></tr>
+<tr><td>3, 5</td><td>15</td><td>⌊250/15⌋ = 16</td></tr>
+<tr><td>3, 7</td><td>21</td><td>⌊250/21⌋ = 11</td></tr>
+<tr><td>5, 7</td><td>35</td><td>⌊250/35⌋ = 7</td></tr>
+</table>
+<div class="eq">Σ|A<sub>i</sub> ∩ A<sub>j</sub>| = 41 + 25 + 17 + 16 + 11 + 7 = 117.</div>
+
+<h4>Step 3: Sum of triple intersections</h4>
+<table class="tt">
+<tr><th>Triple</th><th>lcm</th><th>Count</th></tr>
+<tr><td>2, 3, 5</td><td>30</td><td>⌊250/30⌋ = 8</td></tr>
+<tr><td>2, 3, 7</td><td>42</td><td>⌊250/42⌋ = 5</td></tr>
+<tr><td>2, 5, 7</td><td>70</td><td>⌊250/70⌋ = 3</td></tr>
+<tr><td>3, 5, 7</td><td>105</td><td>⌊250/105⌋ = 2</td></tr>
+</table>
+<div class="eq">Σ|A<sub>i</sub> ∩ A<sub>j</sub> ∩ A<sub>k</sub>| = 8 + 5 + 3 + 2 = 18.</div>
+
+<h4>Step 4: Fourfold intersection and result</h4>
+<div class="eq">|A<sub>2</sub> ∩ A<sub>3</sub> ∩ A<sub>5</sub> ∩ A<sub>7</sub>| = ⌊250/210⌋ = 1.</div>
+<p>Therefore the number of integers divisible by at least one of 2, 3, 5, 7 is</p>
+<div class="eq">293 − 117 + 18 − 1 = 193.</div>
+<p>Hence the number of integers not divisible by any of 2, 3, 5, 7 is</p>
+<div class="eq">250 − 193 = 57.</div>
+<div class="result">Number of integers between 1 and 250 not divisible by any of 2, 3, 5, 7 = 57.</div>
+</div>

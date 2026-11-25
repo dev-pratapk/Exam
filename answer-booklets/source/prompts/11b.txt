@@ -1,0 +1,9 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper header: B.E./B.Tech. MA3354 Discrete Mathematics, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 11 (b) — answer every sub-part below (one <div class="ans"> per sub-part, data-q like "11 (b) (i)").
+
+11 (b) (i) [8 marks]: Obtain the principal disjunctive and principal conjunctive normal forms of (¬P → R) ∧ (Q ↔ P).
+
+11 (b) (ii) [8 marks]: Using the indirect method, show that (∀x)(P(x) ∨ Q(x)) ⇒ (∀x)P(x) ∨ (∃x)Q(x).
+
+Write the file out/11b.html.

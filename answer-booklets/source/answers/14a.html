@@ -1,0 +1,46 @@
+<div class="ans" data-q="14 (a) (i)" data-pages="3">
+<h4>Lagrange's Theorem</h4>
+<p><b>Statement.</b> Let ⟨G, *⟩ be a finite group and let H be a subgroup of G. Then the order of H divides the order of G; that is, |H| divides |G|. Equivalently, |G| = |H| · [G : H], where [G : H] is the number of distinct left cosets of H in G (called the index of H in G).</p>
+<h4>Definitions used</h4>
+<ul>
+<li><b>Order of a group</b> G, denoted |G|, is the number of elements in G.</li>
+<li>For a ∈ G, the <b>left coset</b> of H determined by a is aH = {a * h : h ∈ H}.</li>
+<li>The <b>index</b> [G : H] is the number of distinct left cosets of H in G.</li>
+</ul>
+<h4>Proof</h4>
+<p>Let the distinct left cosets of H in G be a<sub>1</sub>H, a<sub>2</sub>H, …, a<sub>k</sub>H. We establish the following facts about these cosets.</p>
+<ol>
+<li><b>Every element of G lies in some left coset.</b> For any a ∈ G, since the identity e ∈ H we have a = a * e ∈ aH. Hence
+<div class="eq">G = a<sub>1</sub>H ∪ a<sub>2</sub>H ∪ … ∪ a<sub>k</sub>H.</div></li>
+<li><b>Distinct left cosets are disjoint.</b> Suppose aH ∩ bH ≠ ∅, say x ∈ aH ∩ bH. Then x = a * h<sub>1</sub> = b * h<sub>2</sub> for some h<sub>1</sub>, h<sub>2</sub> ∈ H, so a = b * h<sub>2</sub> * h<sub>1</sub><sup>−1</sup>. For any a * h ∈ aH,
+<div class="eq">a * h = (b * h<sub>2</sub> * h<sub>1</sub><sup>−1</sup>) * h = b * (h<sub>2</sub> * h<sub>1</sub><sup>−1</sup> * h) ∈ bH,</div>
+since h<sub>2</sub> * h<sub>1</sub><sup>−1</sup> * h ∈ H (H is closed). Thus aH ⊆ bH, and similarly bH ⊆ aH. Hence aH = bH. Therefore any two left cosets are either identical or disjoint.</li>
+<li><b>Every left coset has exactly |H| elements.</b> Define φ : H → aH by φ(h) = a * h. It is surjective by the definition of aH. If φ(h<sub>1</sub>) = φ(h<sub>2</sub>), then a * h<sub>1</sub> = a * h<sub>2</sub>, and left cancellation gives h<sub>1</sub> = h<sub>2</sub>; so φ is injective. Hence φ is a bijection and |aH| = |H| for every a ∈ G.</li>
+<li><b>Counting the elements of G.</b> By steps 1 and 2 the k distinct left cosets partition G, and by step 3 each contains |H| elements. Therefore
+<div class="eq">|G| = |a<sub>1</sub>H| + |a<sub>2</sub>H| + … + |a<sub>k</sub>H| = k · |H| = [G : H] · |H|.</div></li>
+</ol>
+<p>Since k = [G : H] is a positive integer, |H| divides |G|. In particular, if G is a finite group and a ∈ G, then the order of the cyclic subgroup ⟨a⟩ (which equals the order of the element a) divides |G|.</p>
+<div class="result">Hence |G| = [G : H] · |H|, so the order of every subgroup of a finite group divides the order of the group. ∎</div>
+</div>
+
+<div class="ans" data-q="14 (a) (ii)" data-pages="2.5">
+<h4>Problem</h4>
+<p><b>Given:</b> A homomorphism f : ⟨G, *⟩ → ⟨H, Δ⟩ of groups, with identity elements e<sub>G</sub> ∈ G and e<sub>H</sub> ∈ H. The kernel of f is K = Ker f = {x ∈ G : f(x) = e<sub>H</sub>}. <b>To prove:</b> K is a normal subgroup of ⟨G, *⟩.</p>
+<p><b>Working fact.</b> For any homomorphism f and any a ∈ G, f(a<sup>−1</sup>) = (f(a))<sup>−1</sup>.</p>
+<h4>Part 1: K is a subgroup of G</h4>
+<ol>
+<li><b>K is non-empty.</b> Since f preserves identity, f(e<sub>G</sub>) = e<sub>H</sub>, so e<sub>G</sub> ∈ K.</li>
+<li><b>K is closed under *.</b> Let a, b ∈ K. Then f(a) = f(b) = e<sub>H</sub>, and since f is a homomorphism,
+<div class="eq">f(a * b) = f(a) Δ f(b) = e<sub>H</sub> Δ e<sub>H</sub> = e<sub>H</sub>,</div>
+so a * b ∈ K.</li>
+<li><b>K contains inverses.</b> Let a ∈ K. Then
+<div class="eq">f(a<sup>−1</sup>) = (f(a))<sup>−1</sup> = e<sub>H</sub><sup>−1</sup> = e<sub>H</sub>,</div>
+so a<sup>−1</sup> ∈ K.</li>
+</ol>
+<p>Thus K is a non-empty subset of G that is closed under the operation and under inverses. Hence K is a subgroup of G.</p>
+<h4>Part 2: K is normal in G</h4>
+<p>A subgroup N of G is <b>normal</b> if a * x * a<sup>−1</sup> ∈ N for all a ∈ G and all x ∈ N (equivalently, aN = Na). Let x ∈ K and a ∈ G. Using the homomorphism property and f(a<sup>−1</sup>) = (f(a))<sup>−1</sup>,</p>
+<div class="eq">f(a * x * a<sup>−1</sup>) = f(a) Δ f(x) Δ f(a<sup>−1</sup>) = f(a) Δ e<sub>H</sub> Δ (f(a))<sup>−1</sup> = f(a) Δ (f(a))<sup>−1</sup> = e<sub>H</sub>.</div>
+<p>Hence a * x * a<sup>−1</sup> ∈ K for every x ∈ K and every a ∈ G. That is, aKa<sup>−1</sup> ⊆ K for all a ∈ G, which is precisely the condition that K is a normal subgroup of G.</p>
+<div class="result">Hence the kernel Ker f is a normal subgroup of ⟨G, *⟩. Thus the kernel of every group homomorphism is a normal subgroup. ∎</div>
+</div>

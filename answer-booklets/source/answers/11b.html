@@ -1,0 +1,60 @@
+<div class="ans" data-q="11 (b) (i)" data-pages="2.5">
+<h4>Problem</h4>
+<p><b>Given:</b> F(P, Q, R) = (¬P → R) ∧ (Q ↔ P).</p>
+<p><b>To find:</b> the principal disjunctive normal form (PDNF) and the principal conjunctive normal form (PCNF) of F.</p>
+<h4>Step 1: Eliminate → and ↔</h4>
+<div class="eq">¬P → R ≡ ¬(¬P) ∨ R ≡ P ∨ R (implication law)</div>
+<div class="eq">Q ↔ P ≡ (Q → P) ∧ (P → Q) ≡ (¬Q ∨ P) ∧ (¬P ∨ Q)</div>
+<p>Hence</p>
+<div class="eq">F ≡ (P ∨ R) ∧ (¬Q ∨ P) ∧ (¬P ∨ Q).</div>
+<h4>Step 2: Truth table</h4>
+<table class="tt">
+<tr><th>P</th><th>Q</th><th>R</th><th>P ∨ R</th><th>¬Q ∨ P</th><th>¬P ∨ Q</th><th>F</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+</table>
+<h4>Step 3: Principal disjunctive normal form</h4>
+<p>F is true (F = 1) exactly in the rows 001, 110 and 111. Taking the product of the variables in each true row, negating a variable when its value is 0,</p>
+<div class="eq">F ≡ (¬P ∧ ¬Q ∧ R) ∨ (P ∧ Q ∧ ¬R) ∨ (P ∧ Q ∧ R)</div>
+<div class="eq">F ≡ Σm(1, 6, 7).</div>
+<p>This is the required PDNF: a disjunction of the three minterms corresponding to the true rows of F.</p>
+<h4>Step 4: Principal conjunctive normal form</h4>
+<p>F is false (F = 0) in the rows 000, 010, 011, 100 and 101. The maxterm of a row is the disjunction of the variables, negating a variable when its value is 1. Thus the five maxterms are (P ∨ Q ∨ R), (P ∨ ¬Q ∨ R), (P ∨ ¬Q ∨ ¬R), (¬P ∨ Q ∨ R) and (¬P ∨ Q ∨ ¬R). Therefore</p>
+<div class="eq">F ≡ (P ∨ Q ∨ R) ∧ (P ∨ ¬Q ∨ R) ∧ (P ∨ ¬Q ∨ ¬R) ∧ (¬P ∨ Q ∨ R) ∧ (¬P ∨ Q ∨ ¬R)</div>
+<div class="eq">F ≡ ΠM(0, 2, 3, 4, 5).</div>
+<p>This is the required PCNF: a conjunction of the five maxterms corresponding to the false rows of F.</p>
+<div class="result"><b>PDNF:</b> F ≡ (¬P ∧ ¬Q ∧ R) ∨ (P ∧ Q ∧ ¬R) ∨ (P ∧ Q ∧ R) ≡ Σm(1, 6, 7)<br><b>PCNF:</b> F ≡ (P ∨ Q ∨ R) ∧ (P ∨ ¬Q ∨ R) ∧ (P ∨ ¬Q ∨ ¬R) ∧ (¬P ∨ Q ∨ R) ∧ (¬P ∨ Q ∨ ¬R) ≡ ΠM(0, 2, 3, 4, 5)</div>
+<p><b>Check.</b> The PDNF uses the 3 true rows and the PCNF the 5 false rows of the 8 possible rows, and 3 + 5 = 8; also the same function gives both forms.</p>
+</div>
+
+<div class="ans" data-q="11 (b) (ii)" data-pages="2.5">
+<h4>Problem</h4>
+<p><b>Given:</b> the premise (∀x)(P(x) ∨ Q(x)).</p>
+<p><b>To prove:</b> (∀x)P(x) ∨ (∃x)Q(x).</p>
+<h4>Method: Indirect method (proof by contradiction)</h4>
+<p>In the indirect method we assume the premise to be true and the conclusion to be false, and derive a contradiction. The assumption that the conclusion is false is</p>
+<div class="eq">¬[(∀x)P(x) ∨ (∃x)Q(x)] ≡ ¬(∀x)P(x) ∧ ¬(∃x)Q(x) ≡ (∃x)¬P(x) ∧ (∀x)¬Q(x),</div>
+<p>using De Morgan's law and the quantified negations ¬(∀x)A(x) ≡ (∃x)¬A(x), ¬(∃x)A(x) ≡ (∀x)¬A(x).</p>
+<h4>Proof</h4>
+<table class="tt">
+<tr><th>Step</th><th>Statement</th><th>Reason</th></tr>
+<tr><td>1</td><td>(∀x)(P(x) ∨ Q(x))</td><td>Rule P (premise)</td></tr>
+<tr><td>2</td><td>¬[(∀x)P(x) ∨ (∃x)Q(x)]</td><td>Rule P (negation of the conclusion, assumed for indirect proof)</td></tr>
+<tr><td>3</td><td>(∃x)¬P(x) ∧ (∀x)¬Q(x)</td><td>Rule T on (2), using De Morgan's law and quantified negation</td></tr>
+<tr><td>4</td><td>(∀x)¬Q(x)</td><td>Rule T (Simplification) on (3)</td></tr>
+<tr><td>5</td><td>(∃x)¬P(x)</td><td>Rule T (Simplification) on (3)</td></tr>
+<tr><td>6</td><td>¬P(a)</td><td>Rule ES on (5); a denotes the fixed element guaranteed by (5)</td></tr>
+<tr><td>7</td><td>P(a) ∨ Q(a)</td><td>Rule US on (1)</td></tr>
+<tr><td>8</td><td>¬Q(a)</td><td>Rule US on (4)</td></tr>
+<tr><td>9</td><td>P(a)</td><td>Rule T (Disjunctive syllogism) on (7) and (8)</td></tr>
+<tr><td>10</td><td>P(a) ∧ ¬P(a)</td><td>Rule T (Conjunction) on (9) and (6): a contradiction</td></tr>
+</table>
+<p><b>Conclusion of the indirect proof.</b> Step (10) is a contradiction (P(a) and ¬P(a) cannot both hold). Therefore our additional assumption (2), namely that the conclusion is false, must be wrong. Hence the conclusion cannot be false whenever the premise is true.</p>
+<div class="result">Hence (∀x)(P(x) ∨ Q(x)) ⇒ (∀x)P(x) ∨ (∃x)Q(x). ∎</div>
+</div>

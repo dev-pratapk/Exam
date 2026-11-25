@@ -1,0 +1,9 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper header: B.E./B.Tech. MA3354 Discrete Mathematics, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 14 (a) — answer every sub-part below (one <div class="ans"> per sub-part, data-q like "14 (a) (i)").
+
+14 (a) (i) [8 marks]: State and prove Lagrange’s theorem.
+
+14 (a) (ii) [8 marks]: Prove that the kernel of a homomorphism f from a group ⟨G, *⟩ to a group ⟨H, Δ⟩ is a normal subgroup of the group ⟨G, *⟩.
+
+Write the file out/14a.html.

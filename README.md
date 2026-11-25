@@ -11,6 +11,14 @@ Anna University · B.E./B.Tech · Regulation 2021, 3rd semester
 
 The last page lists where each question came from.
 
+**Answer booklets for Model Question Paper 1.** Two complete model answer scripts, written the way you write in the exam hall:
+- [Booklet A](answer-booklets/MA3354_Model_Paper_1_Answer_Booklet_A.pdf): Part A (all 10) and option (a) of Q11–Q15.
+- [Booklet B](answer-booklets/MA3354_Model_Paper_1_Answer_Booklet_B.pdf): Part A (all 10) and option (b) of Q11–Q15.
+
+Each booklet has a cover sheet listing the questions answered. Every answer shows how many handwritten pages it should take: about 30–35 pages in total, so you do not need to fill all 42 pages. The diagrams are included.
+
+The answers were drafted by the DeepSeek V4.1 Flash model, run through [opencode](https://opencode.ai), and then checked step by step. Every numerical result was recomputed, and every diagram's edge list was compared with its question. Still, check the answers against your textbook before memorising them. The prompts and raw answers are in `answer-booklets/source/`.
+
 It has:
 - the most-repeated questions,
 - a priority list of what to study first,

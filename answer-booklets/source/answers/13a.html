@@ -1,0 +1,138 @@
+<div class="ans" data-q="13 (a) (i)" data-pages="2.5">
+<h4>Given</h4>
+<p>Let G = (V, E) be a finite undirected graph (no loops). For each vertex v, let d(v) denote its degree, and let</p>
+<div class="eq">V<sub>1</sub> = { v ∈ V : d(v) is odd },&nbsp;&nbsp;&nbsp; V<sub>2</sub> = { v ∈ V : d(v) is even }.</div>
+<p><b>To prove:</b> the number of vertices in V<sub>1</sub> (that is, the number of odd-degree vertices) is even.</p>
+
+<h4>Definitions and result used</h4>
+<ul>
+<li><b>Degree d(v):</b> the number of edges incident with the vertex v.</li>
+<li><b>Handshaking lemma:</b> in any graph G = (V, E), the sum of the degrees of all the vertices equals twice the number of edges:
+<div class="eq">Σ<sub>v∈V</sub> d(v) = 2 |E|.</div>
+Each edge has two ends, so it contributes 1 to the degree of each of its two end vertices; hence it is counted twice in the sum.</li>
+</ul>
+
+<h4>Proof</h4>
+<p>Let n<sub>1</sub> = |V<sub>1</sub>| and n<sub>2</sub> = |V<sub>2</sub>|. Every vertex has a degree that is either odd or even, so V<sub>1</sub> and V<sub>2</sub> are disjoint and V<sub>1</sub> ∪ V<sub>2</sub> = V.</p>
+<ol>
+<li><b>Split the degree sum.</b> Since V<sub>1</sub> and V<sub>2</sub> partition V,
+<div class="eq">Σ<sub>v∈V</sub> d(v) = Σ<sub>v∈V<sub>1</sub></sub> d(v) + Σ<sub>v∈V<sub>2</sub></sub> d(v).</div></li>
+<li><b>Use the handshaking lemma.</b> The left side equals 2|E|, which is an even integer:
+<div class="eq">2 |E| = Σ<sub>v∈V<sub>1</sub></sub> d(v) + Σ<sub>v∈V<sub>2</sub></sub> d(v).</div></li>
+<li><b>The even-degree part is even.</b> Each term d(v) in Σ<sub>v∈V<sub>2</sub></sub> d(v) is even, and a sum of even integers is even. So Σ<sub>v∈V<sub>2</sub></sub> d(v) is even.</li>
+<li><b>The odd-degree part is even.</b> From step 2,
+<div class="eq">Σ<sub>v∈V<sub>1</sub></sub> d(v) = 2 |E| − Σ<sub>v∈V<sub>2</sub></sub> d(v).</div>
+This is the difference of two even integers, hence it is even.</li>
+<li><b>Count the odd terms.</b> The sum Σ<sub>v∈V<sub>1</sub></sub> d(v) has exactly n<sub>1</sub> terms, and every term is odd. A sum of n<sub>1</sub> odd integers is odd when n<sub>1</sub> is odd and even when n<sub>1</sub> is even; in other words, the parity of the sum equals the parity of n<sub>1</sub>.</li>
+<li><b>Conclude.</b> By step 4 the sum is even, so by step 5 the number n<sub>1</sub> of terms must be even.</li>
+</ol>
+
+<p><b>Illustration.</b> In a graph with degree sequence (3, 3, 2, 2, 2) the odd degrees are 3 and 3, so there are exactly two odd-degree vertices, an even number. A sequence such as (3, 3, 3) can never occur as the degree sequence of a graph, because it has three odd entries.</p>
+
+<div class="result">Hence the number of vertices of odd degree in any graph G is always even. ∎</div>
+</div>
+
+<div class="ans" data-q="13 (a) (ii)" data-pages="3">
+<h4>Given</h4>
+<p>Two graphs G<sub>1</sub> and G<sub>2</sub>, each with 8 vertices and 10 edges, are shown below. Both consist of an outer square, an inner square, and two edges joining an outer corner to the corresponding inner corner.</p>
+
+<figure class="dg">
+<svg width="210" height="200" viewBox="0 0 210 200" xmlns="http://www.w3.org/2000/svg">
+<line x1="35" y1="35" x2="185" y2="35" stroke="#000" stroke-width="1.6"/>
+<line x1="185" y1="35" x2="185" y2="165" stroke="#000" stroke-width="1.6"/>
+<line x1="185" y1="165" x2="35" y2="165" stroke="#000" stroke-width="1.6"/>
+<line x1="35" y1="165" x2="35" y2="35" stroke="#000" stroke-width="1.6"/>
+<line x1="75" y1="70" x2="145" y2="70" stroke="#000" stroke-width="1.6"/>
+<line x1="145" y1="70" x2="145" y2="130" stroke="#000" stroke-width="1.6"/>
+<line x1="145" y1="130" x2="75" y2="130" stroke="#000" stroke-width="1.6"/>
+<line x1="75" y1="130" x2="75" y2="70" stroke="#000" stroke-width="1.6"/>
+<line x1="185" y1="35" x2="145" y2="70" stroke="#000" stroke-width="1.6"/>
+<line x1="35" y1="165" x2="75" y2="130" stroke="#000" stroke-width="1.6"/>
+<circle cx="35" cy="35" r="4" fill="#000"/>
+<circle cx="185" cy="35" r="4" fill="#000"/>
+<circle cx="185" cy="165" r="4" fill="#000"/>
+<circle cx="35" cy="165" r="4" fill="#000"/>
+<circle cx="75" cy="70" r="4" fill="#000"/>
+<circle cx="145" cy="70" r="4" fill="#000"/>
+<circle cx="145" cy="130" r="4" fill="#000"/>
+<circle cx="75" cy="130" r="4" fill="#000"/>
+<text x="28" y="30" font-size="13" font-family="serif" text-anchor="end">u1</text>
+<text x="192" y="30" font-size="13" font-family="serif" text-anchor="start">u2</text>
+<text x="192" y="172" font-size="13" font-family="serif" text-anchor="start">u3</text>
+<text x="28" y="172" font-size="13" font-family="serif" text-anchor="end">u4</text>
+<text x="68" y="82" font-size="13" font-family="serif" text-anchor="end">u5</text>
+<text x="152" y="82" font-size="13" font-family="serif" text-anchor="start">u6</text>
+<text x="152" y="128" font-size="13" font-family="serif" text-anchor="start">u7</text>
+<text x="68" y="128" font-size="13" font-family="serif" text-anchor="end">u8</text>
+</svg>
+<figcaption>G<sub>1</sub>: the connecting edges are TR–tr (u2–u6) and BL–bl (u4–u8).</figcaption>
+</figure>
+
+<figure class="dg">
+<svg width="210" height="200" viewBox="0 0 210 200" xmlns="http://www.w3.org/2000/svg">
+<line x1="35" y1="35" x2="185" y2="35" stroke="#000" stroke-width="1.6"/>
+<line x1="185" y1="35" x2="185" y2="165" stroke="#000" stroke-width="1.6"/>
+<line x1="185" y1="165" x2="35" y2="165" stroke="#000" stroke-width="1.6"/>
+<line x1="35" y1="165" x2="35" y2="35" stroke="#000" stroke-width="1.6"/>
+<line x1="75" y1="70" x2="145" y2="70" stroke="#000" stroke-width="1.6"/>
+<line x1="145" y1="70" x2="145" y2="130" stroke="#000" stroke-width="1.6"/>
+<line x1="145" y1="130" x2="75" y2="130" stroke="#000" stroke-width="1.6"/>
+<line x1="75" y1="130" x2="75" y2="70" stroke="#000" stroke-width="1.6"/>
+<line x1="35" y1="35" x2="75" y2="70" stroke="#000" stroke-width="1.6"/>
+<line x1="185" y1="35" x2="145" y2="70" stroke="#000" stroke-width="1.6"/>
+<circle cx="35" cy="35" r="4" fill="#000"/>
+<circle cx="185" cy="35" r="4" fill="#000"/>
+<circle cx="185" cy="165" r="4" fill="#000"/>
+<circle cx="35" cy="165" r="4" fill="#000"/>
+<circle cx="75" cy="70" r="4" fill="#000"/>
+<circle cx="145" cy="70" r="4" fill="#000"/>
+<circle cx="145" cy="130" r="4" fill="#000"/>
+<circle cx="75" cy="130" r="4" fill="#000"/>
+<text x="28" y="30" font-size="13" font-family="serif" text-anchor="end">v1</text>
+<text x="192" y="30" font-size="13" font-family="serif" text-anchor="start">v2</text>
+<text x="192" y="172" font-size="13" font-family="serif" text-anchor="start">v3</text>
+<text x="28" y="172" font-size="13" font-family="serif" text-anchor="end">v4</text>
+<text x="68" y="82" font-size="13" font-family="serif" text-anchor="end">v5</text>
+<text x="152" y="82" font-size="13" font-family="serif" text-anchor="start">v6</text>
+<text x="152" y="128" font-size="13" font-family="serif" text-anchor="start">v7</text>
+<text x="68" y="128" font-size="13" font-family="serif" text-anchor="end">v8</text>
+</svg>
+<figcaption>G<sub>2</sub>: the connecting edges are TL–tl (v1–v5) and TR–tr (v2–v6).</figcaption>
+</figure>
+
+<h4>Notation and edge lists</h4>
+<p>Label the outer square of G<sub>1</sub> as u1 (TL), u2 (TR), u3 (BR), u4 (BL) and the inner square as u5 (tl), u6 (tr), u7 (br), u8 (bl). Similarly label the vertices of G<sub>2</sub> as v1, v2, v3, v4 on the outer square and v5, v6, v7, v8 on the inner square, in the same positions.</p>
+<div class="eq">E(G<sub>1</sub>) = { u1u2, u2u3, u3u4, u4u1, u5u6, u6u7, u7u8, u8u5, u2u6, u4u8 }</div>
+<div class="eq">E(G<sub>2</sub>) = { v1v2, v2v3, v3v4, v4v1, v5v6, v6v7, v7v8, v8v5, v1v5, v2v6 }</div>
+
+<h4>Degree of every vertex</h4>
+<table class="tt">
+<tr><th>Vertex of G<sub>1</sub></th><th>Degree</th><th>Vertex of G<sub>2</sub></th><th>Degree</th></tr>
+<tr><td>u1 (TL)</td><td>2</td><td>v1 (TL)</td><td>3</td></tr>
+<tr><td>u2 (TR)</td><td>3</td><td>v2 (TR)</td><td>3</td></tr>
+<tr><td>u3 (BR)</td><td>2</td><td>v3 (BR)</td><td>2</td></tr>
+<tr><td>u4 (BL)</td><td>3</td><td>v4 (BL)</td><td>2</td></tr>
+<tr><td>u5 (tl)</td><td>2</td><td>v5 (tl)</td><td>3</td></tr>
+<tr><td>u6 (tr)</td><td>3</td><td>v6 (tr)</td><td>3</td></tr>
+<tr><td>u7 (br)</td><td>2</td><td>v7 (br)</td><td>2</td></tr>
+<tr><td>u8 (bl)</td><td>3</td><td>v8 (bl)</td><td>2</td></tr>
+</table>
+
+<h4>Comparison of the standard invariants</h4>
+<table class="tt">
+<tr><th>Invariant</th><th>G<sub>1</sub></th><th>G<sub>2</sub></th><th>Equal?</th></tr>
+<tr><td>Number of vertices</td><td>8</td><td>8</td><td>Yes</td></tr>
+<tr><td>Number of edges</td><td>10</td><td>10</td><td>Yes</td></tr>
+<tr><td>Degree sequence</td><td>(3,3,3,3,2,2,2,2)</td><td>(3,3,3,3,2,2,2,2)</td><td>Yes</td></tr>
+<tr><td>Degree-3 vertices</td><td>u2, u4, u6, u8</td><td>v1, v2, v5, v6</td><td>4 in each</td></tr>
+<tr><td>Edges among degree-3 vertices</td><td>u2u6, u4u8</td><td>v1v2, v2v6, v6v5, v5v1</td><td>No</td></tr>
+<tr><td>Their count</td><td>2</td><td>4</td><td>No</td></tr>
+</table>
+
+<h4>Reasoning</h4>
+<p>An isomorphism f : V(G<sub>1</sub>) → V(G<sub>2</sub>) is a bijection that preserves adjacency and non-adjacency. Because degree is preserved, f must map the four degree-3 vertices of G<sub>1</sub> bijectively onto the four degree-3 vertices of G<sub>2</sub>. Moreover, if two degree-3 vertices are joined by an edge in G<sub>1</sub>, their images must be joined by an edge in G<sub>2</sub>, and conversely. Therefore the subgraph induced by the degree-3 vertices of G<sub>1</sub> must be isomorphic to the subgraph induced by the degree-3 vertices of G<sub>2</sub>.</p>
+<p>In G<sub>1</sub>, the only edges with both ends of degree 3 are u2u6 and u4u8; these are two disjoint edges, so the induced subgraph is 2K<sub>2</sub> (it has 2 edges). In G<sub>2</sub>, the edges with both ends of degree 3 are v1v2, v2v6, v6v5, v5v1, which form the 4-cycle v1–v2–v6–v5–v1 (it has 4 edges). The two induced subgraphs have different numbers of edges, hence are not isomorphic.</p>
+<p>Equivalently, G<sub>2</sub> contains a 4-cycle on its four degree-3 vertices while G<sub>1</sub> contains no such cycle; an isomorphism would have to carry one to the other, which is impossible.</p>
+
+<div class="result">Hence G<sub>1</sub> and G<sub>2</sub> are <b>not isomorphic</b>, even though they have the same number of vertices, the same number of edges and the same degree sequence. ∎</div>
+</div>

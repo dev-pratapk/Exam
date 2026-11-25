@@ -1,0 +1,178 @@
+<div class="ans" data-q="13 (b) (i)" data-pages="2.5">
+<h4>Statement (Dirac's theorem)</h4>
+<p>If G is a connected simple graph with n vertices, where n ≥ 3, such that deg(v) ≥ n/2 for every vertex v of G, then G has a Hamilton cycle (a cycle containing every vertex of G exactly once).</p>
+<p><b>Given:</b> G is connected and simple, |V(G)| = n ≥ 3, and deg(v) ≥ n/2 for all v ∈ V(G). <b>To prove:</b> G contains a Hamilton cycle.</p>
+
+<h4>Definitions used</h4>
+<ul>
+<li><b>Simple graph:</b> an undirected graph with no loops and no multiple edges.</li>
+<li><b>Degree deg(v):</b> the number of edges incident with v.</li>
+<li><b>Path / cycle:</b> a path is a sequence of distinct vertices in which consecutive vertices are joined by an edge; a cycle is a path together with the edge joining its last vertex back to its first.</li>
+<li><b>Hamilton cycle:</b> a cycle that passes through all the n vertices of G.</li>
+<li><b>Longest path:</b> a simple path of G having the largest possible number of vertices.</li>
+</ul>
+
+<h4>Proof (longest-path argument)</h4>
+<ol>
+<li>Among all simple paths of G choose one with the maximum number of vertices,
+<div class="eq">P : v<sub>1</sub>, v<sub>2</sub>, …, v<sub>k</sub>, &nbsp;&nbsp; k ≤ n.</div>
+Since n ≥ 3 gives deg(v) ≥ n/2 ≥ 1.5, every degree is an integer at least 2; hence G contains a cycle and the longest path has k ≥ 3.</li>
+
+<li><b>Every neighbour of v<sub>1</sub> and of v<sub>k</sub> lies on P.</b> If some neighbour w of v<sub>1</sub> were outside P, then w, v<sub>1</sub>, v<sub>2</sub>, …, v<sub>k</sub> would be a path with k + 1 vertices, contradicting the maximality of k. The same argument applies to v<sub>k</sub>. Hence
+<div class="eq">N(v<sub>1</sub>) ⊆ { v<sub>2</sub>, …, v<sub>k</sub> }, &nbsp;&nbsp; N(v<sub>k</sub>) ⊆ { v<sub>1</sub>, …, v<sub>k−1</sub> }.</div></li>
+
+<li><b>Two index sets.</b> Define
+<div class="eq">A = { i : 1 ≤ i ≤ k−1 and v<sub>1</sub> is adjacent to v<sub>i+1</sub> },</div>
+<div class="eq">B = { i : 1 ≤ i ≤ k−1 and v<sub>k</sub> is adjacent to v<sub>i</sub> }.</div>
+By step 2 the map v<sub>i+1</sub> ↔ i is a bijection from N(v<sub>1</sub>) onto A, so |A| = deg(v<sub>1</sub>) ≥ n/2; similarly |B| = deg(v<sub>k</sub>) ≥ n/2.</li>
+
+<li><b>A and B meet.</b> Both A and B are subsets of { 1, 2, …, k−1 }, a set with k−1 ≤ n−1 elements. If A ∩ B = ∅, then
+<div class="eq">|A| + |B| ≤ k − 1 ≤ n − 1 &lt; n,</div>
+which contradicts |A| + |B| ≥ n/2 + n/2 = n. Therefore A ∩ B ≠ ∅; choose i ∈ A ∩ B.</li>
+
+<li><b>Close P into a cycle.</b> For this i, v<sub>1</sub> is adjacent to v<sub>i+1</sub> (since i ∈ A) and v<sub>k</sub> is adjacent to v<sub>i</sub> (since i ∈ B). Hence
+<div class="eq">C : v<sub>1</sub>, v<sub>2</sub>, …, v<sub>i</sub>, v<sub>k</sub>, v<sub>k−1</sub>, …, v<sub>i+1</sub>, v<sub>1</sub></div>
+is a cycle: consecutive vertices are joined along P, by the edge v<sub>i</sub>v<sub>k</sub>, backwards along P, and by the edge v<sub>i+1</sub>v<sub>1</sub>. It contains exactly the k vertices of P.</li>
+
+<li><b>P uses all vertices.</b> Suppose k &lt; n. Then some vertex of G lies outside C. Since G is connected, a shortest path from such a vertex to C ends with an edge x′ y where x′ ∉ V(C) and y ∈ V(C). Start at x′, move to y, and then go once completely around C; this is a simple path with k + 1 vertices, contradicting the maximality of k. Hence k = n.</li>
+
+<li><b>Conclusion.</b> The cycle C now contains all n vertices of G, so C is a Hamilton cycle.</li>
+</ol>
+
+<div class="result">Hence every connected simple graph G with n ≥ 3 and deg(v) ≥ n/2 for every vertex v has a Hamilton cycle (Dirac's theorem). ∎</div>
+</div>
+
+<div class="ans" data-q="13 (b) (ii)" data-pages="3">
+<h4>Euler's theorem (criterion used)</h4>
+<p>For a connected graph: (1) an <b>Euler circuit</b> (a closed trail using every edge exactly once) exists ⇔ every vertex has even degree; (2) an <b>Euler path</b> (an open trail using every edge exactly once) exists ⇔ the graph has exactly two vertices of odd degree, and the path starts at one odd vertex and ends at the other. If there are more than two odd-degree vertices, neither an Euler path nor an Euler circuit exists.</p>
+
+<h4>Graph G<sub>1</sub></h4>
+<figure class="dg">
+<svg width="280" height="300" viewBox="0 0 280 300" xmlns="http://www.w3.org/2000/svg">
+<line x1="75" y1="130" x2="145" y2="60" stroke="#000" stroke-width="1.6"/>
+<line x1="75" y1="130" x2="55" y2="245" stroke="#000" stroke-width="1.6"/>
+<line x1="75" y1="130" x2="205" y2="150" stroke="#000" stroke-width="1.6"/>
+<line x1="145" y1="60" x2="205" y2="150" stroke="#000" stroke-width="1.6"/>
+<line x1="145" y1="60" x2="235" y2="50" stroke="#000" stroke-width="1.6"/>
+<line x1="55" y1="245" x2="205" y2="150" stroke="#000" stroke-width="1.6"/>
+<line x1="205" y1="150" x2="235" y2="50" stroke="#000" stroke-width="1.6"/>
+<circle cx="75" cy="130" r="4" fill="#000"/>
+<circle cx="145" cy="60" r="4" fill="#000"/>
+<circle cx="55" cy="245" r="4" fill="#000"/>
+<circle cx="205" cy="150" r="4" fill="#000"/>
+<circle cx="235" cy="50" r="4" fill="#000"/>
+<text x="63" y="135" font-size="14" font-family="serif" text-anchor="end">A</text>
+<text x="145" y="48" font-size="14" font-family="serif" text-anchor="middle">B</text>
+<text x="44" y="263" font-size="14" font-family="serif" text-anchor="end">C</text>
+<text x="216" y="156" font-size="14" font-family="serif" text-anchor="start">D</text>
+<text x="247" y="46" font-size="14" font-family="serif" text-anchor="start">E</text>
+</svg>
+<figcaption>G<sub>1</sub>: edges AB, AC, AD, BD, BE, CD, DE (7 edges).</figcaption>
+</figure>
+
+<p><b>Degree table.</b></p>
+<table class="tt">
+<tr><th>Vertex</th><th>Incident edges</th><th>Degree</th></tr>
+<tr><td>A</td><td>AB, AC, AD</td><td>3 (odd)</td></tr>
+<tr><td>B</td><td>AB, BD, BE</td><td>3 (odd)</td></tr>
+<tr><td>C</td><td>AC, CD</td><td>2</td></tr>
+<tr><td>D</td><td>AD, BD, CD, DE</td><td>4</td></tr>
+<tr><td>E</td><td>BE, DE</td><td>2</td></tr>
+</table>
+<p>G<sub>1</sub> is connected and has exactly two odd-degree vertices, A and B. By Euler's theorem it has an Euler path from A to B, but no Euler circuit. One such path is</p>
+<div class="eq">A – C – D – A – B – D – E – B.</div>
+<p>It uses the seven distinct edges AC, CD, DA, AB, BD, DE, EB, i.e. all the edges, and begins at A and ends at B. Hence it is an Euler path (not a circuit).</p>
+
+<h4>Graph G<sub>2</sub></h4>
+<figure class="dg">
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+<line x1="150" y1="60" x2="227.9" y2="105" stroke="#000" stroke-width="1.6"/>
+<line x1="227.9" y1="105" x2="227.9" y2="195" stroke="#000" stroke-width="1.6"/>
+<line x1="227.9" y1="195" x2="150" y2="240" stroke="#000" stroke-width="1.6"/>
+<line x1="150" y1="240" x2="72.1" y2="195" stroke="#000" stroke-width="1.6"/>
+<line x1="72.1" y1="195" x2="72.1" y2="105" stroke="#000" stroke-width="1.6"/>
+<line x1="72.1" y1="105" x2="150" y2="60" stroke="#000" stroke-width="1.6"/>
+<line x1="150" y1="60" x2="150" y2="240" stroke="#000" stroke-width="1.6"/>
+<line x1="227.9" y1="105" x2="72.1" y2="195" stroke="#000" stroke-width="1.6"/>
+<line x1="227.9" y1="195" x2="72.1" y2="105" stroke="#000" stroke-width="1.6"/>
+<circle cx="150" cy="60" r="4" fill="#000"/>
+<circle cx="227.9" cy="105" r="4" fill="#000"/>
+<circle cx="227.9" cy="195" r="4" fill="#000"/>
+<circle cx="150" cy="240" r="4" fill="#000"/>
+<circle cx="72.1" cy="195" r="4" fill="#000"/>
+<circle cx="72.1" cy="105" r="4" fill="#000"/>
+<circle cx="150" cy="150" r="2.5" fill="#000"/>
+<text x="150" y="48" font-size="14" font-family="serif" text-anchor="middle">A</text>
+<text x="240" y="110" font-size="14" font-family="serif" text-anchor="start">B</text>
+<text x="240" y="200" font-size="14" font-family="serif" text-anchor="start">C</text>
+<text x="150" y="258" font-size="14" font-family="serif" text-anchor="middle">D</text>
+<text x="60" y="200" font-size="14" font-family="serif" text-anchor="end">E</text>
+<text x="60" y="110" font-size="14" font-family="serif" text-anchor="end">F</text>
+<text x="166" y="153" font-size="12" font-family="serif" text-anchor="start">Q</text>
+</svg>
+<figcaption>G<sub>2</sub>: hexagon A B C D E F together with the long diagonals AD, BE, CF, which meet at the centre Q.</figcaption>
+</figure>
+
+<p><b>Degree table.</b></p>
+<table class="tt">
+<tr><th>Vertex</th><th>Incident edges</th><th>Degree</th></tr>
+<tr><td>A</td><td>AB, AF, AD</td><td>3 (odd)</td></tr>
+<tr><td>B</td><td>AB, BC, BE</td><td>3 (odd)</td></tr>
+<tr><td>C</td><td>BC, CD, CF</td><td>3 (odd)</td></tr>
+<tr><td>D</td><td>CD, DE, DA</td><td>3 (odd)</td></tr>
+<tr><td>E</td><td>DE, EF, EB</td><td>3 (odd)</td></tr>
+<tr><td>F</td><td>EF, FA, FC</td><td>3 (odd)</td></tr>
+</table>
+<p>G<sub>2</sub> is connected, and each of A, B, C, D, E, F has degree 3, so there are six odd-degree vertices. If the centre Q is treated as a vertex, each long diagonal splits into two edges and deg(Q) = 6 (even), while A, B, C, D, E, F still have degree 3; again there are six odd vertices. In either reading, the number of odd-degree vertices is 6 &gt; 2.</p>
+<div class="result">Since G<sub>2</sub> has more than two odd-degree vertices, it has <b>neither an Euler path nor an Euler circuit</b>.</div>
+
+<h4>Graph G<sub>3</sub> (the complete graph K<sub>5</sub>)</h4>
+<figure class="dg">
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+<line x1="150" y1="50" x2="245.1" y2="119.1" stroke="#000" stroke-width="1.6"/>
+<line x1="150" y1="50" x2="208.8" y2="230.9" stroke="#000" stroke-width="1.6"/>
+<line x1="150" y1="50" x2="91.2" y2="230.9" stroke="#000" stroke-width="1.6"/>
+<line x1="150" y1="50" x2="54.9" y2="119.1" stroke="#000" stroke-width="1.6"/>
+<line x1="245.1" y1="119.1" x2="208.8" y2="230.9" stroke="#000" stroke-width="1.6"/>
+<line x1="245.1" y1="119.1" x2="91.2" y2="230.9" stroke="#000" stroke-width="1.6"/>
+<line x1="245.1" y1="119.1" x2="54.9" y2="119.1" stroke="#000" stroke-width="1.6"/>
+<line x1="208.8" y1="230.9" x2="91.2" y2="230.9" stroke="#000" stroke-width="1.6"/>
+<line x1="208.8" y1="230.9" x2="54.9" y2="119.1" stroke="#000" stroke-width="1.6"/>
+<line x1="91.2" y1="230.9" x2="54.9" y2="119.1" stroke="#000" stroke-width="1.6"/>
+<circle cx="150" cy="50" r="4" fill="#000"/>
+<circle cx="245.1" cy="119.1" r="4" fill="#000"/>
+<circle cx="208.8" cy="230.9" r="4" fill="#000"/>
+<circle cx="91.2" cy="230.9" r="4" fill="#000"/>
+<circle cx="54.9" cy="119.1" r="4" fill="#000"/>
+<text x="150" y="38" font-size="14" font-family="serif" text-anchor="middle">A</text>
+<text x="257" y="124" font-size="14" font-family="serif" text-anchor="start">B</text>
+<text x="220" y="241" font-size="14" font-family="serif" text-anchor="start">C</text>
+<text x="80" y="241" font-size="14" font-family="serif" text-anchor="end">D</text>
+<text x="43" y="124" font-size="14" font-family="serif" text-anchor="end">E</text>
+</svg>
+<figcaption>G<sub>3</sub> = K<sub>5</sub>: the pentagon together with its five diagonals (10 edges).</figcaption>
+</figure>
+
+<p><b>Degree table.</b></p>
+<table class="tt">
+<tr><th>Vertex</th><th>Incident edges</th><th>Degree</th></tr>
+<tr><td>A</td><td>AB, AC, AD, AE</td><td>4</td></tr>
+<tr><td>B</td><td>BA, BC, BD, BE</td><td>4</td></tr>
+<tr><td>C</td><td>CA, CB, CD, CE</td><td>4</td></tr>
+<tr><td>D</td><td>DA, DB, DC, DE</td><td>4</td></tr>
+<tr><td>E</td><td>EA, EB, EC, ED</td><td>4</td></tr>
+</table>
+<p>G<sub>3</sub> is connected and every vertex has even degree 4. By Euler's theorem it has an Euler circuit. One such circuit is</p>
+<div class="eq">A – B – C – D – E – A – C – E – B – D – A.</div>
+<p>It uses the ten distinct edges AB, BC, CD, DE, EA, AC, CE, EB, BD, DA, i.e. all 10 edges of K<sub>5</sub>, and returns to the starting vertex A; hence it is an Euler circuit (and therefore also an Euler path).</p>
+
+<h4>Summary</h4>
+<table class="tt">
+<tr><th>Graph</th><th>Odd-degree vertices</th><th>Conclusion</th></tr>
+<tr><td>G<sub>1</sub></td><td>A, B (two)</td><td>Euler path A–C–D–A–B–D–E–B; no Euler circuit</td></tr>
+<tr><td>G<sub>2</sub></td><td>A, B, C, D, E, F (six)</td><td>Neither an Euler path nor an Euler circuit</td></tr>
+<tr><td>G<sub>3</sub></td><td>none (zero)</td><td>Euler circuit A–B–C–D–E–A–C–E–B–D–A</td></tr>
+</table>
+
+<div class="result">G<sub>1</sub> has an Euler path but no Euler circuit; G<sub>2</sub> has neither; G<sub>3</sub> has an Euler circuit. ∎</div>
+</div>

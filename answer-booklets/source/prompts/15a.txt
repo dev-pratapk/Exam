@@ -1,0 +1,9 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper header: B.E./B.Tech. MA3354 Discrete Mathematics, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 15 (a) — answer every sub-part below (one <div class="ans"> per sub-part, data-q like "15 (a) (i)").
+
+15 (a) (i) [8 marks]: Prove that every chain is a distributive lattice.
+
+15 (a) (ii) [8 marks]: In a distributive complemented lattice, show that the following are equivalent: (1) a ≤ b (2) a ∧ b̄ = 0 (3) ā ∨ b = 1 (4) b̄ ≤ ā.
+
+Write the file out/15a.html.

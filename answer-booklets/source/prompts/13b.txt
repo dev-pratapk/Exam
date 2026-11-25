@@ -1,0 +1,17 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper header: B.E./B.Tech. MA3354 Discrete Mathematics, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 13 (b) — answer every sub-part below (one <div class="ans"> per sub-part, data-q like "13 (b) (i)").
+
+13 (b) (i) [8 marks]: If G is a connected simple graph with n vertices, n ≥ 3, such that the degree of every vertex in G is at least n/2, then prove that G has a Hamilton cycle.
+
+13 (b) (ii) [8 marks]: Find an Euler path or an Euler circuit, if it exists, in each of the following three graphs. If it does not exist, explain why.
+FIGURE (draw all three graphs in SVG):
+G1: vertices A, B, C, D, E. Edges: A–B, A–C, A–D, B–D, B–E, C–D, D–E (7 edges). Degrees: A3, B3, C2, D4, E2.
+    Exactly two odd vertices (A, B) ⇒ Euler path but no Euler circuit. Example Euler path: A–C–D–A–B–D–E–B.
+G2: regular hexagon A, B, C, D, E, F (edges AB, BC, CD, DE, EF, FA) plus the three long diagonals A–D, B–E, C–F which cross at the
+    centre point labelled Q. Each of A..F has degree 3 (if Q is taken as a vertex, deg Q = 6 and A..F still have degree 3).
+    Six odd vertices ⇒ neither an Euler path nor an Euler circuit.
+G3: complete graph K5 on A, B, C, D, E (pentagon + all diagonals, 10 edges). Every vertex has degree 4 ⇒ Euler circuit
+    (hence also an Euler path). Example circuit: A–B–C–D–E–A–C–E–B–D–A.
+
+Write the file out/13b.html.
