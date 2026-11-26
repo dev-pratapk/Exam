@@ -1,0 +1,84 @@
+<div class="ans" data-q="16 (a)" data-pages="6">
+<h4>Introduction and recommendation</h4>
+<p><b>Scenario:</b> an autonomous education institution wants to move its <b>website</b> and its <b>database</b> (student records, admissions, results) from on-premises infrastructure to the cloud. As the cloud expert I must choose the most suitable <b>deployment model</b> and <b>service model</b>.</p>
+<div class="result">Recommendation: <b>Hybrid cloud</b> as the deployment model, with <b>PaaS</b> for the website and a managed database service (<b>DBaaS</b>) for the student database; IaaS only for legacy applications that cannot run on PaaS.</div>
+
+<figure class="dg"><svg width="560" height="230" viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13">
+<defs><marker id="a16a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<g fill="none" stroke="#000" stroke-width="1.6">
+<rect x="10" y="85" width="85" height="55" rx="6"/>
+<rect x="125" y="85" width="85" height="55" rx="6"/>
+<rect x="250" y="45" width="115" height="50" rx="6"/><rect x="250" y="130" width="115" height="50" rx="6"/>
+<rect x="415" y="75" width="135" height="75" rx="6"/>
+<rect x="115" y="22" width="262" height="186" rx="10" stroke-dasharray="7 4"/>
+<rect x="400" y="22" width="156" height="186" rx="10" stroke-dasharray="7 4"/>
+<line x1="95" y1="112" x2="125" y2="112" marker-end="url(#a16a)"/>
+<line x1="210" y1="100" x2="250" y2="70" marker-end="url(#a16a)"/><line x1="210" y1="125" x2="250" y2="155" marker-end="url(#a16a)"/>
+<line x1="365" y1="70" x2="415" y2="100" marker-end="url(#a16a)"/><line x1="365" y1="155" x2="415" y2="125" marker-end="url(#a16a)"/>
+</g>
+<g text-anchor="middle"><text x="52" y="108">Students,</text><text x="52" y="124">staff, public</text>
+<text x="167" y="108">CDN +</text><text x="167" y="124">load balancer</text>
+<text x="307" y="66">Web server 1</text><text x="307" y="82">(PaaS, auto-scaled)</text>
+<text x="307" y="151">Web server 2</text><text x="307" y="167">(PaaS, auto-scaled)</text>
+<text x="482" y="107">Student database</text><text x="482" y="123">(DBaaS, encrypted,</text><text x="482" y="139">private, backed up)</text>
+<text x="246" y="40" font-size="12" font-weight="bold">Public cloud: website</text>
+<text x="478" y="40" font-size="12" font-weight="bold">Private part (via VPN)</text></g>
+</svg><figcaption>Proposed hybrid architecture: the website scales in the public cloud and the sensitive database stays in a private, access-controlled environment.</figcaption></figure>
+
+<h4>1. Factors to consider</h4>
+<table class="tt">
+<tr><th>Factor</th><th>Why it matters for the institution</th></tr>
+<tr><td><b>Security and privacy of data</b></td><td>The database holds personal records of students. The institution must follow data-protection rules (for example India’s Digital Personal Data Protection Act, 2023) and prevent leaks.</td></tr>
+<tr><td><b>Compliance and data location</b></td><td>Data should stay in approved regions; audit logs and access control are needed.</td></tr>
+<tr><td><b>Scalability and peaks</b></td><td>Traffic is very uneven: admissions, results and exam registration days bring heavy load, and other days almost none.</td></tr>
+<tr><td><b>Cost</b></td><td>The cloud converts capital expenditure on servers into operating expenditure and avoids paying for idle capacity.</td></tr>
+<tr><td><b>Availability and disaster recovery</b></td><td>The website must be reachable at result time; backups and a second site are needed.</td></tr>
+<tr><td><b>Control and customization</b></td><td>How much control the institution wants over the servers and the database.</td></tr>
+<tr><td><b>In-house skills</b></td><td>A small IT team cannot administer servers, patches and databases around the clock.</td></tr>
+<tr><td><b>Migration effort and vendor lock-in</b></td><td>Downtime, application changes, and the ease of moving to another provider later.</td></tr>
+</table>
+
+<h4>2. Choice of deployment model</h4>
+<table class="tt">
+<tr><th>Factor</th><th>Public</th><th>Private</th><th>Community</th><th>Hybrid</th></tr>
+<tr><td>Cost</td><td>Low, pay per use</td><td>High (own hardware, staff)</td><td>Medium (shared)</td><td>Medium</td></tr>
+<tr><td>Security of student records</td><td>Medium (shared, provider-managed)</td><td>High</td><td>High</td><td>High for the private part</td></tr>
+<tr><td>Scalability for peak days</td><td>Very high</td><td>Low</td><td>Medium</td><td>High (burst to public)</td></tr>
+<tr><td>Control</td><td>Low</td><td>High</td><td>Medium</td><td>Medium to high</td></tr>
+<tr><td>Migration effort</td><td>Low</td><td>High</td><td>Medium</td><td>Medium</td></tr>
+<tr><td>Fit for this institution</td><td>Good for the website only</td><td>Good for records only; expensive</td><td>Only if a consortium of colleges exists</td><td><b>Website + records</b></td></tr>
+</table>
+<p><b>Why hybrid is best suited compared with the others:</b></p>
+<ul>
+<li>A <b>public-only</b> cloud puts the sensitive records on shared infrastructure, which is a risk and may conflict with compliance.</li>
+<li>A <b>private-only</b> cloud keeps security but needs large capital expenditure and cannot scale for admission and result peaks; most capacity would stay idle.</li>
+<li>A <b>community</b> cloud needs other organizations with the same requirements and offers limited scalability.</li>
+<li>A <b>hybrid</b> cloud puts the public website on the elastic public cloud (low cost, handles peaks) and keeps the student database in a private, access-controlled environment connected over a secure link. It gives security where it matters and scalability where it is needed.</li>
+</ul>
+
+<h4>3. Choice of service model</h4>
+<table class="tt">
+<tr><th>Model</th><th>Suitability</th></tr>
+<tr><td><b>SaaS</b></td><td>Good for standard tools (e-mail, learning management, office suite), but the institution’s own website and database cannot simply be moved to a ready-made application.</td></tr>
+<tr><td><b>PaaS</b></td><td><b>Best for the website.</b> The provider manages servers, operating system and scaling; the staff only deploy the application. Auto-scaling handles peak days; this suits a small IT team.</td></tr>
+<tr><td><b>DBaaS</b> (managed database, a PaaS service)</td><td><b>Best for the database.</b> The provider handles patching, backup, replication and failover; the institution controls access and encryption.</td></tr>
+<tr><td><b>IaaS</b></td><td>Gives the most control but the staff must manage virtual machines, patches and scaling. Use it only for legacy software that PaaS cannot run.</td></tr>
+</table>
+
+<h4>4. Migration plan and risk control</h4>
+<ol>
+<li><b>Assess:</b> list the applications, data size, traffic pattern and dependencies; classify the data as public or sensitive.</li>
+<li><b>Design:</b> choose the provider and region, the network (VPN), identity and access control, and the backup policy.</li>
+<li><b>Pilot:</b> move a test copy of the website and a copy of the database; test performance and security.</li>
+<li><b>Migrate:</b> replicate the database to the new environment, then switch (cut over) outside peak time, keeping the old system as a fallback.</li>
+<li><b>Operate:</b> monitor, back up regularly, review costs and train the staff.</li>
+</ol>
+<table class="tt">
+<tr><th>Risk</th><th>Control</th></tr>
+<tr><td>Data leak</td><td>Encrypt data at rest and in transit; role-based access; audit logs</td></tr>
+<tr><td>Provider outage</td><td>Multiple availability zones; regular backups; tested recovery</td></tr>
+<tr><td>Vendor lock-in</td><td>Use standard technologies and keep exportable backups</td></tr>
+<tr><td>Unexpected cost</td><td>Budgets and alerts; auto-scaling limits</td></tr>
+</table>
+<div class="result">Hence a hybrid cloud (public cloud for the website, private environment for the student database) with PaaS and DBaaS is the best suited model: it is secure, scales on peak days, costs less than owning servers and needs little administration.</div>
+</div>

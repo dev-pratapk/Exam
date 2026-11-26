@@ -1,0 +1,53 @@
+<div class="ans" data-q="15 (b)" data-pages="5">
+<h4>Introduction</h4>
+<p>Cloud computing delivers resources as <b>services</b> over a network. The services are organized in three <b>service models</b>, each built on the one below it, and each cloud <b>platform</b> (Amazon Web Services, Google Cloud Platform, Microsoft Azure) offers many services of each kind.</p>
+
+<h4>1. Cloud service models</h4>
+<figure class="dg"><svg width="540" height="250" viewBox="0 0 540 250" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13">
+<defs><marker id="a15b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<g fill="none" stroke="#000" stroke-width="1.6">
+<rect x="20" y="15" width="300" height="50"/><rect x="20" y="65" width="300" height="50"/><rect x="20" y="115" width="300" height="50"/><rect x="20" y="165" width="300" height="50"/>
+<line x1="330" y1="40" x2="400" y2="40" marker-end="url(#a15b)"/><line x1="330" y1="90" x2="400" y2="90" marker-end="url(#a15b)"/><line x1="330" y1="140" x2="400" y2="140" marker-end="url(#a15b)"/>
+</g>
+<g text-anchor="middle"><text x="170" y="36" font-weight="bold">SaaS: Software as a Service</text><text x="170" y="54">e-mail, CRM, office tools, ERP</text>
+<text x="170" y="86" font-weight="bold">PaaS: Platform as a Service</text><text x="170" y="104">runtime, frameworks, database, queue</text>
+<text x="170" y="136" font-weight="bold">IaaS: Infrastructure as a Service</text><text x="170" y="154">virtual machines, storage, network</text>
+<text x="170" y="186" font-weight="bold">Physical resources + virtualization</text><text x="170" y="204">servers, storage, network, hypervisor</text></g>
+<g><text x="408" y="44">End users</text><text x="408" y="94">Developers</text><text x="408" y="144">System administrators</text></g>
+</svg><figcaption>Layered view of the three service models and who uses each layer.</figcaption></figure>
+<table class="tt">
+<tr><th>Model</th><th>What the provider gives</th><th>User manages</th><th>Examples</th></tr>
+<tr><td><b>IaaS</b></td><td>Virtual machines, storage, networks</td><td>OS, middleware, runtime, application, data</td><td>Amazon EC2 and S3, Google Compute Engine, Azure Virtual Machines</td></tr>
+<tr><td><b>PaaS</b></td><td>Platform to build and run applications: runtime, frameworks, databases</td><td>Application and data only</td><td>Google App Engine, AWS Elastic Beanstalk, Azure App Service</td></tr>
+<tr><td><b>SaaS</b></td><td>Complete application delivered through a browser</td><td>Only use and configuration</td><td>Gmail, Salesforce, Microsoft 365, Google Workspace</td></tr>
+</table>
+
+<h4>2. Cloud services and the platforms that support them</h4>
+<table class="tt">
+<tr><th>Service</th><th>Amazon Web Services</th><th>Google Cloud Platform</th><th>Microsoft Azure</th></tr>
+<tr><td><b>Compute</b> (virtual servers)</td><td>EC2</td><td>Compute Engine</td><td>Virtual Machines</td></tr>
+<tr><td><b>Storage</b> (objects and files)</td><td>S3</td><td>Cloud Storage</td><td>Blob Storage</td></tr>
+<tr><td><b>Database</b></td><td>RDS, DynamoDB</td><td>Cloud SQL, Datastore (Firestore)</td><td>SQL Database, Cosmos DB</td></tr>
+<tr><td><b>Application runtime</b> (PaaS)</td><td>Elastic Beanstalk</td><td>App Engine</td><td>App Service</td></tr>
+<tr><td><b>Queuing / messaging</b></td><td>SQS</td><td>Pub/Sub</td><td>Queue Storage, Service Bus</td></tr>
+<tr><td><b>Content delivery</b></td><td>CloudFront</td><td>Cloud CDN</td><td>Azure CDN</td></tr>
+<tr><td><b>MapReduce / big data</b></td><td>EMR</td><td>Dataproc</td><td>HDInsight</td></tr>
+</table>
+<ul>
+<li><b>Compute services</b> provide virtual machines that can be created, resized and stopped on demand (pay per hour or second).</li>
+<li><b>Storage services</b> provide scalable, durable storage for objects and files, accessed through web APIs.</li>
+<li><b>Database services</b> provide managed relational (SQL) and NoSQL databases; the provider handles backup, patching and replication.</li>
+<li><b>Application services</b> provide ready-made building blocks for applications: application runtimes and frameworks, message queues, e-mail and notification services, content delivery networks, MapReduce, media transcoding and search.</li>
+</ul>
+
+<h4>3. Example of an application service adapted by an organization (illustrative)</h4>
+<p>An online retailer runs its shop on the cloud:</p>
+<ol>
+<li>The web application runs on a PaaS runtime (for example Elastic Beanstalk or App Engine) that scales automatically on sale days.</li>
+<li>Each order is placed on a <b>message queue</b> (Amazon SQS). Worker processes read the queue, so a burst of orders does not overload the system.</li>
+<li>After processing, an <b>e-mail service</b> (Amazon SES) sends the order confirmation and a <b>notification service</b> (Amazon SNS) sends an SMS or push message.</li>
+<li>Product images are stored in object storage (S3) and delivered quickly through a content delivery network (CloudFront); orders are kept in a managed database (RDS).</li>
+</ol>
+<p>The retailer pays only for what it uses, has no servers to maintain, and can handle peak load by scaling these services.</p>
+<div class="result">Hence cloud services are delivered as IaaS, PaaS and SaaS, and platforms such as AWS, Google Cloud Platform and Azure supply the compute, storage, database and application services that organizations adapt to build their applications.</div>
+</div>

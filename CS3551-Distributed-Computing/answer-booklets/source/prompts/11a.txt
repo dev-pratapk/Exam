@@ -1,0 +1,8 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper: B.E./B.Tech. CS3551 Distributed Computing, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 11 (a) [13 marks]: Explain blocking, non-blocking, synchronous and asynchronous primitives for distributed communication. Also summarize major libraries and standards for building distributed applications.
+
+Write ONE <div class="ans" data-q="11 (a)" data-pages="5">.
+Content checklist: Must cover: Send()/Receive(); buffered vs unbuffered; the four Send variants (blocking synchronous, non-blocking synchronous, blocking asynchronous, non-blocking asynchronous) and blocking / non-blocking Receive, with the timing diagram showing when each call returns; handles and Wait(); processor synchrony; libraries & standards: sockets, MPI, PVM, RPC, Java RMI, CORBA, DCOM, message-oriented middleware.
+
+Write the file out/11a.html.

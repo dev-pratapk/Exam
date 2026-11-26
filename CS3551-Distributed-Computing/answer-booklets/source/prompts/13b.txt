@@ -1,0 +1,8 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper: B.E./B.Tech. CS3551 Distributed Computing, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 13 (b) [13 marks]: Compare and contrast Chandy–Misra–Haas algorithm for the AND model and OR model.
+
+Write ONE <div class="ans" data-q="13 (b)" data-pages="5">.
+Content checklist: Must cover: AND model vs OR model definitions with WFG examples; CMH for AND model (probe(i, j, k), dependent_k(i) array, a deadlock when probe(i, j, i) returns to initiator; one probe per WFG edge, at most m(n−1)/2 messages for m processes at n sites, delay O(n)); CMH for OR model (query(i, j, k) and reply(i, j, k) messages, num_k(i), wait_k(i); engaging query; deadlock declared when the initiator receives replies to all its queries; e query and e reply messages for e WFG edges); a comparison table (model, message types, what is propagated, detection condition, message complexity, false deadlocks). Draw one small WFG for each model.
+
+Write the file out/13b.html.

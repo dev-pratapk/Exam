@@ -1,0 +1,97 @@
+<div class="ans" data-q="16 (b)" data-pages="6">
+<h4>Introduction</h4>
+<p>In <b>group communication</b> a message is multicast to all members of a group. The ordering guarantees are: unordered, FIFO, causal and <b>total order</b>. <b>Total order</b> means that if two messages M<sub>x</sub> and M<sub>y</sub> are delivered to both processes p<sub>i</sub> and p<sub>j</sub>, they are delivered in the same order at both: every member sees the same sequence of messages. It is needed, for example, in replicated databases and replicated state machines, where all copies must apply updates in the same order.</p>
+
+<h4>1. Centralized algorithm</h4>
+<p>One process of the group acts as the <b>coordinator (sequencer)</b>.</p>
+<ol>
+<li>When p<sub>i</sub> wants to multicast a message M to group G, it sends M to the coordinator.</li>
+<li>The coordinator receives messages one by one and sends each M to all members of G, in the order in which it received them.</li>
+<li>Each member delivers the messages in the order in which they arrive from the coordinator.</li>
+</ol>
+<figure class="dg"><svg width="500" height="180" viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13">
+<defs><marker id="a16b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<g fill="none" stroke="#000" stroke-width="1.6">
+<rect x="15" y="25" width="70" height="32"/><rect x="15" y="120" width="70" height="32"/>
+<rect x="200" y="65" width="100" height="50" rx="6"/>
+<rect x="395" y="6" width="100" height="40"/><rect x="395" y="70" width="100" height="40"/><rect x="395" y="134" width="100" height="40"/>
+<line x1="85" y1="41" x2="200" y2="80" marker-end="url(#a16b1)"/><line x1="85" y1="136" x2="200" y2="100" marker-end="url(#a16b1)"/>
+<line x1="300" y1="77" x2="395" y2="26" marker-end="url(#a16b1)"/><line x1="300" y1="90" x2="395" y2="90" marker-end="url(#a16b1)"/><line x1="300" y1="103" x2="395" y2="154" marker-end="url(#a16b1)"/>
+</g>
+<g text-anchor="middle"><text x="50" y="46">P1</text><text x="50" y="141">P2</text><text x="250" y="86">Coordinator</text><text x="250" y="102">(sequencer)</text>
+<text x="445" y="23">member 1</text><text x="445" y="39" font-size="12" font-style="italic">gets M1, M2</text>
+<text x="445" y="87">member 2</text><text x="445" y="103" font-size="12" font-style="italic">gets M1, M2</text>
+<text x="445" y="151">member 3</text><text x="445" y="167" font-size="12" font-style="italic">gets M1, M2</text></g>
+<text x="100" y="32" font-style="italic">M1</text><text x="100" y="158" font-style="italic">M2</text>
+</svg><figcaption>Centralized total order: the coordinator fixes one order, and every member receives M1 then M2.</figcaption></figure>
+<p><b>Complexity:</b> for a group of n members, about n + 1 messages per multicast (one to the coordinator and n from it) and two message hops of delay.</p>
+<p><b>Disadvantages:</b> the coordinator is a <b>single point of failure</b> and a <b>bottleneck</b>; if it fails, a new coordinator must be elected.</p>
+
+<h4>2. Distributed (three-phase) algorithm</h4>
+<p>No coordinator is used. Each process p<sub>j</sub> keeps a counter <b>tsn<sub>j</sub></b> (the next timestamp number) and two queues: <b>temp_Q</b>, holding messages with a timestamp and a flag deliverable / undeliverable, sorted by timestamp, and <b>delivery_Q</b>, from which messages are delivered. Messages with equal timestamps are ordered by the sender’s id.</p>
+<p><b>Phase 1: the sender asks for a timestamp.</b></p>
+<ol>
+<li>p<sub>i</sub> sends the message M to all members of the group G.</li>
+<li>Each member p<sub>j</sub> that receives M does tsn<sub>j</sub> := tsn<sub>j</sub> + 1, assigns this value as the <i>temporary timestamp</i> of M, puts (M, tsn<sub>j</sub>, undeliverable) in temp_Q and sends <b>REVISE_TS(M, tsn<sub>j</sub>)</b> back to p<sub>i</sub>.</li>
+</ol>
+<p><b>Phase 2: the sender decides the final timestamp.</b></p>
+<ol start="3">
+<li>When p<sub>i</sub> has received REVISE_TS from every member, it computes the <b>final timestamp sn = max of all the tsn<sub>j</sub></b> and sends <b>FINAL_TS(M, sn)</b> to all members.</li>
+</ol>
+<p><b>Phase 3: delivery.</b></p>
+<ol start="4">
+<li>A member that receives FINAL_TS(M, sn) finds M in temp_Q, sets its timestamp to sn, marks it <b>deliverable</b> and re-sorts temp_Q by timestamp.</li>
+<li>While the message at the head of temp_Q is deliverable, it is moved to delivery_Q and delivered. A deliverable message behind an undeliverable message at the head must wait.</li>
+</ol>
+<figure class="dg"><svg width="560" height="240" viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13">
+<defs><marker id="a16b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<g stroke="#000" stroke-width="1.6" fill="none">
+<line x1="45" y1="50" x2="548" y2="50"/><line x1="45" y1="120" x2="548" y2="120"/><line x1="45" y1="190" x2="548" y2="190"/>
+<line x1="90" y1="50" x2="150" y2="120" marker-end="url(#a16b2)"/><line x1="90" y1="50" x2="170" y2="190" marker-end="url(#a16b2)"/>
+<line x1="160" y1="120" x2="240" y2="50" stroke-dasharray="6 4" marker-end="url(#a16b2)"/><line x1="180" y1="190" x2="260" y2="50" stroke-dasharray="6 4" marker-end="url(#a16b2)"/>
+<line x1="290" y1="50" x2="360" y2="120" stroke-dasharray="2 4" marker-end="url(#a16b2)"/><line x1="290" y1="50" x2="400" y2="190" stroke-dasharray="2 4" marker-end="url(#a16b2)"/>
+</g>
+<g fill="#000"><circle cx="90" cy="50" r="4"/><circle cx="150" cy="120" r="4"/><circle cx="170" cy="190" r="4"/><circle cx="260" cy="50" r="4"/><circle cx="290" cy="50" r="4"/><circle cx="360" cy="120" r="4"/><circle cx="400" cy="190" r="4"/></g>
+<text x="8" y="55">P1</text><text x="8" y="125">P2</text><text x="8" y="195">P3</text>
+<text x="90" y="36" text-anchor="middle">multicast M</text>
+<text x="275" y="36" text-anchor="middle">final sn = max</text>
+<text x="158" y="140">tsn</text>
+<text x="170" y="212" text-anchor="middle">tsn</text>
+<text x="374" y="140">deliver M</text>
+<text x="400" y="212" text-anchor="middle">deliver M</text>
+<text x="100" y="94" font-style="italic" text-anchor="end">M</text>
+<text x="214" y="158" font-style="italic">REVISE_TS</text>
+<text x="350" y="162" font-style="italic" text-anchor="end">FINAL_TS</text>
+<text x="440" y="76" font-size="12">Phase 1: solid</text><text x="440" y="92" font-size="12">Phase 2: dashed</text><text x="440" y="108" font-size="12">Phase 3: dotted</text>
+</svg><figcaption>Three phases for one multicast by P1 to the group {P1, P2, P3}: 2 + 2 + 2 = 6 = 3(n − 1) messages.</figcaption></figure>
+
+<h4>Example: two concurrent multicasts</h4>
+<p>P1 multicasts A and P2 multicasts B at the same time to the group {P1, P2, P3}. All counters start at 0. The receive orders differ: P1 and P3 receive A before B, and P2 receives B before A.</p>
+<table class="tt">
+<tr><th>Process</th><th>Temporary timestamp of A</th><th>Temporary timestamp of B</th></tr>
+<tr><td>P1 (A, then B)</td><td>1</td><td>2</td></tr>
+<tr><td>P2 (B, then A)</td><td>2</td><td>1</td></tr>
+<tr><td>P3 (A, then B)</td><td>1</td><td>2</td></tr>
+<tr><td><b>Final timestamp = max</b></td><td><b>2</b></td><td><b>2</b></td></tr>
+</table>
+<p>Both final timestamps are 2, and the tie is broken by sender id: A (sender P1) comes before B (sender P2). At P2, temp_Q is first {B(1, undeliverable), A(2, undeliverable)}. When FINAL_TS(B) = 2 arrives, B becomes deliverable but the queue is re-sorted and A (2, from P1) is now at the head and still undeliverable, so B must wait. When FINAL_TS(A) = 2 arrives, A is delivered and then B. P1 and P3 also deliver A then B. <b>All three deliver A, B in the same order.</b></p>
+
+<h4>Correctness</h4>
+<ul>
+<li>The final timestamp of a message is decided once, by its sender, and the same value is sent to all members, so every member sorts the messages in the same order.</li>
+<li>A temporary timestamp is never larger than the final one. A message is delivered only when it is at the head of temp_Q and deliverable, so no message with an undecided final timestamp can end up before it.</li>
+</ul>
+<p><b>Complexity:</b> 3(n − 1) messages per multicast (n − 1 for M, n − 1 for REVISE_TS and n − 1 for FINAL_TS), and three message hops of delay.</p>
+
+<h4>Comparison</h4>
+<table class="tt">
+<tr><th>Aspect</th><th>Centralized</th><th>Distributed (three-phase)</th></tr>
+<tr><td>Coordinator</td><td>Yes (sequencer)</td><td>None</td></tr>
+<tr><td>Messages per multicast</td><td>about n + 1</td><td>3(n − 1)</td></tr>
+<tr><td>Delay</td><td>2 message hops</td><td>3 message hops</td></tr>
+<tr><td>Single point of failure / bottleneck</td><td>Yes</td><td>No</td></tr>
+<tr><td>Who decides the order</td><td>Coordinator</td><td>Sender (max of the proposed timestamps)</td></tr>
+<tr><td>Best for</td><td>Small groups, simple systems</td><td>Larger or fault-sensitive systems</td></tr>
+</table>
+<div class="result">Hence total order can be achieved by a centralized sequencer (about n + 1 messages, but a single point of failure) or by the distributed three-phase algorithm (3(n − 1) messages, no coordinator), and in both every member delivers the messages in the same order.</div>
+</div>

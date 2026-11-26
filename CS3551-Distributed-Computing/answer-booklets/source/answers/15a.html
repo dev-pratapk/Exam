@@ -1,0 +1,63 @@
+<div class="ans" data-q="15 (a)" data-pages="5">
+<h4>Introduction</h4>
+<p>The NIST definition: <i>cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (networks, servers, storage, applications and services) that can be rapidly provisioned and released with minimal management effort or service-provider interaction.</i> A <b>deployment model</b> says who owns the cloud, who can use it and where it is located. There are four types: public, private, community and hybrid.</p>
+
+<figure class="dg"><svg width="540" height="250" viewBox="0 0 540 250" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13">
+<defs><marker id="a15a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<g fill="none" stroke="#000" stroke-width="1.6">
+<rect x="15" y="15" width="235" height="80" rx="8"/><rect x="290" y="15" width="235" height="80" rx="8"/>
+<rect x="15" y="155" width="235" height="80" rx="8"/><rect x="290" y="155" width="235" height="80" rx="8"/>
+<line x1="132" y1="95" x2="132" y2="125"/><line x1="132" y1="125" x2="407" y2="125"/>
+<line x1="407" y1="95" x2="407" y2="125"/>
+<line x1="407" y1="125" x2="407" y2="155" marker-end="url(#a15a)"/>
+</g>
+<g text-anchor="middle"><text x="132" y="38" font-weight="bold">Public cloud</text><text x="132" y="58">Provider owns it; many tenants</text><text x="132" y="76">share it over the Internet</text>
+<text x="407" y="38" font-weight="bold">Private cloud</text><text x="407" y="58">One organization only;</text><text x="407" y="76">on-premise or hosted</text>
+<text x="132" y="178" font-weight="bold">Community cloud</text><text x="132" y="198">Shared by organizations with</text><text x="132" y="216">common concerns</text>
+<text x="407" y="178" font-weight="bold">Hybrid cloud</text><text x="407" y="198">Private + public (or community)</text><text x="407" y="216">bound together; cloud bursting</text></g>
+<text x="270" y="119" font-size="11" font-style="italic" text-anchor="middle">public + private (or community) combine to form</text>
+</svg><figcaption>The four cloud deployment models; a hybrid cloud is a composition of two or more of the others.</figcaption></figure>
+
+<h4>1. Public cloud</h4>
+<p>The infrastructure is owned and operated by a cloud provider and made available to the general public or a large industry group. Many customers (tenants) share the same physical resources over the Internet and pay per use. <i>Examples:</i> Amazon Web Services, Microsoft Azure, Google Cloud Platform.</p>
+<table class="tt">
+<tr><th>Advantages</th><th>Disadvantages</th></tr>
+<tr><td>No capital expenditure; pay-as-you-go<br>Very high, rapid scalability (elasticity)<br>No maintenance or upgrades by the user<br>Global availability and high reliability</td><td>Little control over infrastructure and policies<br>Security, privacy and data-location (compliance) concerns<br>Multi-tenancy: shared resources<br>Depends on the provider and the Internet; vendor lock-in</td></tr>
+</table>
+
+<h4>2. Private cloud</h4>
+<p>The infrastructure is provisioned for exclusive use by a single organization. It may be owned, managed and operated by the organization, by a third party, or both, and may be located on-premise or off-premise. <i>Examples:</i> a data centre running OpenStack or VMware vSphere.</p>
+<table class="tt">
+<tr><th>Advantages</th><th>Disadvantages</th></tr>
+<tr><td>Highest security and control<br>Easier compliance with regulations<br>Customization to own needs<br>Predictable performance</td><td>High capital and running cost<br>Limited scalability (fixed capacity)<br>Needs skilled staff<br>Resources may stay under-used</td></tr>
+</table>
+
+<h4>3. Community cloud</h4>
+<p>The infrastructure is shared by several organizations with common concerns (mission, security requirements, policy, compliance). It may be managed by the organizations or by a third party. <i>Examples:</i> a government cloud shared by departments, or a cloud shared by hospitals or universities.</p>
+<table class="tt">
+<tr><th>Advantages</th><th>Disadvantages</th></tr>
+<tr><td>Cost is shared among members<br>Common security and compliance requirements<br>More secure than a public cloud</td><td>Limited capacity and scalability<br>Governance and cost-sharing among members is complex<br>Fewer providers and choices</td></tr>
+</table>
+
+<h4>4. Hybrid cloud</h4>
+<p>A composition of two or more distinct clouds (private, community or public) that remain separate entities but are bound together by standardized technology that enables data and application portability. A typical use is <b>cloud bursting</b>: the normal load runs on the private cloud and the peak load overflows to the public cloud.</p>
+<table class="tt">
+<tr><th>Advantages</th><th>Disadvantages</th></tr>
+<tr><td>Sensitive data stays private while the public cloud supplies elasticity<br>Cost optimization and flexibility<br>Good for disaster recovery and bursting</td><td>Complex to set up and manage<br>Integration, networking and security between the clouds<br>Compliance has to be maintained across both</td></tr>
+</table>
+
+<h4>Comparison</h4>
+<table class="tt">
+<tr><th>Aspect</th><th>Public</th><th>Private</th><th>Community</th><th>Hybrid</th></tr>
+<tr><td>Owner / users</td><td>Provider / general public</td><td>One organization</td><td>Group of organizations</td><td>Mixed</td></tr>
+<tr><td>Cost model</td><td>Pay per use</td><td>High fixed cost</td><td>Shared cost</td><td>Mixed</td></tr>
+<tr><td>Security and control</td><td>Lower</td><td>Highest</td><td>High</td><td>High for the private part</td></tr>
+<tr><td>Scalability</td><td>Very high</td><td>Limited</td><td>Limited</td><td>High</td></tr>
+<tr><td>Setup time</td><td>Minutes</td><td>Weeks to months</td><td>Weeks</td><td>Weeks</td></tr>
+<tr><td>Typical use</td><td>Web apps, testing, start-ups</td><td>Banks, sensitive data</td><td>Government, research</td><td>Seasonal load with sensitive data</td></tr>
+</table>
+
+<h4>Choosing a model</h4>
+<p>Choose <b>public</b> for low cost and fast scaling of non-sensitive workloads; <b>private</b> when security, regulation or control dominate; <b>community</b> when organizations share the same requirements and want to share cost; <b>hybrid</b> when the workload has both sensitive and bursty parts.</p>
+<div class="result">Hence the four deployment models (public, private, community and hybrid) trade off cost, control, security and scalability, and the choice depends on the workload and the organization’s requirements.</div>
+</div>

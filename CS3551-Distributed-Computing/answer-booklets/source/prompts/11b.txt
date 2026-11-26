@@ -1,0 +1,8 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper: B.E./B.Tech. CS3551 Distributed Computing, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 11 (b) [13 marks]: Explain the design issues and challenges in the design of distributed operating systems.
+
+Write ONE <div class="ans" data-q="11 (b)" data-pages="5">.
+Content checklist: Organise as Kshemkalyani & Singhal ch.1: (1) challenges from the system perspective (communication, processes, naming, synchronization, data storage and access, consistency and replication, fault tolerance, security, API and transparency, scalability and modularity); (2) algorithmic challenges (execution models, dynamic distributed graph algorithms, time and global state, synchronization/coordination, group communication and multicast, monitoring distributed events, program design and verification, debugging, data replication, load balancing, real-time scheduling, performance); (3) applications of distributed computing and newer challenges (mobile systems, sensor networks, ubiquitous computing, P2P, publish-subscribe, distributed agents, distributed data mining, grid computing, security).
+
+Write the file out/11b.html.

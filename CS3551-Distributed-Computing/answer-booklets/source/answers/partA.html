@@ -1,0 +1,72 @@
+<div class="ans" data-q="1" data-pages="0.5">
+<p><b>Definition.</b> In a <i>message passing</i> system processes communicate by explicit <b>send</b> and <b>receive</b> operations over a network; in a <i>shared memory</i> system they communicate by reading and writing common variables. The main differences are:</p>
+<table class="tt">
+<tr><th>Aspect</th><th>Message passing</th><th>Shared memory</th></tr>
+<tr><td>Communication</td><td>send / receive messages</td><td>read / write shared variables</td></tr>
+<tr><td>Address space</td><td>private, disjoint</td><td>one common address space</td></tr>
+<tr><td>Coupling</td><td>loosely coupled</td><td>tightly coupled</td></tr>
+<tr><td>Synchronization</td><td>implicit in send/receive (blocking or buffered)</td><td>explicit locks and semaphores</td></tr>
+<tr><td>Scalability</td><td>scales to WAN and many nodes</td><td>limited to one multiprocessor</td></tr>
+<tr><td>Examples</td><td>sockets, RPC, MPI</td><td>threads, OpenMP</td></tr>
+</table>
+</div>
+
+<div class="ans" data-q="2" data-pages="0.5">
+<p><b>Motivations for distributed systems.</b> They are built to achieve: (i) <b>resource sharing</b> — files, printers, databases and services used by many users; (ii) <b>communication and collaboration</b> — e-mail, chat, distributed databases; (iii) <b>scalability</b> — add nodes to handle growing load; (iv) <b>fault tolerance and reliability</b> — replication keeps the service alive after a failure; (v) <b>cost and performance</b> — many cheap machines give better price/performance than one supercomputer; (vi) <b>geographic distribution</b> and <b>load sharing</b>; (vii) <b>transparency</b> — remote resources are accessed as if local.</p>
+</div>
+
+<div class="ans" data-q="3" data-pages="0.5">
+<p><b>Scalar time</b> keeps one integer <i>L</i><sub>i</sub> per process (Lamport clock). <b>R1:</b> <i>L</i><sub>i</sub> := <i>L</i><sub>i</sub> + 1 before each event. <b>R2:</b> a message carries <i>L</i><sub>i</sub> as timestamp <i>t</i>; on receipt, <i>L</i><sub>i</sub> := max(<i>L</i><sub>i</sub>, <i>t</i>) + 1. Hence <i>a</i> → <i>b</i> ⇒ <i>L</i>(<i>a</i>) &lt; <i>L</i>(<i>b</i>), but not conversely.</p>
+<p><b>Vector time</b> keeps <i>V</i><sub>i</sub>[1..<i>n</i>], where <i>V</i><sub>i</sub>[<i>j</i>] counts the events of <i>P</i><sub>j</sub> known to <i>P</i><sub>i</sub>. <b>R1:</b> <i>V</i><sub>i</sub>[<i>i</i>] := <i>V</i><sub>i</sub>[<i>i</i>] + 1 before an event. <b>R2:</b> on receiving (<i>m</i>, <i>t</i>), <i>V</i><sub>i</sub>[<i>j</i>] := max(<i>V</i><sub>i</sub>[<i>j</i>], <i>t</i>[<i>j</i>]) ∀<i>j</i>, then <i>V</i><sub>i</sub>[<i>i</i>] := <i>V</i><sub>i</sub>[<i>i</i>] + 1. Hence <i>a</i> → <i>b</i> ⇔ <i>V</i>(<i>a</i>) &lt; <i>V</i>(<i>b</i>).</p>
+</div>
+
+<div class="ans" data-q="4" data-pages="0.5">
+<p><b>Global state:</b> the collection of the local states of all processes and the states of all channels (messages in transit).</p>
+<p><b>Consistent global state:</b> one that can occur in some execution, i.e. it satisfies <b>C1</b> — every received message was sent earlier, <i>receive</i>(<i>m</i>) ∈ <i>LS</i><sub>j</sub> ⇒ <i>send</i>(<i>m</i>) ∈ <i>LS</i><sub>i</sub>; and <b>C2</b> — every sent but unreceived message is recorded in the channel, <i>send</i>(<i>m</i>) ∈ <i>LS</i><sub>i</sub> ∧ <i>receive</i>(<i>m</i>) ∉ <i>LS</i><sub>j</sub> ⇒ <i>m</i> ∈ <i>SC</i><sub>ij</sub>.</p>
+</div>
+
+<div class="ans" data-q="5" data-pages="0.5">
+<p><b>Three requirements of mutual exclusion algorithms.</b></p>
+<ol>
+<li><b>Safety (mutual exclusion):</b> at most one process is inside the critical section (CS) at any time.</li>
+<li><b>Liveness (progress):</b> a process that requests entry eventually enters the CS; requests are not blocked forever (no deadlock).</li>
+<li><b>Fairness (bounded waiting):</b> no process starves; a waiting request is not overtaken indefinitely, and requests are normally granted in the order made.</li>
+</ol>
+</div>
+
+<div class="ans" data-q="6" data-pages="0.5">
+<p><b>False (phantom) deadlock.</b> A false deadlock is reported by a deadlock detection algorithm when no real deadlock exists — the detector observes a cycle in the wait-for graph that has already been broken.</p>
+<p><b>When it occurs.</b> It occurs because detection works on <i>stale or inconsistent state information</i>: probe or wait-for messages are delayed, a process releases the resource or aborts after sending its reply, or cycles are combined from different instants. Message delays and the absence of a global clock make the collected wait-for graph inconsistent. Consistent snapshots, timestamps and two-phase detection reduce false deadlocks.</p>
+</div>
+
+<div class="ans" data-q="7" data-pages="0.5">
+<p><b>Four issues in failure recovery.</b></p>
+<ul>
+<li><b>Domino effect:</b> rolling back one process may force dependent processes to roll back, possibly to the very beginning.</li>
+<li><b>Orphan processes:</b> processes that continue running after the failure of a process on which they depend.</li>
+<li><b>Lost in-transit messages:</b> messages sent before the failure but not yet received must be replayed or the recovered state made consistent.</li>
+<li><b>Checkpoint overhead and garbage collection:</b> frequent checkpoints cost time and stable storage; obsolete checkpoints must be identified and deleted, and repeated failures during recovery must be handled.</li>
+</ul>
+</div>
+
+<div class="ans" data-q="8" data-pages="0.5">
+<p><b>Checkpoint.</b> A checkpoint is a snapshot of a process's local state — memory, registers, program counter and open files — saved periodically on stable (non-volatile) storage; the messages it sends and receives are kept in a message log.</p>
+<p><b>Usefulness.</b> On failure the process restarts from its latest checkpoint instead of from the beginning, so only the work done after that checkpoint is lost. Checkpoints of all processes, together with message logs, are used to compute a <i>recovery line</i> — a consistent global state — so the system can roll back and resume correctly. They reduce recomputation, limit recovery time and make transient failures tolerable.</p>
+</div>
+
+<div class="ans" data-q="9" data-pages="0.5">
+<p><b>Virtualization</b> is the technique of abstracting physical computing resources (CPU, memory, storage, network) and presenting them as multiple isolated virtual resources. A <b>hypervisor</b> (VMM) runs on the host and creates virtual machines, each with its own guest OS, on one physical machine.</p>
+<p>It decouples software from hardware, gives <b>isolation</b> and <b>multi-tenancy</b>, allows over-commitment of resources, live migration and rapid creation of instances. In cloud computing it is the basis of IaaS and PaaS: providers sell virtual machines and containers instead of physical servers, improving utilization and elasticity.</p>
+</div>
+
+<div class="ans" data-q="10" data-pages="0.5">
+<p><b>Characteristics of cloud computing</b> (NIST):</p>
+<ol>
+<li><b>On-demand self-service</b> — a user provisions computing resources automatically, without human interaction with the provider.</li>
+<li><b>Broad network access</b> — services are available over the network through standard devices such as laptops and mobiles.</li>
+<li><b>Resource pooling</b> — the provider's resources are pooled to serve many tenants (multi-tenancy), with location independence.</li>
+<li><b>Rapid elasticity</b> — resources can be scaled out and in quickly and appear unlimited to the user.</li>
+<li><b>Measured service</b> — usage is monitored, controlled and billed, giving pay-per-use.</li>
+</ol>
+<p>These give scalability, cost saving, reliability and location independence.</p>
+</div>

@@ -1,0 +1,74 @@
+<div class="ans" data-q="11 (a)" data-pages="5">
+<h4>Introduction</h4>
+<p>Processes in a distributed system have no shared memory, so they cooperate by <b>message passing</b>. The two basic communication primitives are <b>Send(destination, message)</b> and <b>Receive(source, &amp;message)</b>. A message consists of a <i>header</i> (source, destination, type, length) and the <i>data</i>. The semantics of these two calls — whether the caller waits, and whether the message is stored on the way — decide the synchrony of the communication.</p>
+
+<h4>Buffered and unbuffered communication</h4>
+<ul>
+<li><b>Unbuffered (rendezvous):</b> there is no temporary storage. The sender and the receiver must both be at the communication point at the same time; a Send cannot complete until the matching Receive is executed.</li>
+<li><b>Buffered:</b> the message is first copied into a buffer (sender-side kernel buffer, or a receiver mailbox/port) and the sender is released. The buffer <i>decouples</i> the two processes in time, but a finite buffer may still block the sender or force message loss.</li>
+</ul>
+<p>“<b>Synchronous</b>” means the Send is tied to the matching Receive; “<b>asynchronous</b>” means the Send completes once the data has been copied out of the user buffer, without waiting for the Receive. “<b>Blocking / non-blocking</b>” describes whether the calling process waits for the call to return. These two ideas combine into four Send variants.</p>
+
+<h4>The four Send variants</h4>
+<table class="tt">
+<tr><th>Variant</th><th>Behaviour of Send</th><th>Data copied to</th><th>Send completes when</th></tr>
+<tr><td>Blocking synchronous</td><td>Sender is blocked until the receiver has issued the matching Receive</td><td>Kernel buffer, then receiver’s system buffer</td><td>An acknowledgement arrives that the Receive has been issued</td></tr>
+<tr><td>Non-blocking synchronous</td><td>Control returns as soon as copying from the user buffer to the kernel buffer starts; a handle is returned</td><td>Kernel buffer</td><td>Later, when the acknowledgement of the Receive arrives (checked with Wait(handle))</td></tr>
+<tr><td>Blocking asynchronous</td><td>Sender is blocked only until the data is copied out of the user buffer</td><td>Kernel buffer</td><td>The user buffer has been copied (receiver need not have called Receive)</td></tr>
+<tr><td>Non-blocking asynchronous</td><td>Control returns as soon as copying starts; a handle is returned</td><td>Kernel buffer</td><td>The copy out of the user buffer finishes (checked with Wait(handle))</td></tr>
+</table>
+<p>Thus a <b>blocking synchronous</b> Send is the tightest form (both processes meet); a <b>non-blocking asynchronous</b> Send is the loosest form (fully decoupled). The intermediate forms trade latency against buffer space and programming complexity.</p>
+
+<figure class="dg"><svg width="560" height="280" viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13">
+<line x1="470" y1="32" x2="470" y2="232" stroke="#000" stroke-width="1.4" stroke-dasharray="6 4"/>
+<text x="470" y="22" text-anchor="middle">Receive() issued at P2</text>
+<g stroke="#000" stroke-width="1.6" fill="none"><line x1="200" y1="252" x2="545" y2="252"/></g>
+<polygon points="545,248 553,252 545,256" fill="#000"/>
+<text x="505" y="272">time</text>
+<g font-weight="bold"><text x="20" y="64">Blocking synchronous</text><text x="20" y="124">Non-blocking synchronous</text><text x="20" y="184">Blocking asynchronous</text><text x="20" y="244">Non-blocking asynchronous</text></g>
+<g stroke="#000" fill="none">
+<line x1="200" y1="60" x2="478" y2="60" stroke-width="5"/>
+<line x1="200" y1="120" x2="214" y2="120" stroke-width="5"/><line x1="214" y1="120" x2="478" y2="120" stroke-width="1.6" stroke-dasharray="2 4"/>
+<line x1="200" y1="180" x2="268" y2="180" stroke-width="5"/>
+<line x1="200" y1="240" x2="214" y2="240" stroke-width="5"/>
+</g>
+<g fill="#000"><circle cx="200" cy="60" r="4"/><circle cx="200" cy="120" r="4"/><circle cx="200" cy="180" r="4"/><circle cx="200" cy="240" r="4"/></g>
+<g fill="#fff" stroke="#000" stroke-width="1.6"><circle cx="478" cy="60" r="4"/><circle cx="214" cy="120" r="4"/><circle cx="478" cy="120" r="4"/><circle cx="268" cy="180" r="4"/><circle cx="214" cy="240" r="4"/></g>
+<g font-size="12" font-style="italic">
+<text x="200" y="46">blocked until the Receive is issued and acknowledged</text>
+<text x="200" y="106">returns at once</text><text x="225" y="138">Wait(handle) completes at the acknowledgement</text>
+<text x="200" y="166">blocked only while the data is copied to the buffer</text>
+<text x="226" y="244">returns at once; copying continues (Wait(handle) to check)</text>
+</g>
+</svg><figcaption>Fig. 1 — When each Send call returns, relative to the receiver’s Receive(). Thick bar = sender blocked; dotted line = transfer still pending; open circle = Send returns.</figcaption></figure>
+
+<h4>Receive primitives</h4>
+<ul>
+<li><b>Blocking Receive:</b> the process blocks until a message is available (from a buffer or directly from a sender) and then returns it. Simple, but the process is idle meanwhile.</li>
+<li><b>Non-blocking Receive:</b> the call returns immediately with a status; if no message is present it returns a null/empty value. The process must poll, which wastes CPU but keeps it responsive.</li>
+</ul>
+<p>With an <b>unbuffered</b> channel, a blocking Receive must wait for a sender; with a <b>buffered</b> channel, it completes at once if the buffer is non-empty.</p>
+
+<h4>Handles and Wait()</h4>
+<p>A non-blocking Send (and non-blocking Receive) returns a <b>handle</b> — an identifier for the pending operation. The process continues with useful work and later calls <b>Wait(handle)</b> to block until that operation completes, or <b>Test(handle)</b> to check completion without blocking. This is how computation and communication are overlapped. MPI implements it with <b>MPI_Request</b>, <b>MPI_Isend / MPI_Irecv</b>, <b>MPI_Wait</b> and <b>MPI_Test</b>.</p>
+
+<h4>Processor synchrony</h4>
+<p>A system is <b>synchronous</b> if all processors advance in lock-step with a known bound on message delay; it is <b>asynchronous</b> if processors run at independent speeds with unbounded delay and no global clock. In a synchronous system a blocking Send/Receive pair is easy to reason about; in an asynchronous system, buffering and non-blocking primitives are used to hide latency and avoid deadlock. Note that “synchronous send” (sender–receiver coupling) is a different idea from “synchronous processor” (lock-step execution).</p>
+
+<h4>Libraries and standards for distributed applications</h4>
+<table class="tt">
+<tr><th>Library / Standard</th><th>Type</th><th>Main features</th></tr>
+<tr><td>Sockets (BSD)</td><td>OS API</td><td>TCP stream / UDP datagram endpoints; lowest-level, basis of most middleware</td></tr>
+<tr><td>MPI</td><td>Message-passing standard</td><td>Point-to-point and collective calls, communicators, non-blocking requests; clusters</td></tr>
+<tr><td>PVM</td><td>Message-passing library</td><td>Heterogeneous workstation clusters; process management; legacy predecessor of MPI</td></tr>
+<tr><td>RPC</td><td>Call standard</td><td>Client/server stubs, marshalling, synchronous request–reply; Sun RPC, gRPC</td></tr>
+<tr><td>Java RMI</td><td>Object middleware</td><td>Remote objects, stubs/skeletons, serialization, registry; JVM-to-JVM</td></tr>
+<tr><td>CORBA</td><td>Object standard (OMG)</td><td>Language-neutral IDL, Object Request Broker, IIOP; platform independent</td></tr>
+<tr><td>DCOM</td><td>Component standard</td><td>Microsoft COM over the network; binary components, DCE RPC; Windows-centric</td></tr>
+<tr><td>MOM</td><td>Message-oriented middleware</td><td>Queues/topics, store-and-forward, publish–subscribe; JMS, RabbitMQ, Kafka</td></tr>
+</table>
+<p>These range from low-level <b>sockets</b> and message-passing libraries (<b>MPI, PVM</b>), through call-based <b>RPC</b> and object-based <b>Java RMI, CORBA, DCOM</b>, to fully asynchronous <b>MOM</b>. RPC/RMI hide the message layer behind a procedure or method call, while MOM decouples sender and receiver through queues.</p>
+
+<h4>Conclusion</h4>
+<p>Send/Receive primitives differ in <i>blocking</i> (does the caller wait?) and <i>synchronous</i> (is the message buffered or must a rendezvous occur?). Blocking synchronous gives the strongest coupling, non-blocking asynchronous the weakest; handles with Wait() let a process overlap communication with computation. The right library or standard — sockets, MPI/PVM, RPC/RMI, CORBA/DCOM or MOM — is chosen from the required coupling, performance, heterogeneity and language support.</p>
+</div>

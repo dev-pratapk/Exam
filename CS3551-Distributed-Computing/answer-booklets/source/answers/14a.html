@@ -1,0 +1,75 @@
+<div class="ans" data-q="14 (a)" data-pages="5">
+<h4>Introduction</h4>
+<p>A <b>checkpoint</b> is a saved copy of the local state of a process on stable storage. In <b>checkpoint-based rollback recovery</b>, after a failure the processes roll back to a set of checkpoints and restart from there. The set must form a <b>consistent global state</b>, called a <i>recovery line</i>: it must contain no <b>orphan message</b>, that is, a message whose receive is recorded but whose send is not.</p>
+
+<h4>1. Checkpoint-based recovery approaches</h4>
+<table class="tt">
+<tr><th>Approach</th><th>How checkpoints are taken</th><th>Advantage</th><th>Disadvantage</th></tr>
+<tr><td><b>Uncoordinated (independent) checkpointing</b></td><td>Each process takes checkpoints on its own, without coordination. The dependencies between checkpoints are recorded and a recovery line is searched for after a failure.</td><td>Simple; no run-time coordination; each process picks convenient times.</td><td>Domino effect (rollback may go back to the initial state); useless checkpoints; garbage collection is needed; several checkpoints per process must be kept.</td></tr>
+<tr><td><b>Coordinated checkpointing</b></td><td>The processes coordinate and take checkpoints together so that the set is consistent. It may be <i>blocking</i> (processes stop sending messages during the protocol) or <i>non-blocking</i> (for example Chandy–Lamport markers).</td><td>Always a consistent set; no domino effect; only the last checkpoint is needed; simple recovery.</td><td>Coordination messages and delay; blocking reduces performance; one initiator is a possible bottleneck.</td></tr>
+<tr><td><b>Communication-induced checkpointing</b></td><td>Processes take <i>local</i> (basic) checkpoints independently and are <i>forced</i> to take additional checkpoints, driven by information piggybacked on application messages. It is <i>model-based</i> or <i>index-based</i>.</td><td>No domino effect; no separate coordination messages; processes are autonomous.</td><td>Extra forced checkpoints, which can be many; piggybacked data increases message size.</td></tr>
+</table>
+
+<h4>2. Coordinated checkpointing: the Koo–Toueg algorithm</h4>
+<p>Koo and Toueg’s algorithm is a <b>blocking</b> coordinated algorithm that checkpoints only the processes that must be checkpointed (a <i>minimal</i> set).</p>
+<p><b>Assumptions:</b> channels are FIFO and end-to-end protocols (such as sliding window) are used; communication failures do not partition the network; one process initiates the checkpointing; no failure occurs during the protocol.</p>
+<p><b>First phase (tentative checkpoints)</b></p>
+<ol>
+<li>The initiator P<sub>i</sub> takes a <b>tentative checkpoint</b> and sends a request to every process from which it received a message since its last checkpoint. The request carries the label of the last message P<sub>i</sub> received from that process.</li>
+<li>A process P<sub>j</sub> that receives the request takes a tentative checkpoint if it has sent P<sub>i</sub> a message after its own last checkpoint, because otherwise that message would become an orphan. P<sub>j</sub> then sends requests in the same way to the processes it has received messages from.</li>
+<li>A process that does not need a new checkpoint, or has already taken one for this initiation, replies <b>yes</b>. After taking a tentative checkpoint, a process <b>does not send application messages</b> until the second phase ends (this is why the algorithm is blocking).</li>
+<li>P<sub>j</sub> sends <b>yes</b> to its requester when all the processes it asked have answered yes; if any process answers no, it answers no.</li>
+</ol>
+<p><b>Second phase (decision)</b></p>
+<ol>
+<li>If the initiator receives <b>yes</b> from all the processes it asked, it decides that all tentative checkpoints become <b>permanent</b>; otherwise it decides to <b>discard</b> them.</li>
+<li>The decision is sent to all processes that took tentative checkpoints. Each one makes the checkpoint permanent (and deletes the older one) or discards it, and then resumes sending messages.</li>
+</ol>
+<h4>Illustration</h4>
+<p>P1 received m1 from P2, and P2 received m2 from P3, after their last checkpoints. P1 starts the algorithm.</p>
+<figure class="dg"><svg width="620" height="290" viewBox="0 0 620 290" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13">
+<defs><marker id="a14a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<g stroke="#000" stroke-width="1.6" fill="none">
+<line x1="40" y1="55" x2="610" y2="55"/><line x1="40" y1="135" x2="610" y2="135"/><line x1="40" y1="215" x2="610" y2="215"/>
+<line x1="130" y1="135" x2="200" y2="55" marker-end="url(#a14a)"/>
+<line x1="140" y1="215" x2="210" y2="135" marker-end="url(#a14a)"/>
+<line x1="270" y1="55" x2="320" y2="135" stroke-dasharray="6 4" marker-end="url(#a14a)"/>
+<line x1="320" y1="135" x2="370" y2="215" stroke-dasharray="6 4" marker-end="url(#a14a)"/>
+<line x1="385" y1="215" x2="435" y2="135" stroke-dasharray="2 4" marker-end="url(#a14a)"/>
+<line x1="445" y1="135" x2="495" y2="55" stroke-dasharray="2 4" marker-end="url(#a14a)"/>
+<line x1="505" y1="55" x2="545" y2="135" stroke-dasharray="2 4" marker-end="url(#a14a)"/>
+<line x1="505" y1="55" x2="590" y2="215" stroke-dasharray="2 4" marker-end="url(#a14a)"/>
+</g>
+<g stroke="#000" stroke-width="1.6" fill="#fff"><rect x="265" y="50" width="10" height="10"/><rect x="315" y="130" width="10" height="10"/><rect x="365" y="210" width="10" height="10"/></g>
+<g stroke="#000" stroke-width="1.6" fill="#000"><rect x="57" y="49" width="6" height="12"/><rect x="57" y="129" width="6" height="12"/><rect x="57" y="209" width="6" height="12"/><circle cx="505" cy="55" r="4"/><circle cx="545" cy="135" r="4"/><circle cx="590" cy="215" r="4"/></g>
+<text x="8" y="60">P1</text><text x="8" y="140">P2</text><text x="8" y="220">P3</text>
+<text x="150" y="96" font-style="italic" text-anchor="end">m1</text>
+<text x="168" y="176" font-style="italic" text-anchor="end">m2</text>
+<text x="60" y="40" text-anchor="middle" font-size="11">previous</text>
+<text x="270" y="40" text-anchor="middle">tentative</text>
+<text x="312" y="158" text-anchor="end">tentative</text>
+<text x="370" y="240" text-anchor="middle">tentative</text>
+<text x="306" y="92" font-style="italic">request</text>
+<text x="336" y="178" font-style="italic" text-anchor="end">request</text>
+<text x="422" y="182" font-style="italic">yes</text>
+<text x="482" y="102" font-style="italic">yes</text>
+<text x="505" y="40" text-anchor="middle">commit</text>
+<g stroke="#000" stroke-width="1.6"><line x1="20" y1="272" x2="50" y2="272"/><line x1="190" y1="272" x2="220" y2="272" stroke-dasharray="6 4"/><line x1="290" y1="272" x2="320" y2="272" stroke-dasharray="2 4"/></g>
+<text x="56" y="276" font-size="12">application message</text><text x="226" y="276" font-size="12">request</text><text x="326" y="276" font-size="12">yes reply / commit decision</text>
+</svg><figcaption>Koo–Toueg: tentative checkpoints (hollow squares) become permanent when the commit decision arrives (dots). Black bars = previous permanent checkpoints.</figcaption></figure>
+<table class="tt">
+<tr><th>Step</th><th>What happens</th></tr>
+<tr><td>1</td><td>P1 takes a tentative checkpoint and sends a request to P2, because P1 received m1 from P2 after its last checkpoint. P1 stops sending application messages.</td></tr>
+<tr><td>2</td><td>P2 had sent m1 after its last checkpoint, so it takes a tentative checkpoint. It sends a request to P3, because P2 received m2 from P3.</td></tr>
+<tr><td>3</td><td>P3 takes a tentative checkpoint. It has received no message from any other process since its last checkpoint, so it replies <b>yes</b> to P2.</td></tr>
+<tr><td>4</td><td>P2 replies <b>yes</b> to P1.</td></tr>
+<tr><td>5</td><td>P1 has all the yes replies, so it sends <b>commit</b> to P2 and P3. All three tentative checkpoints become permanent and the processes resume sending messages.</td></tr>
+</table>
+
+<h4>Recovery in the Koo–Toueg algorithm</h4>
+<p>It also has two phases. In the first, the initiator asks the processes that must roll back whether they are willing; a process must roll back if it has received a message from the initiator that the initiator’s checkpoint does not show as sent (otherwise that message would be an orphan). In the second phase, if all agree, the initiator tells them to roll back to their last permanent checkpoint and restart; otherwise recovery is aborted.</p>
+
+<h4>Correctness</h4>
+<p>The permanent checkpoints are consistent because every process that sent a message received by an already-checkpointed process also takes a checkpoint, and application messages are not sent between the tentative checkpoint and the decision, so no orphan message can be created. Only processes that communicated since the last checkpoint take part, so the set is minimal. There is no domino effect, and only one permanent checkpoint per process has to be kept.</p>
+<div class="result">Hence checkpoint-based recovery is uncoordinated, coordinated or communication-induced, and the Koo–Toueg coordinated algorithm takes a minimal consistent set of checkpoints in two phases (tentative, then permanent).</div>
+</div>

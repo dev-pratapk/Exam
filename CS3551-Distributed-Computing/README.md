@@ -10,6 +10,14 @@ Anna University · Regulation 2021 · Semester 5
 
 The last page lists which paper each question came from.
 
+**Answer booklets for Model Question Paper 1.** Two complete answer scripts, written the way you write in the exam hall:
+- [Booklet A](answer-booklets/CS3551_Model_Paper_1_Answer_Booklet_A.pdf): Part A (all 10), and option (a) of Q11–Q16.
+- [Booklet B](answer-booklets/CS3551_Model_Paper_1_Answer_Booklet_B.pdf): Part A (all 10), and option (b) of Q11–Q16.
+
+Each booklet has a cover sheet listing the questions answered. Every answer shows how many handwritten pages it should take: about 30–36 pages in total, so you do not need to fill all 42. Algorithm answers include space-time diagrams and worked examples.
+
+Some answers were drafted by the free DeepSeek model (through [opencode](https://opencode.ai)) and the rest written with Claude; all were checked against the textbook algorithms. See `answer-booklets/source/README.md`. Check the answers against your own textbook before memorising them.
+
 It contains the top 15 topics to study (3 per unit) and every question from the past papers grouped by topic. It also explains the Part C case-study pattern and how the analysis was done.
 
 ## What was found

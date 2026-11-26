@@ -1,0 +1,109 @@
+<div class="ans" data-q="13 (a)" data-pages="5">
+<h4>Introduction</h4>
+<p>Mutual exclusion allows at most one process in its critical section (CS) at a time. Ricart–Agrawala (1981) is a fully distributed timestamp-based algorithm: a site enters the CS only after a REPLY from every other site and defers requests in an array instead of using a central queue.</p>
+
+<h4>System model and assumptions</h4>
+<ul>
+<li>There are N sites P<sub>1</sub>, …, P<sub>N</sub>; each site knows all the others.</li>
+<li>Channels are <b>reliable</b> (Kshemkalyani and Singhal): no message is lost, duplicated or corrupted, and all are eventually delivered. Requests are totally ordered by (timestamp, site-id).</li>
+<li>Each site has a Lamport clock: increment before sending a REQUEST; on receiving a message stamped ts<sub>j</sub> set ts<sub>i</sub> = max(ts<sub>i</sub>, ts<sub>j</sub>) + 1. Requests are ordered by (ts<sub>i</sub>, i).</li>
+<li>CS execution time is finite.</li>
+</ul>
+
+<h4>Data structures and messages</h4>
+<ul>
+<li><b>REQUEST(ts<sub>i</sub>, i)</b>: multicast to all other N−1 sites.</li>
+<li><b>REPLY(ts<sub>i</sub>)</b>: permission sent to a requester.</li>
+<li><b>RD<sub>i</sub>[1…N]</b>: request-deferred array; RD<sub>i</sub>[j] = 1 means j's request is deferred and a REPLY is owed to j, while RD<sub>i</sub>[i] = 1 marks i's own outstanding request. Initially all 0.</li>
+<li><b>reply_count<sub>i</sub></b>: number of REPLYs received.</li>
+</ul>
+
+<h4>Algorithm at site P<sub>i</sub></h4>
+<p><b>(1) Requesting the CS</b></p>
+<ol>
+<li>Increment the clock: ts<sub>i</sub> = ts<sub>i</sub> + 1.</li>
+<li>Set RD<sub>i</sub>[i] = 1 and reply_count<sub>i</sub> = 0.</li>
+<li>Send REQUEST(ts<sub>i</sub>, i) to all other N−1 sites.</li>
+</ol>
+<p><b>(2) On receiving REQUEST(ts<sub>j</sub>, j) — deferral rule</b></p>
+<div class="eq">Defer ⇔ (i is executing the CS) ∨ (i is requesting ∧ (ts<sub>i</sub>, i) &lt; (ts<sub>j</sub>, j))</div>
+<ol>
+<li>Update ts<sub>i</sub> = max(ts<sub>i</sub>, ts<sub>j</sub>) + 1.</li>
+<li>If the condition holds, set RD<sub>i</sub>[j] = 1; send no REPLY now.</li>
+<li>Otherwise send REPLY(ts<sub>i</sub>) to j immediately.</li>
+</ol>
+<p><b>(3) Executing the CS</b>: i enters only after REPLYs from all other N−1 sites (reply_count<sub>i</sub> = N−1); requests received in the CS are deferred by rule (2).</p>
+<p><b>(4) Releasing the CS</b>: on exit set RD<sub>i</sub>[i] = 0; for every j with RD<sub>i</sub>[j] = 1, send the deferred REPLY and clear RD<sub>i</sub>[j].</p>
+
+<h4>Worked example (N = 3)</h4>
+<p>P<sub>1</sub> and P<sub>2</sub> request concurrently; timestamps (1,1) and (1,2) make P<sub>1</sub> older. P<sub>3</sub> is idle.</p>
+<table class="tt">
+<tr><th>Step</th><th>Event</th><th>Action taken</th></tr>
+<tr><td>1</td><td>P<sub>1</sub> requests</td><td>ts<sub>1</sub>=1; RD<sub>1</sub>[1]=1; REQUEST(1,1) to P<sub>2</sub>, P<sub>3</sub></td></tr>
+<tr><td>2</td><td>P<sub>2</sub> requests</td><td>ts<sub>2</sub>=1; RD<sub>2</sub>[2]=1; REQUEST(1,2) to P<sub>1</sub>, P<sub>3</sub></td></tr>
+<tr><td>3</td><td>P<sub>3</sub> receives both</td><td>idle, so REPLY to P<sub>1</sub> and P<sub>2</sub></td></tr>
+<tr><td>4</td><td>P<sub>2</sub> receives (1,1)</td><td>its (1,2) is younger, so REPLY to P<sub>1</sub></td></tr>
+<tr><td>5</td><td>P<sub>1</sub> receives (1,2)</td><td>its (1,1) is older, so defer: RD<sub>1</sub>[2]=1</td></tr>
+<tr><td>6</td><td>P<sub>1</sub> has two REPLYs</td><td>reply_count<sub>1</sub>=N−1; enters the CS</td></tr>
+<tr><td>7</td><td>P<sub>1</sub> exits</td><td>sends deferred REPLY to P<sub>2</sub></td></tr>
+<tr><td>8</td><td>P<sub>2</sub> has two REPLYs</td><td>reply_count<sub>2</sub>=N−1; enters the CS</td></tr>
+</table>
+
+<figure class="dg"><svg width="600" height="275" viewBox="0 0 600 275" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13">
+<defs><marker id="a13a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<g stroke="#000" stroke-width="1.6" fill="none">
+<line x1="40" y1="50" x2="590" y2="50"/><line x1="40" y1="130" x2="590" y2="130"/><line x1="40" y1="210" x2="590" y2="210"/>
+<line x1="80" y1="50" x2="170" y2="130" marker-end="url(#a13a)"/>
+<line x1="80" y1="50" x2="200" y2="210" marker-end="url(#a13a)"/>
+<line x1="95" y1="130" x2="190" y2="50" marker-end="url(#a13a)"/>
+<line x1="95" y1="130" x2="230" y2="210" marker-end="url(#a13a)"/>
+<line x1="172" y1="130" x2="265" y2="50" stroke-dasharray="6 4" marker-end="url(#a13a)"/>
+<line x1="205" y1="210" x2="305" y2="50" stroke-dasharray="6 4" marker-end="url(#a13a)"/>
+<line x1="235" y1="210" x2="295" y2="130" stroke-dasharray="6 4" marker-end="url(#a13a)"/>
+<line x1="392" y1="50" x2="455" y2="130" stroke-dasharray="6 4" marker-end="url(#a13a)"/>
+<rect x="315" y="38" width="75" height="24" stroke-dasharray="3 3"/><rect x="465" y="118" width="75" height="24" stroke-dasharray="3 3"/>
+</g>
+<g fill="#000"><circle cx="80" cy="50" r="3.5"/><circle cx="95" cy="130" r="3.5"/><circle cx="190" cy="50" r="3.5"/><circle cx="172" cy="130" r="3.5"/><circle cx="200" cy="210" r="3.5"/><circle cx="230" cy="210" r="3.5"/><circle cx="265" cy="50" r="3.5"/><circle cx="305" cy="50" r="3.5"/><circle cx="295" cy="130" r="3.5"/><circle cx="455" cy="130" r="3.5"/></g>
+<text x="10" y="55">P1</text><text x="10" y="135">P2</text><text x="10" y="215">P3</text>
+<text x="80" y="36" text-anchor="middle">REQ(1,1)</text>
+<text x="150" y="36">defers REQ(1,2)</text>
+<text x="100" y="150" text-anchor="end">REQ(1,2)</text>
+<text x="352" y="55" text-anchor="middle">CS</text><text x="502" y="135" text-anchor="middle">CS</text>
+<text x="284" y="94" font-style="italic">REPLY</text>
+<text x="432" y="94" font-style="italic">deferred REPLY</text>
+<text x="215" y="234" text-anchor="middle">P3 (idle) replies to both</text>
+<g stroke="#000" stroke-width="1.6"><line x1="20" y1="260" x2="50" y2="260"/><line x1="170" y1="260" x2="200" y2="260" stroke-dasharray="6 4"/></g>
+<text x="56" y="264" font-size="12">REQUEST</text><text x="206" y="264" font-size="12">REPLY</text><text x="300" y="264" font-size="12">time flows left to right</text>
+</svg><figcaption>Fig. 13(a): Space–time diagram for N = 3. P1’s older request (1,1) is served first; P2’s request is deferred at P1 until P1 leaves the CS.</figcaption></figure>
+
+<p>P<sub>1</sub> enters after REPLYs from P<sub>2</sub> and P<sub>3</sub>; P<sub>2</sub> waits until P<sub>1</sub> exits and sends the deferred REPLY.</p>
+
+<h4>Correctness</h4>
+<p><b>Mutual exclusion.</b> Suppose P<sub>i</sub> and P<sub>j</sub> are in the CS together, with (ts<sub>i</sub>, i) &lt; (ts<sub>j</sub>, j). P<sub>j</sub> must have received a REPLY from P<sub>i</sub>. When P<sub>i</sub> replied it was neither in the CS nor requesting with the smaller timestamp (else it would defer P<sub>j</sub>), so P<sub>i</sub> had not yet requested. But receiving P<sub>j</sub>'s REQUEST raises P<sub>i</sub>'s clock above ts<sub>j</sub>, so P<sub>i</sub>'s later request is younger and P<sub>j</sub> defers it until exit — contradiction.</p>
+<p><b>No starvation.</b> The oldest outstanding request is deferred only by sites in the CS; any requesting site has a larger timestamp and replies at once. Since CS execution is finite, the oldest request gets all N−1 REPLYs and enters, and the argument repeats by induction. Once a request reaches all sites, clock updates make later requests younger, so no older request can appear indefinitely.</p>
+
+<h4>Performance</h4>
+<ul>
+<li><b>Message complexity:</b> N−1 REQUESTs + N−1 REPLYs = <b>2(N−1) messages per CS entry</b>.</li>
+<li><b>Synchronization delay:</b> <b>T</b>, one message transmission time.</li>
+<li>No central coordinator, hence no single point of failure.</li>
+</ul>
+
+<h4>Comparison with Lamport's algorithm</h4>
+<table class="tt">
+<tr><th>Aspect</th><th>Ricart–Agrawala</th><th>Lamport</th></tr>
+<tr><td>Messages per CS entry</td><td>2(N−1)</td><td>3(N−1)</td></tr>
+<tr><td>Message types</td><td>REQUEST, REPLY</td><td>REQUEST, REPLY, RELEASE</td></tr>
+<tr><td>Permission from</td><td>All N−1 sites</td><td>All N−1 sites</td></tr>
+<tr><td>Request ordering</td><td>(timestamp, site-id)</td><td>(timestamp, site-id)</td></tr>
+<tr><td>Deferral</td><td>RD array</td><td>Request queue</td></tr>
+<tr><td>Channel requirement</td><td>Reliable channels</td><td>Reliable and FIFO</td></tr>
+<tr><td>Synchronization delay</td><td>T</td><td>T</td></tr>
+</table>
+<p>Ricart–Agrawala saves N−1 messages because Lamport's separate RELEASE is merged with the REPLY sent on exit.</p>
+
+<h4>Conclusion</h4>
+<p>Ricart–Agrawala gives distributed mutual exclusion with 2(N−1) messages, delay T, and no starvation; Lamport needs 3(N−1).</p>
+
+<div class="result">Ricart–Agrawala: 2(N−1) messages per CS entry, synchronization delay T, mutual exclusion and no starvation; Lamport: 3(N−1) messages.</div>
+</div>

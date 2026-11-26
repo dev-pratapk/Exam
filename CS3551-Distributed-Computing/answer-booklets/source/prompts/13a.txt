@@ -1,0 +1,8 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper: B.E./B.Tech. CS3551 Distributed Computing, Regulations 2021, Model Question Paper 1.
+Your part: PART B, Question 13 (a) [13 marks]: Outline Ricart and Agrawala’s algorithm for implementing mutual exclusion in distributed systems and illustrate the algorithm.
+
+Write ONE <div class="ans" data-q="13 (a)" data-pages="5">.
+Content checklist: Must cover: assumptions (reliable communication channels as stated in Kshemkalyani & Singhal; Lamport timestamps to order requests); messages REQUEST and REPLY; request-deferred array RD_i; the algorithm in three parts: requesting the CS, executing the CS (after receiving REPLY from all other N−1 sites), releasing the CS (send all deferred REPLYs); the rule for deferring: defer if the site is executing the CS, or is requesting and its own request has a smaller (timestamp, site-id); a worked example with 3 sites and a space-time diagram; correctness (mutual exclusion, no starvation); performance: 2(N−1) messages per CS, synchronization delay T. Compare briefly with Lamport (3(N−1)).
+
+Write the file answer.html in the current directory.

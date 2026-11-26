@@ -1,0 +1,81 @@
+<div class="ans" data-q="12 (b)" data-pages="5">
+<h4>Introduction</h4>
+<p>Events in a distributed system must be ordered or timed even though there is no common clock. Two approaches exist: <b>physical clock synchronization</b>, which keeps the real-time clocks of machines close to each other, and <b>logical clocks</b>, which capture only the <i>causal order</i> of events.</p>
+
+<h4>1. Physical clock synchronization</h4>
+<p><b>Terms:</b> <i>clock skew</i> is the difference between the readings of two clocks at the same instant. <i>Clock drift</i> is the difference in their rates. <i>Offset</i> is the difference between a clock and the reference time. <b>External synchronization</b> keeps clocks within a bound of a UTC source; <b>internal synchronization</b> keeps them within a bound of each other.</p>
+<table class="tt">
+<tr><th>Algorithm</th><th>Idea</th><th>Type</th></tr>
+<tr><td>Cristian’s algorithm</td><td>The client asks a time server at its clock time T<sub>0</sub>, the server replies with its time T<sub>S</sub>, and the reply arrives at T<sub>1</sub>. The client sets its clock to T<sub>S</sub> + (T<sub>1</sub> − T<sub>0</sub>)/2, assuming equal delays in both directions.</td><td>External</td></tr>
+<tr><td>Berkeley algorithm</td><td>A master polls all machines for their clock values, averages them (ignoring far-off values) and sends each machine the <i>adjustment</i> it should apply, not the absolute time.</td><td>Internal</td></tr>
+<tr><td>Network Time Protocol (NTP)</td><td>Servers are arranged in a hierarchy of strata; stratum 1 servers are connected to UTC sources and each lower stratum synchronizes with the one above. Client and server exchange timestamped messages.</td><td>External</td></tr>
+</table>
+<p><b>NTP offset and delay.</b> The client sends a request at T<sub>1</sub> (client clock); the server receives it at T<sub>2</sub> and replies at T<sub>3</sub> (server clock); the client receives the reply at T<sub>4</sub> (client clock).</p>
+<div class="eq">offset θ = [ (T<sub>2</sub> − T<sub>1</sub>) + (T<sub>3</sub> − T<sub>4</sub>) ] / 2</div>
+<div class="eq">delay δ = (T<sub>4</sub> − T<sub>1</sub>) − (T<sub>3</sub> − T<sub>2</sub>)</div>
+<p><i>Example:</i> T<sub>1</sub> = 100, T<sub>2</sub> = 145, T<sub>3</sub> = 147, T<sub>4</sub> = 112. Then θ = [(145 − 100) + (147 − 112)]/2 = (45 + 35)/2 = 40, so the client clock is 40 units behind the server, and δ = (112 − 100) − (147 − 145) = 12 − 2 = 10.</p>
+
+<h4>2. Framework of a system of logical clocks</h4>
+<p>A system of logical clocks consists of a <b>time domain T</b>, a partially ordered set with relation &lt;, and a <b>logical clock C</b> that assigns every event e a timestamp C(e) ∈ T. It must satisfy the <b>clock consistency condition</b>:</p>
+<div class="eq">e<sub>i</sub> → e<sub>j</sub> ⇒ C(e<sub>i</sub>) &lt; C(e<sub>j</sub>)</div>
+<p>If the converse also holds, C(e<sub>i</sub>) &lt; C(e<sub>j</sub>) ⇒ e<sub>i</sub> → e<sub>j</sub>, the system is <b>strongly consistent</b>.</p>
+<p><b>Implementation.</b> Each process p<sub>i</sub> keeps a local logical clock and updates it by two rules:</p>
+<ul>
+<li><b>R1:</b> how the local clock is updated when p<sub>i</sub> executes an event (send, receive or internal).</li>
+<li><b>R2:</b> how the clock is updated when p<sub>i</sub> receives a message, using the timestamp carried by the message.</li>
+</ul>
+
+<h4>3. Scalar time (Lamport)</h4>
+<p>The time domain is the set of non-negative integers; each process p<sub>i</sub> has one integer clock C<sub>i</sub>.</p>
+<ul>
+<li><b>R1:</b> before executing an event, C<sub>i</sub> := C<sub>i</sub> + d (d &gt; 0, normally 1).</li>
+<li><b>R2:</b> a message carries the timestamp C<sub>msg</sub> of its send event. On receipt, C<sub>i</sub> := max(C<sub>i</sub>, C<sub>msg</sub>); then execute R1; then deliver the message.</li>
+</ul>
+<p><b>Properties:</b> (i) consistent: e<sub>i</sub> → e<sub>j</sub> ⇒ C(e<sub>i</sub>) &lt; C(e<sub>j</sub>); (ii) total ordering is obtained by ordering equal timestamps by process id, (h, i) &lt; (k, j) iff h &lt; k or (h = k and i &lt; j); (iii) event counting: with d = 1, C(e) = the height of e in the causal graph; (iv) <b>not</b> strongly consistent, because C(e<sub>i</sub>) &lt; C(e<sub>j</sub>) does not imply e<sub>i</sub> → e<sub>j</sub>.</p>
+
+<h4>4. Vector time</h4>
+<p>The time domain is the set of n-dimensional non-negative integer vectors; process p<sub>i</sub> keeps a vector V<sub>i</sub>[1..n], where V<sub>i</sub>[i] is p<sub>i</sub>’s own logical clock and V<sub>i</sub>[j] is p<sub>i</sub>’s latest knowledge of p<sub>j</sub>’s clock.</p>
+<ul>
+<li><b>R1:</b> before executing an event, V<sub>i</sub>[i] := V<sub>i</sub>[i] + d.</li>
+<li><b>R2:</b> a message carries the vector vt of its send event. On receipt, V<sub>i</sub>[k] := max(V<sub>i</sub>[k], vt[k]) for 1 ≤ k ≤ n; then V<sub>i</sub>[i] := V<sub>i</sub>[i] + d; then deliver.</li>
+</ul>
+<p><b>Comparison of vectors:</b> vh ≤ vk iff vh[x] ≤ vk[x] for all x; vh &lt; vk iff vh ≤ vk and vh[x] &lt; vk[x] for some x; vh ∥ vk iff neither vh &lt; vk nor vk &lt; vh.</p>
+<figure class="dg"><svg width="560" height="235" viewBox="0 0 560 235" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13">
+<defs><marker id="a12b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<g stroke="#000" stroke-width="1.6" fill="none">
+<line x1="50" y1="50" x2="545" y2="50"/><line x1="50" y1="120" x2="545" y2="120"/><line x1="50" y1="190" x2="545" y2="190"/>
+<line x1="110" y1="50" x2="220" y2="120" marker-end="url(#a12b)"/>
+<line x1="330" y1="120" x2="400" y2="190" marker-end="url(#a12b)"/>
+</g>
+<g fill="#000"><circle cx="110" cy="50" r="4"/><circle cx="420" cy="50" r="4"/><circle cx="90" cy="120" r="4"/><circle cx="220" cy="120" r="4"/><circle cx="330" cy="120" r="4"/><circle cx="160" cy="190" r="4"/><circle cx="400" cy="190" r="4"/></g>
+<text x="12" y="55">P1</text><text x="12" y="125">P2</text><text x="12" y="195">P3</text>
+<text x="110" y="36" text-anchor="middle">e11 [1,0,0]</text>
+<text x="420" y="36" text-anchor="middle">e12 [2,0,0]</text>
+<text x="90" y="141" text-anchor="middle">e21 [0,1,0]</text>
+<text x="220" y="141" text-anchor="middle">e22 [1,2,0]</text>
+<text x="330" y="106" text-anchor="middle">e23 [1,3,0]</text>
+<text x="160" y="212" text-anchor="middle">e31 [0,0,1]</text>
+<text x="400" y="212" text-anchor="middle">e32 [1,3,2]</text>
+<text x="172" y="84" font-style="italic">m1</text>
+<text x="378" y="156" font-style="italic">m2</text>
+</svg><figcaption>Vector clocks (d = 1): e11 sends m1, e22 receives it, e23 sends m2, e32 receives it.</figcaption></figure>
+<table class="tt">
+<tr><th>Pair of events</th><th>Vectors</th><th>Result</th></tr>
+<tr><td>e11, e22</td><td>[1,0,0] &lt; [1,2,0]</td><td>e11 → e22 (through m1)</td></tr>
+<tr><td>e21, e32</td><td>[0,1,0] &lt; [1,3,2]</td><td>e21 → e32</td></tr>
+<tr><td>e12, e21</td><td>[2,0,0] and [0,1,0] are incomparable</td><td>concurrent</td></tr>
+<tr><td>e31, e22</td><td>[0,0,1] and [1,2,0] are incomparable</td><td>concurrent</td></tr>
+</table>
+<p><b>Properties:</b> isomorphism, e<sub>i</sub> → e<sub>j</sub> ⇔ vh &lt; vk; hence vector time is <b>strongly consistent</b> and can test whether two events are concurrent; with d = 1, vh[i] is the number of events p<sub>i</sub> has executed up to the event.</p>
+
+<h4>Scalar time versus vector time</h4>
+<table class="tt">
+<tr><th>Aspect</th><th>Scalar time</th><th>Vector time</th></tr>
+<tr><td>Clock size</td><td>one integer</td><td>n integers</td></tr>
+<tr><td>Message overhead</td><td>one integer</td><td>n integers</td></tr>
+<tr><td>Consistency</td><td>consistent</td><td>strongly consistent</td></tr>
+<tr><td>Detects concurrency</td><td>no</td><td>yes</td></tr>
+<tr><td>Typical use</td><td>total ordering, mutual exclusion</td><td>causal ordering, debugging, checkpointing</td></tr>
+</table>
+<div class="result">Hence physical clocks are synchronized with Cristian, Berkeley or NTP, while logical clocks follow R1 and R2: scalar time is consistent but not strongly consistent, and vector time is strongly consistent.</div>
+</div>

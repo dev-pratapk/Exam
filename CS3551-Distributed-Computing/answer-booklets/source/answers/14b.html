@@ -1,0 +1,81 @@
+<div class="ans" data-q="14 (b)" data-pages="5">
+<h4>Introduction: the agreement problems</h4>
+<p>Processes in a distributed system must often agree on a value. Three related problems are defined:</p>
+<table class="tt">
+<tr><th>Problem</th><th>Initial values</th><th>Requirements</th></tr>
+<tr><td><b>Byzantine agreement</b></td><td>One designated process (the source or commander) has an initial value.</td><td><i>Agreement:</i> all non-faulty processes decide the same value. <i>Validity:</i> if the source is non-faulty, the common value is the source’s value. <i>Termination:</i> every non-faulty process decides.</td></tr>
+<tr><td><b>Consensus</b></td><td>Every process has an initial value.</td><td>Agreement, validity (if all initial values are equal, that value is decided) and termination.</td></tr>
+<tr><td><b>Interactive consistency</b></td><td>Every process has an initial value.</td><td>All non-faulty processes agree on the same <i>set</i> (vector) of values, one per process, and the entry for a non-faulty process is its own value.</td></tr>
+</table>
+
+<h4>1. Agreement in a failure-free system</h4>
+<p>If no process and no link fails, agreement is easy:</p>
+<ul>
+<li><b>Synchronous system:</b> every process broadcasts its value to all others in one round. After the round every process holds the same set of values and applies the same deterministic function (majority, min, max or average) to it. All decide the same value.</li>
+<li><b>Asynchronous system:</b> a process waits until it has received the value from every other process; because there are no failures, every message arrives eventually. It then applies the same function. Agreement is again reached.</li>
+</ul>
+<p>The problem becomes hard only when processes can fail, because other processes cannot tell whether a silent process has crashed or is only slow.</p>
+
+<h4>2. Agreement in a synchronous message-passing system with failures</h4>
+<p>In a synchronous system computation proceeds in <b>rounds</b>: in a round every process sends messages, receives the messages of that round and does its local processing, within known bounds on delay and speed.</p>
+
+<h4>(a) Consensus with crash failures (at most f processes may crash)</h4>
+<p>Every process p<sub>i</sub> executes the following for up to f crash failures; x is the current value, initially the process’s own value.</p>
+<div class="eq">for round = 1 to f + 1 do<br>
+&nbsp;&nbsp;if the current value of x has not been broadcast then broadcast(x);<br>
+&nbsp;&nbsp;y<sub>j</sub> := value (if any) received from process j in this round;<br>
+&nbsp;&nbsp;x := min(x, y<sub>j</sub>);<br>
+output x as the consensus value.</div>
+<p><b>Why it works:</b> at most f processes crash, so among the f + 1 rounds there is at least one round in which <b>no process crashes</b>. In that round every non-crashed process broadcasts its current minimum and every other non-crashed process receives it, so they all hold the same x afterwards and stay equal. Hence all decide the same value. <b>Lower bound:</b> f + 1 rounds are necessary for f crash failures. Message complexity is O((f + 1)·n<sup>2</sup>).</p>
+
+<h4>(b) Byzantine agreement</h4>
+<p>A <b>Byzantine</b> (arbitrary) fault means a process may send wrong or conflicting messages to different processes. <b>Result: Byzantine agreement among n processes with at most f Byzantine processes needs n ≥ 3f + 1.</b></p>
+<p><b>Impossibility for n = 3, f = 1.</b> A commander C sends its value to lieutenants L1 and L2, which then exchange what they received.</p>
+<figure class="dg"><svg width="560" height="215" viewBox="0 0 560 215" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13">
+<defs><marker id="a14b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<g stroke="#000" stroke-width="1.6" fill="none">
+<line x1="125" y1="48" x2="52" y2="140" marker-end="url(#a14b)"/>
+<line x1="135" y1="48" x2="208" y2="140" marker-end="url(#a14b)"/>
+<line x1="198" y1="160" x2="68" y2="160" marker-end="url(#a14b)"/>
+<line x1="405" y1="48" x2="332" y2="140" marker-end="url(#a14b)"/>
+<line x1="415" y1="48" x2="488" y2="140" marker-end="url(#a14b)"/>
+<line x1="478" y1="160" x2="348" y2="160" marker-end="url(#a14b)"/>
+</g>
+<g fill="#fff" stroke="#000" stroke-width="1.6"><circle cx="130" cy="35" r="14"/><circle cx="40" cy="155" r="14"/><circle cx="220" cy="155" r="14"/><circle cx="410" cy="35" r="14"/><circle cx="320" cy="155" r="14"/><circle cx="500" cy="155" r="14"/></g>
+<g text-anchor="middle"><text x="130" y="40">C</text><text x="40" y="160">L1</text><text x="220" y="160">L2</text><text x="410" y="40">C</text><text x="320" y="160">L1</text><text x="500" y="160">L2</text></g>
+<g text-anchor="middle" font-style="italic"><text x="78" y="86">0</text><text x="182" y="86">0</text><text x="133" y="178">“C said 1”</text><text x="358" y="86">0</text><text x="462" y="86">1</text><text x="413" y="178">“C said 1”</text></g>
+<text x="130" y="12" text-anchor="middle" font-size="12">Case (a): C correct, L2 faulty</text>
+<text x="410" y="12" text-anchor="middle" font-size="12">Case (b): C faulty, L2 correct</text>
+<text x="220" y="196" text-anchor="middle" font-size="12">(L2 lies)</text>
+<text x="500" y="196" text-anchor="middle" font-size="12">(C lies)</text>
+</svg><figcaption>L1 receives the same two messages (0 from C, “C said 1” from L2) in case (a) and in case (b).</figcaption></figure>
+<ul>
+<li><b>Case (a):</b> C is correct and sends 0 to both. Faulty L2 tells L1 “C said 1”. By validity L1 must decide 0.</li>
+<li><b>Case (b):</b> C is faulty and sends 0 to L1 and 1 to L2. Correct L2 tells L1 “C said 1”. L1 sees exactly the same messages as in case (a), so it again decides 0.</li>
+<li>In case (b), by the symmetric argument (a case where C is correct and sends 1, and L1 is the liar), L2 must decide 1. So L1 decides 0 and L2 decides 1: <b>agreement is violated</b>. Hence three processes cannot tolerate one Byzantine process.</li>
+</ul>
+
+<h4>Oral-messages algorithm OM(f) (Lamport, Shostak, Pease)</h4>
+<p>It works for n ≥ 3f + 1 and takes f + 1 rounds. The commander sends its value to every lieutenant, and each lieutenant relays what it received to the others, recursively.</p>
+<ol>
+<li><b>OM(0):</b> the commander sends its value to every lieutenant; each lieutenant uses the value it receives (a default value if none arrives).</li>
+<li><b>OM(m), m &gt; 0:</b> (1) the commander sends its value to all n − 1 lieutenants. (2) Let v<sub>i</sub> be the value lieutenant i received from the commander. Lieutenant i acts as the commander in OM(m − 1) and sends v<sub>i</sub> to the other n − 2 lieutenants. (3) Lieutenant i then takes <b>majority(v<sub>1</sub>, …, v<sub>n−1</sub>)</b>, where v<sub>j</sub> is the value it received from lieutenant j in step 2 (and v<sub>i</sub> is its own).</li>
+</ol>
+<p><b>Example: n = 4, f = 1</b> (lieutenants L1, L2, L3).</p>
+<table class="tt">
+<tr><th>Case</th><th>Round 1 (commander to L1, L2, L3)</th><th>Round 2 (lieutenants exchange)</th><th>Decision</th></tr>
+<tr><td>Commander correct with value 1; L3 faulty</td><td>1, 1, 1</td><td>L1 holds (1, 1 from L2, x from L3); L2 holds (1, 1 from L1, y from L3)</td><td>L1: majority(1,1,x) = 1; L2: majority(1,1,y) = 1. Agreement and validity hold.</td></tr>
+<tr><td>Commander faulty, sends 0, 1, 1</td><td>0, 1, 1</td><td>L1: (0, 1, 1); L2: (1, 0, 1); L3: (1, 0, 1)</td><td>All three compute majority = 1. Agreement holds.</td></tr>
+</table>
+<p><b>Complexity:</b> f + 1 rounds; the number of messages is (n − 1)(n − 2)…(n − f − 1), that is O(n<sup>f+1</sup>), exponential in f (9 messages for n = 4, f = 1).</p>
+<p><b>Phase-king algorithm:</b> a polynomial alternative for n &gt; 4f. It runs f + 1 phases of two rounds each; in phase k the process with id k acts as “king” and its value is adopted by processes that did not see a strong majority.</p>
+
+<h4>Summary of results</h4>
+<table class="tt">
+<tr><th>Failure model</th><th>Synchronous system</th><th>Asynchronous system</th></tr>
+<tr><td>No failure</td><td>agreement in 1 round</td><td>agreement possible</td></tr>
+<tr><td>Crash failures (f)</td><td>consensus in f + 1 rounds (lower bound f + 1)</td><td>impossible even with one crash (FLP result)</td></tr>
+<tr><td>Byzantine failures (f)</td><td>possible iff n ≥ 3f + 1 (OM: f + 1 rounds, exponential messages)</td><td>impossible</td></tr>
+</table>
+<div class="result">Hence in a failure-free system agreement needs one exchange of values, while a synchronous system with f crash failures needs f + 1 rounds and with f Byzantine failures needs n ≥ 3f + 1 processes and f + 1 rounds.</div>
+</div>

@@ -1,0 +1,81 @@
+<div class="ans" data-q="11 (b)" data-pages="5">
+<h4>Introduction</h4>
+<p>A <b>distributed system</b> is a collection of autonomous computers that cooperate through a communication network. It has <i>no shared memory</i> and <i>no global clock</i>, so processes interact only by message passing. A <b>distributed operating system (DOS)</b> is the software layer that manages such a collection and presents it to users as a <b>single system image</b>; unlike a network operating system, the user is not aware of the individual machines. Its design must solve three groups of problems: system-level challenges, algorithmic challenges, and the challenges raised by new applications (Fig. 1).</p>
+
+<figure class="dg">
+<svg width="400" height="336" viewBox="0 0 400 336" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<rect x="10" y="8" width="380" height="74" fill="none" stroke="#000" stroke-width="1.6"/>
+<text x="200" y="25" text-anchor="middle" font-size="12" font-weight="bold" font-family="serif">Applications and Newer Challenges</text>
+<text x="200" y="43" text-anchor="middle" font-size="9.5" font-family="serif">mobile systems · sensor networks · ubiquitous computing</text>
+<text x="200" y="57" text-anchor="middle" font-size="9.5" font-family="serif">P2P · publish–subscribe · agents · data mining</text>
+<text x="200" y="71" text-anchor="middle" font-size="9.5" font-family="serif">grid computing · security</text>
+<line x1="200" y1="82" x2="200" y2="104" stroke="#000" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="208" y="97" font-size="9" font-family="serif">uses</text>
+<rect x="10" y="106" width="380" height="104" fill="none" stroke="#000" stroke-width="1.6"/>
+<text x="200" y="124" text-anchor="middle" font-size="12" font-weight="bold" font-family="serif">Algorithmic Challenges</text>
+<text x="200" y="143" text-anchor="middle" font-size="9.5" font-family="serif">execution models · dynamic graph algorithms · time and global state</text>
+<text x="200" y="158" text-anchor="middle" font-size="9.5" font-family="serif">coordination · group communication · event monitoring</text>
+<text x="200" y="173" text-anchor="middle" font-size="9.5" font-family="serif">verification and debugging · replication · load balancing</text>
+<text x="200" y="188" text-anchor="middle" font-size="9.5" font-family="serif">real-time scheduling · performance</text>
+<line x1="200" y1="210" x2="200" y2="232" stroke="#000" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="208" y="225" font-size="9" font-family="serif">needs</text>
+<rect x="10" y="234" width="380" height="94" fill="none" stroke="#000" stroke-width="1.6"/>
+<text x="200" y="252" text-anchor="middle" font-size="12" font-weight="bold" font-family="serif">Challenges from the System Perspective</text>
+<text x="200" y="271" text-anchor="middle" font-size="9.5" font-family="serif">communication · processes · naming · synchronization</text>
+<text x="200" y="287" text-anchor="middle" font-size="9.5" font-family="serif">storage and access · consistency and replication · fault tolerance</text>
+<text x="200" y="303" text-anchor="middle" font-size="9.5" font-family="serif">security · API and transparency · scalability and modularity</text>
+</svg>
+<figcaption>Fig. 1 The design space of a distributed operating system: applications use algorithms, and algorithms depend on system services.</figcaption>
+</figure>
+
+<h4>1. Challenges from the System Perspective</h4>
+<p>The physical distribution of resources creates the following ten issues.</p>
+<table class="tt">
+<tr><th>Issue</th><th>Why it is difficult</th><th>Representative solution</th></tr>
+<tr><td><b>Communication</b></td><td>No shared memory; messages may be lost, duplicated, delayed or reordered, and hosts may be heterogeneous.</td><td>Message passing, RPC/RMI, protocols, buffering, exactly-once delivery.</td></tr>
+<tr><td><b>Processes</b></td><td>Processes and threads are created, migrated, identified and scheduled on remote nodes.</td><td>Process/thread servers, code migration, handles, distributed scheduling.</td></tr>
+<tr><td><b>Naming</b></td><td>Every resource needs a unique, location-independent name and fast resolution.</td><td>Global name space, name servers, hierarchical or flat naming, unique identifiers.</td></tr>
+<tr><td><b>Synchronization</b></td><td>There is no global clock, yet concurrent events must be ordered and mutually excluded.</td><td>Logical and vector clocks, clock synchronization, mutual exclusion, leader election.</td></tr>
+<tr><td><b>Data storage and access</b></td><td>Files and databases are scattered over nodes and must be accessed transparently.</td><td>Distributed file systems (NFS, AFS), distributed databases, caching, directories.</td></tr>
+<tr><td><b>Consistency and replication</b></td><td>Replicas improve availability and performance, but concurrent updates must remain coherent.</td><td>Consistency models (strict, sequential, causal), quorum, primary-backup, CAP trade-off.</td></tr>
+<tr><td><b>Fault tolerance</b></td><td>Failures are partial and independent; a node may crash or behave maliciously.</td><td>Failure detectors, replication, checkpointing, transactions, k-fault tolerance.</td></tr>
+<tr><td><b>Security</b></td><td>Open channels and many administrative domains invite eavesdropping and masquerading.</td><td>Authentication, authorization, encryption, access control, non-repudiation.</td></tr>
+<tr><td><b>API and transparency</b></td><td>Distribution must be hidden behind a clean interface without hiding useful information.</td><td>Access, location, migration, relocation, replication, concurrency and scaling transparency.</td></tr>
+<tr><td><b>Scalability and modularity</b></td><td>Growth in nodes, users and geography must not create central bottlenecks.</td><td>Decentralization, partitioning, hierarchical naming, modular design.</td></tr>
+</table>
+
+<h4>2. Algorithmic Challenges</h4>
+<p>System services must be matched by correct distributed algorithms. The main algorithmic challenges are:</p>
+<ol>
+<li><b>Execution models.</b> Synchronous versus asynchronous computation, interleaving of concurrent actions, and message-passing versus shared-memory semantics must be defined; a program correct in one model may fail in another.</li>
+<li><b>Dynamic distributed graph algorithms.</b> The topology and membership change, so algorithms must route, reconfigure and terminate without global knowledge.</li>
+<li><b>Time and global state.</b> With no global clock, ordering events and observing a consistent global state are hard; logical clocks, consistent cuts and snapshots are needed.</li>
+<li><b>Synchronization and coordination.</b> Distributed mutual exclusion, consensus, leader election and distributed transactions must tolerate asynchrony and failures.</li>
+<li><b>Group communication and multicast.</b> Reliable, atomic and ordered multicast to a dynamic group is needed, and ordering plus agreement is expensive.</li>
+<li><b>Monitoring distributed events.</b> A global predicate or event whose parts occur on different processes must be detected, e.g. for management or debugging.</li>
+<li><b>Program design and verification.</b> Concurrency multiplies the interleavings, so formal specification, model checking and systematic testing are required.</li>
+<li><b>Debugging.</b> Non-determinism and the lack of a global state make bugs hard to reproduce; replay and causal tracing help.</li>
+<li><b>Data replication.</b> Consistency, placement and update propagation must be chosen to balance coherence, availability and cost.</li>
+<li><b>Load balancing.</b> Work must be placed and migrated dynamically to avoid hot spots and idle nodes.</li>
+<li><b>Real-time scheduling.</b> End-to-end deadlines and quality of service must be met despite unpredictable message delays.</li>
+<li><b>Performance.</b> Message complexity, latency, throughput and scalability must be measured and optimized, avoiding bottlenecks and false sharing.</li>
+</ol>
+
+<h4>3. Applications and Newer Challenges</h4>
+<p>Modern applications add requirements that the classical model does not capture:</p>
+<ul>
+<li><b>Mobile systems:</b> node mobility, disconnection, limited bandwidth and energy, location-dependent services.</li>
+<li><b>Sensor networks:</b> severe energy limits, unattended operation, in-network aggregation and time synchronization.</li>
+<li><b>Ubiquitous computing:</b> context awareness, heterogeneity, spontaneous interoperation and privacy.</li>
+<li><b>Peer-to-peer systems:</b> decentralization, churn, overlay routing, incentives and trust.</li>
+<li><b>Publish–subscribe:</b> decoupling of publishers and subscribers in space and time, efficient event matching, scalability.</li>
+<li><b>Distributed agents:</b> autonomy, mobility, negotiation and coordination among agents.</li>
+<li><b>Distributed data mining:</b> very large distributed data sets, privacy and communication cost.</li>
+<li><b>Grid computing:</b> resource sharing across organizations (virtual organizations), virtualization, authentication and scheduling.</li>
+<li><b>Security (newer challenge):</b> end-to-end trust in open, wireless and multi-owner environments.</li>
+</ul>
+
+<h4>Conclusion</h4>
+<p>A DOS must hide distribution through transparency while providing communication, naming, synchronization, fault tolerance and security. The hardest core problems remain the absence of a global clock and global state, partial failure, and the trade-off between consistency, availability and performance.</p>
+</div>

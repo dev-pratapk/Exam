@@ -1,0 +1,16 @@
+Read SPEC.md in the current directory and follow it exactly.
+Paper: B.E./B.Tech. CS3551 Distributed Computing, Regulations 2021, Model Question Paper 1.
+Your part: PART A (10 × 2 = 20 marks). Answer all ten 2-mark questions.
+1. Distinguish between message passing systems and shared memory systems.
+2. What are the motivations for distributed systems?
+3. How do you define the scalar time and vector time?
+4. Define global state and consistent global state.
+5. List down the three requirements of mutual exclusion algorithms.
+6. What is a false deadlock and when does it occur?
+7. List down any four issues in failure recovery.
+8. What is a checkpoint in the recovery system? How is it useful?
+9. What is virtualization in cloud computing?
+10. List the characteristics of cloud computing.
+Use data-q="1" … data-q="10" and data-pages="0.5".
+Hints: Answer each in 4–8 lines; use a small comparison table for Q1. Q3: scalar time = single integer per process with rules R1/R2; vector time = vector of n integers. Q4: global state = collection of local states and channel states; consistent if it satisfies C1/C2 (every received message was sent; no message is in transit that is not recorded). Q5: safety, liveness, fairness. Q10: on-demand self-service, broad network access, resource pooling, rapid elasticity, measured service.
+Write the file out/partA.html.
