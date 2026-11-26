@@ -13,6 +13,7 @@ The last page lists which paper each question came from.
 **Answer booklets for Model Question Paper 1.** Two complete answer scripts, written the way you write in the exam hall:
 - [Booklet A](answer-booklets/CS3551_Model_Paper_1_Answer_Booklet_A.pdf): Part A (all 10), and option (a) of Q11–Q16.
 - [Booklet B](answer-booklets/CS3551_Model_Paper_1_Answer_Booklet_B.pdf): Part A (all 10), and option (b) of Q11–Q16.
+- [Mini xerox (A4, print front and back)](answer-booklets/CS3551_Model_Paper_1_Mini_Xerox_A4.pdf): both booklets in one 8-page file, two columns per page. Part A appears once, and the cover pages and blank space are removed.
 
 Each booklet has a cover sheet listing the questions answered. Every answer shows how many handwritten pages it should take: about 30–36 pages in total, so you do not need to fill all 42. Algorithm answers include space-time diagrams and worked examples.
 
