@@ -1,0 +1,21 @@
+<div class="ans" data-q="11 (a)" data-pages="4">
+<h4>Formulation</h4>
+<p>Let x<sub>1</sub> = number of trucks and x<sub>2</sub> = number of automobiles produced per week.</p>
+<div class="eq">Maximize Z = 300x<sub>1</sub> + 200x<sub>2</sub></div>
+<p>subject to</p>
+<div class="eq">5x<sub>1</sub> + 2x<sub>2</sub> ≤ 180 (shop A, man-days)<br>3x<sub>1</sub> + 3x<sub>2</sub> ≤ 135 (shop B, man-days), that is x<sub>1</sub> + x<sub>2</sub> ≤ 45<br>x<sub>1</sub>, x<sub>2</sub> ≥ 0</div>
+<h4>Graphical solution</h4>
+<ol>
+<li>Plot 5x<sub>1</sub> + 2x<sub>2</sub> = 180 through (36, 0) and (0, 90).</li>
+<li>Plot x<sub>1</sub> + x<sub>2</sub> = 45 through (45, 0) and (0, 45).</li>
+<li>Both constraints are of the ≤ type and x<sub>1</sub>, x<sub>2</sub> ≥ 0, so the feasible region is the shaded polygon OABC.</li>
+<li>The corner B is the intersection of the two lines: 5x<sub>1</sub> + 2(45 − x<sub>1</sub>) = 180 gives 3x<sub>1</sub> = 90, x<sub>1</sub> = 30, x<sub>2</sub> = 15.</li>
+</ol>
+<figure class="dg"><svg width="520" height="345" viewBox="0 0 520 345" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="12"><defs><marker id="a11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs><polygon points="55.0,285.0 307.0,285.0 265.0,210.0 55.0,60.0" fill="#e8e8e8" stroke="none"/><g stroke="#000" stroke-width="1.6" fill="none"><line x1="55" y1="285" x2="419.0" y2="285" marker-end="url(#a11)"/><line x1="55" y1="285" x2="55" y2="25.0" marker-end="url(#a11)"/><line x1="307.0" y1="285.0" x2="167.0" y2="35.0"/><line x1="370.0" y1="285.0" x2="55.0" y2="60.0"/><line x1="335.0" y1="285.0" x2="101.7" y2="35.0" stroke-dasharray="6 4" stroke-width="1.2"/></g><line x1="125.0" y1="285" x2="125.0" y2="289" stroke="#000"/><text x="125.0" y="301" text-anchor="middle">10</text><line x1="51" y1="235.0" x2="55" y2="235.0" stroke="#000"/><text x="47" y="239.0" text-anchor="end">10</text><line x1="195.0" y1="285" x2="195.0" y2="289" stroke="#000"/><text x="195.0" y="301" text-anchor="middle">20</text><line x1="51" y1="185.0" x2="55" y2="185.0" stroke="#000"/><text x="47" y="189.0" text-anchor="end">20</text><line x1="265.0" y1="285" x2="265.0" y2="289" stroke="#000"/><text x="265.0" y="301" text-anchor="middle">30</text><line x1="51" y1="135.0" x2="55" y2="135.0" stroke="#000"/><text x="47" y="139.0" text-anchor="end">30</text><line x1="335.0" y1="285" x2="335.0" y2="289" stroke="#000"/><text x="335.0" y="301" text-anchor="middle">40</text><line x1="51" y1="85.0" x2="55" y2="85.0" stroke="#000"/><text x="47" y="89.0" text-anchor="end">40</text><line x1="405.0" y1="285" x2="405.0" y2="289" stroke="#000"/><text x="405.0" y="301" text-anchor="middle">50</text><line x1="51" y1="35.0" x2="55" y2="35.0" stroke="#000"/><text x="47" y="39.0" text-anchor="end">50</text><circle cx="55.0" cy="285.0" r="3.5" fill="#000"/><text x="51.0" y="315.0">O (0, 0)</text><circle cx="307.0" cy="285.0" r="3.5" fill="#000"/><text x="285.0" y="317.0">A (36, 0)</text><circle cx="265.0" cy="210.0" r="3.5" fill="#000"/><text x="273.0" y="202.0">B (30, 15)</text><circle cx="55.0" cy="60.0" r="3.5" fill="#000"/><text x="63.0" y="64.0">C (0, 45)</text><text x="423.0" y="289">x₁ (trucks)</text><text x="63" y="21.0">x₂ (automobiles)</text><text x="175.0" y="39.0">5x₁ + 2x₂ = 180</text><text x="342.0" y="251.0">x₁ + x₂ = 45</text><line x1="300" y1="60" x2="335" y2="60" stroke="#000" stroke-width="1.2" stroke-dasharray="6 4"/><text x="341" y="64" font-size="11">iso-profit line Z = 12000</text></svg><figcaption>Feasible region OABC. The dashed line is the iso-profit line Z = 12000 through the optimum corner B.</figcaption></figure>
+<h4>Value of Z at the corner points</h4>
+<table class="tt"><tr><th>Corner point</th><th>(x<sub>1</sub>, x<sub>2</sub>)</th><th>Z = 300x<sub>1</sub> + 200x<sub>2</sub></th></tr>
+<tr><td>O</td><td>(0, 0)</td><td>0</td></tr><tr><td>A</td><td>(36, 0)</td><td>10 800</td></tr>
+<tr><td><b>B</b></td><td><b>(30, 15)</b></td><td><b>9 000 + 3 000 = 12 000</b></td></tr><tr><td>C</td><td>(0, 45)</td><td>9 000</td></tr></table>
+<p>The maximum value of Z is at B.</p>
+<div class="result">Produce 30 trucks and 15 automobiles per week; the maximum profit is ₹12,000 per week.</div>
+</div>

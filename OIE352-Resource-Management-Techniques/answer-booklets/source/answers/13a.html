@@ -1,0 +1,14 @@
+<div class="ans" data-q="13 (a)" data-pages="4">
+<h4>Problem</h4>
+<p>Minimize Z = −2x<sub>1</sub> − 3x<sub>2</sub> subject to 2x<sub>1</sub> + 2x<sub>2</sub> ≤ 7, x<sub>1</sub> ≤ 2, x<sub>2</sub> ≤ 2, x<sub>1</sub>, x<sub>2</sub> ≥ 0 and integers. Equivalent: maximize Z′ = 2x<sub>1</sub> + 3x<sub>2</sub> with x<sub>1</sub> + x<sub>2</sub> ≤ 3.5 (Z = −Z′). I use the <b>branch and bound method</b>.</p>
+<h4>Step 1: LP relaxation (ignore integrality)</h4>
+<p>The feasible region is the polygon bounded by x<sub>1</sub> ≤ 2, x<sub>2</sub> ≤ 2, x<sub>1</sub> + x<sub>2</sub> ≤ 3.5. Its corner points are (0, 0), (2, 0), (2, 1.5), (1.5, 2) and (0, 2). Since x<sub>2</sub> has the larger profit, the maximum is at (1.5, 2):</p>
+<div class="eq">Z′ = 2(1.5) + 3(2) = 9, so Z = −9 (a lower bound for the minimum).</div>
+<p>x<sub>1</sub> = 1.5 is not an integer, so branch on x<sub>1</sub>.</p>
+<h4>Step 2: branching</h4>
+<table class="tt"><tr><th>Sub-problem</th><th>Added constraint</th><th>LP optimum</th><th>Z</th><th>Result</th></tr><tr><td>P1</td><td>x<sub>1</sub> ≤ 1</td><td>(x<sub>1</sub>, x<sub>2</sub>) = (1, 2)</td><td>−2 − 6 = −8</td><td>Integer solution: incumbent Z = −8</td></tr><tr><td>P2</td><td>x<sub>1</sub> ≥ 2 (so x<sub>1</sub> = 2)</td><td>(2, 1.5)</td><td>−4 − 4.5 = −8.5</td><td>x<sub>2</sub> fractional, and −8.5 < −8: branch on x<sub>2</sub></td></tr><tr><td>P3</td><td>P2 and x<sub>2</sub> ≤ 1</td><td>(2, 1)</td><td>−4 − 3 = −7</td><td>Integer, but −7 is worse than −8</td></tr><tr><td>P4</td><td>P2 and x<sub>2</sub> ≥ 2</td><td>2(2) + 2(2) = 8 > 7</td><td>–</td><td>Infeasible</td></tr></table>
+<p>All branches are now closed. The best integer solution is that of P1.</p>
+<h4>Check</h4>
+<p>(1, 2): 2(1) + 2(2) = 6 ≤ 7, x<sub>1</sub> = 1 ≤ 2, x<sub>2</sub> = 2 ≤ 2. Other feasible integer points give Z = 0, −2, −3, −4, −6, −7, so −8 is the minimum.</p>
+<div class="result">Optimum integer solution: x<sub>1</sub> = 1, x<sub>2</sub> = 2; minimum Z = −8.</div>
+</div>

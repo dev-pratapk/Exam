@@ -1,0 +1,29 @@
+<div class="ans" data-q="15 (b)" data-pages="5">
+<h4>Network</h4>
+<p>The activities, identified by their start and end events, form the network 1 → 2 → 5 → 6, 1 → 3 → 5 → 6 and 1 → 4 → 6. The three-time-estimate (PERT) method gives, for each activity, an expected time and a variance (the time estimate t<sub>1</sub> in the table is the most likely time t<sub>m</sub>).</p>
+<figure class="dg"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="13"><defs><marker id="a15b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+<g stroke="#000" stroke-width="1.6" fill="none"><line x1="43" y1="105" x2="127" y2="38" marker-end="url(#a15b)"/><line x1="43" y1="105" x2="127" y2="105" marker-end="url(#a15b)"/><line x1="43" y1="105" x2="127" y2="172" marker-end="url(#a15b)"/>
+<line x1="153" y1="35" x2="257" y2="98" marker-end="url(#a15b)"/><line x1="153" y1="105" x2="257" y2="105" marker-end="url(#a15b)"/><line x1="153" y1="172" x2="397" y2="112" marker-end="url(#a15b)"/>
+<line x1="283" y1="105" x2="397" y2="105" marker-end="url(#a15b)"/>
+<line x1="43" y1="105" x2="127" y2="105" stroke-width="1.6"/></g>
+<g fill="#fff" stroke="#000" stroke-width="1.6"><circle cx="30" cy="105" r="13"/><circle cx="140" cy="28" r="13"/><circle cx="140" cy="105" r="13"/><circle cx="140" cy="180" r="13"/><circle cx="270" cy="105" r="13"/><circle cx="410" cy="105" r="13"/></g>
+<g text-anchor="middle"><text x="30" y="110">1</text><text x="140" y="33">2</text><text x="140" y="110">3</text><text x="140" y="185">4</text><text x="270" y="110">5</text><text x="410" y="110">6</text>
+<text x="70" y="62" font-style="italic" font-size="12">2</text><text x="80" y="97" font-style="italic" font-size="12">4</text><text x="68" y="150" font-style="italic" font-size="12">3</text>
+<text x="200" y="55" font-style="italic" font-size="12">1</text><text x="205" y="97" font-style="italic" font-size="12">6</text><text x="270" y="162" font-style="italic" font-size="12">5</text><text x="345" y="97" font-style="italic" font-size="12">7</text></g>
+</svg><figcaption>PERT network; the numbers on the arrows are the expected times t<sub>e</sub> in weeks. Critical path 1 → 3 → 5 → 6.</figcaption></figure>
+<h4>(ii) Expected times and variances</h4>
+<table class="tt"><tr><th>Activity (i–j)</th><th>t<sub>0</sub></th><th>t<sub>m</sub></th><th>t<sub>p</sub></th><th>Expected time t<sub>e</sub> = (t<sub>0</sub> + 4t<sub>m</sub> + t<sub>p</sub>)/6</th><th>Variance σ<sup>2</sup> = ((t<sub>p</sub> − t<sub>0</sub>)/6)<sup>2</sup></th></tr><tr><td>1–2</td><td>1</td><td>1</td><td>7</td><td>2</td><td>1</td></tr><tr><td>1–3</td><td>1</td><td>4</td><td>7</td><td>4</td><td>1</td></tr><tr><td>1–4</td><td>2</td><td>2</td><td>8</td><td>3</td><td>1</td></tr><tr><td>2–5</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr><tr><td>3–5</td><td>2</td><td>5</td><td>14</td><td>6</td><td>4</td></tr><tr><td>4–6</td><td>2</td><td>5</td><td>8</td><td>5</td><td>1</td></tr><tr><td>5–6</td><td>3</td><td>6</td><td>15</td><td>7</td><td>4</td></tr></table>
+<h4>(iii) Expected project completion time</h4>
+<table class="tt"><tr><th>Path</th><th>Length (weeks)</th></tr><tr><td>1 → 2 → 5 → 6</td><td>2 + 1 + 7 = 10</td></tr><tr><td><b>1 → 3 → 5 → 6</b></td><td><b>4 + 6 + 7 = 17</b></td></tr><tr><td>1 → 4 → 6</td><td>3 + 5 = 8</td></tr></table>
+<p>The longest path 1 → 3 → 5 → 6 is the critical path. Expected project completion time T<sub>E</sub> = <b>17 weeks</b>. The earliest and latest event times confirm it (events 1, 3, 5, 6 have zero slack):</p>
+<table class="tt"><tr><th>Event</th><th>Earliest time E</th><th>Latest time L</th><th>Slack L − E</th></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2</td><td>2</td><td>9</td><td>7</td></tr><tr><td>3</td><td>4</td><td>4</td><td>0</td></tr><tr><td>4</td><td>3</td><td>12</td><td>9</td></tr><tr><td>5</td><td>10</td><td>10</td><td>0</td></tr><tr><td>6</td><td>17</td><td>17</td><td>0</td></tr></table>
+<h4>Variance of the project time</h4>
+<div class="eq">σ<sup>2</sup> = σ<sup>2</sup>(1–3) + σ<sup>2</sup>(3–5) + σ<sup>2</sup>(5–6) = 1 + 4 + 4 = 9, so σ = 3 weeks</div>
+<h4>(iv) Probability of finishing at least 3 weeks earlier than expected</h4>
+<p>T = 17 − 3 = 14 weeks. Z = (T − T<sub>E</sub>)/σ = (14 − 17)/3 = −1.</p>
+<div class="eq">P(T ≤ 14) = P(Z ≤ −1) = 1 − 0.8413 = 0.1587 ≈ 15.9 %</div>
+<h4>(v) Probability of finishing by the due date of 18 weeks</h4>
+<p>Z = (18 − 17)/3 = 0.33.</p>
+<div class="eq">P(T ≤ 18) = P(Z ≤ 0.33) = 0.6293 ≈ 62.9 %</div>
+<div class="result">Critical path 1 → 3 → 5 → 6; expected completion time 17 weeks, σ = 3 weeks; probability of finishing 3 weeks earlier = 0.1587; probability of finishing within 18 weeks = 0.6293.</div>
+</div>

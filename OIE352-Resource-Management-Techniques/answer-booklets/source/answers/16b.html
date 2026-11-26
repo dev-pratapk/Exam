@@ -1,0 +1,14 @@
+<div class="ans" data-q="16 (b)" data-pages="4">
+<h4>Problem</h4>
+<p>Maximize Z = 80x<sub>1</sub> + 45x<sub>2</sub> subject to x<sub>1</sub> + x<sub>2</sub> ≤ 7, 12x<sub>1</sub> + 5x<sub>2</sub> ≤ 60, x<sub>1</sub>, x<sub>2</sub> ≥ 0 and integers. (The constraint 12x<sub>1</sub> + 5x<sub>2</sub> ≤ 60 is used as in the 2020 paper; the 2021 paper prints 600, which would make this constraint useless.) I use the <b>branch and bound method</b>.</p>
+<h4>Step 1: LP relaxation</h4>
+<p>The corner points of the feasible region are (0, 0), (5, 0), (25/7, 24/7) and (0, 7). The two lines meet where x<sub>1</sub> + x<sub>2</sub> = 7 and 12x<sub>1</sub> + 5x<sub>2</sub> = 60, that is 7x<sub>1</sub> = 25.</p>
+<table class="tt"><tr><th>Corner</th><th>(0, 0)</th><th>(5, 0)</th><th>(25/7, 24/7)</th><th>(0, 7)</th></tr><tr><td>Z</td><td>0</td><td>400</td><td>(2000 + 1080)/7 = 440</td><td>315</td></tr></table>
+<p>The LP optimum is Z = 440 at x<sub>1</sub> = 25/7 ≈ 3.57, x<sub>2</sub> = 24/7 ≈ 3.43. Both are fractional; 440 is an upper bound. Branch on x<sub>1</sub>.</p>
+<h4>Step 2: branching</h4>
+<table class="tt"><tr><th>Sub-problem</th><th>Added constraints</th><th>LP optimum</th><th>Z</th><th>Result</th></tr><tr><td>P1</td><td>x<sub>1</sub> ≤ 3</td><td>(3, 4)  [x<sub>2</sub> ≤ 4 and ≤ 4.8]</td><td>240 + 180 = 420</td><td>Integer: incumbent Z = 420</td></tr><tr><td>P2</td><td>x<sub>1</sub> ≥ 4</td><td>(4, 2.4)</td><td>320 + 108 = 428</td><td>428 &gt; 420 and fractional: branch on x<sub>2</sub></td></tr><tr><td>P3</td><td>P2 and x<sub>2</sub> ≤ 2</td><td>(25/6, 2) ≈ (4.17, 2)</td><td>333.3 + 90 = 423.3</td><td>423.3 &gt; 420: branch on x<sub>1</sub></td></tr><tr><td>P4</td><td>P2 and x<sub>2</sub> ≥ 3</td><td>12(4) + 5(3) = 63 &gt; 60</td><td>–</td><td>Infeasible</td></tr><tr><td>P5</td><td>P3 and x<sub>1</sub> ≤ 4</td><td>(4, 2)</td><td>320 + 90 = 410</td><td>Integer, but 410 &lt; 420: closed</td></tr><tr><td>P6</td><td>P3 and x<sub>1</sub> ≥ 5</td><td>(5, 0)</td><td>400</td><td>Integer, 400 &lt; 420: closed</td></tr></table>
+<p>All sub-problems are closed (integer, infeasible, or with bound not better than 420). The best integer solution is that of P1.</p>
+<h4>Check</h4>
+<p>(3, 4): 3 + 4 = 7 ≤ 7 and 12(3) + 5(4) = 56 ≤ 60. Trying the other integer points near the boundary, (4, 2) gives 410, (2, 5) gives 385 and (0, 7) gives 315, all below 420.</p>
+<div class="result">Optimum integer solution: x<sub>1</sub> = 3, x<sub>2</sub> = 4; maximum Z = 420.</div>
+</div>

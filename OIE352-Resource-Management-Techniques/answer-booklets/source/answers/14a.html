@@ -1,0 +1,23 @@
+<div class="ans" data-q="14 (a)" data-pages="4">
+<h4>Problem and Lagrange function</h4>
+<p>The Kuhn–Tucker (K–T) conditions are the necessary conditions for optimality of a non-linear programming problem with <b>inequality constraints</b>. Consider</p>
+<div class="eq">Minimize f(X), X = (x<sub>1</sub>, …, x<sub>n</sub>), subject to g<sub>j</sub>(X) ≤ 0, j = 1, …, m.</div>
+<p>Introduce a multiplier λ<sub>j</sub> for each constraint and form the Lagrange function L(X, λ) = f(X) + Σ<sub>j</sub> λ<sub>j</sub> g<sub>j</sub>(X).</p>
+<h4>The conditions</h4>
+<p>If X* is a local minimum (and the constraints satisfy a regularity condition), there exist multipliers λ<sub>j</sub> such that:</p>
+<ol>
+<li><b>Stationarity:</b> ∂f/∂x<sub>i</sub> + Σ<sub>j</sub> λ<sub>j</sub> ∂g<sub>j</sub>/∂x<sub>i</sub> = 0 for i = 1, …, n.</li>
+<li><b>Complementary slackness:</b> λ<sub>j</sub> g<sub>j</sub>(X*) = 0. A constraint that is not active (g<sub>j</sub> &lt; 0) has λ<sub>j</sub> = 0.</li>
+<li><b>Feasibility:</b> g<sub>j</sub>(X*) ≤ 0.</li>
+<li><b>Non-negativity of the multipliers:</b> λ<sub>j</sub> ≥ 0.</li>
+</ol>
+<p>For a <b>maximization</b> problem (with g<sub>j</sub> ≤ 0) the stationarity condition becomes ∂f/∂x<sub>i</sub> − Σ<sub>j</sub> λ<sub>j</sub> ∂g<sub>j</sub>/∂x<sub>i</sub> = 0 with λ<sub>j</sub> ≥ 0. The conditions are also <b>sufficient</b> when f is convex and every g<sub>j</sub> is convex (for minimization), since the problem is then a convex program.</p>
+<h4>Example</h4>
+<p>Minimize f = x<sub>1</sub><sup>2</sup> + x<sub>2</sub><sup>2</sup> subject to x<sub>1</sub> + x<sub>2</sub> ≥ 4, that is g = 4 − x<sub>1</sub> − x<sub>2</sub> ≤ 0.</p>
+<div class="eq">L = x<sub>1</sub><sup>2</sup> + x<sub>2</sub><sup>2</sup> + λ(4 − x<sub>1</sub> − x<sub>2</sub>)</div>
+<p>The K–T conditions are</p>
+<div class="eq">(1) ∂L/∂x<sub>1</sub> = 2x<sub>1</sub> − λ = 0<br>(2) ∂L/∂x<sub>2</sub> = 2x<sub>2</sub> − λ = 0<br>(3) λ(4 − x<sub>1</sub> − x<sub>2</sub>) = 0<br>(4) x<sub>1</sub> + x<sub>2</sub> ≥ 4, λ ≥ 0</div>
+<table class="tt"><tr><th>Case</th><th>Working</th><th>Result</th></tr><tr><td>λ = 0 (constraint inactive)</td><td>From (1) and (2): x<sub>1</sub> = x<sub>2</sub> = 0, but then x<sub>1</sub> + x<sub>2</sub> = 0 &lt; 4</td><td>Violates the constraint: rejected</td></tr><tr><td>g = 0 (constraint active)</td><td>(1) and (2) give x<sub>1</sub> = x<sub>2</sub> = λ/2; the constraint 4 − x<sub>1</sub> − x<sub>2</sub> = 0 gives λ = 4, so x<sub>1</sub> = x<sub>2</sub> = 2</td><td>λ = 4 ≥ 0: accepted</td></tr></table>
+<p>The function and the constraint are convex, so the K–T point is the global minimum. f* = 2<sup>2</sup> + 2<sup>2</sup> = 8.</p>
+<div class="result">K–T point: x<sub>1</sub> = 2, x<sub>2</sub> = 2, λ = 4; minimum f = 8.</div>
+</div>

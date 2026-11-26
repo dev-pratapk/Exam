@@ -1,0 +1,15 @@
+<div class="ans" data-q="14 (b)" data-pages="3">
+<h4>Newton–Raphson method</h4>
+<p>To solve f(x) = 0, start from an initial guess x<sub>0</sub> and improve it repeatedly using the tangent to the curve:</p>
+<div class="eq">x<sub>n+1</sub> = x<sub>n</sub> − f(x<sub>n</sub>) / f′(x<sub>n</sub>)</div>
+<h4>Given</h4>
+<p>f(x) = 2x<sup>3</sup> − 2.5x − 5, f′(x) = 6x<sup>2</sup> − 2.5, f″(x) = 12x. The root lies in [1, 2].</p>
+<h4>Initial guess</h4>
+<p>f(1) = 2 − 2.5 − 5 = −5.5 (negative) and f(2) = 16 − 5 − 5 = 6 (positive), so a root exists between 1 and 2. For guaranteed convergence start at the end where f(x<sub>0</sub>) and f″(x<sub>0</sub>) have the same sign: f(2) = 6 &gt; 0 and f″(2) = 24 &gt; 0, so take <b>x<sub>0</sub> = 2</b>.</p>
+<h4>Iterations</h4>
+<table class="tt"><tr><th>n</th><th>x<sub>n</sub></th><th>f(x<sub>n</sub>)</th><th>f′(x<sub>n</sub>)</th><th>x<sub>n+1</sub> = x<sub>n</sub> − f/f′</th></tr><tr><td>0</td><td>2.00000</td><td>6.00000</td><td>21.50000</td><td>1.72093</td></tr><tr><td>1</td><td>1.72093</td><td>0.89109</td><td>15.26961</td><td>1.66257</td></tr><tr><td>2</td><td>1.66257</td><td>0.03477</td><td>14.08489</td><td>1.66010</td></tr><tr><td>3</td><td>1.66010</td><td>0.00006</td><td>14.03568</td><td>1.66010</td></tr></table>
+<p>The last two iterates agree to five decimal places, so the process is stopped.</p>
+<h4>Check</h4>
+<p>f(1.66010) = 2(1.66010)<sup>3</sup> − 2.5(1.66010) − 5 ≈ 0.000000, which is zero to the accuracy used.</p>
+<div class="result">The root of 2x<sup>3</sup> − 2.5x − 5 = 0 in [1, 2] is x ≈ 1.6601.</div>
+</div>

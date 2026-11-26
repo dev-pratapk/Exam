@@ -1,0 +1,77 @@
+<div class="ans" data-q="1" data-pages="0.5">
+<h4>Linear programming</h4>
+<p>Linear programming (LP) is a mathematical technique for finding the best value (maximum or minimum) of a <b>linear objective function</b> subject to a set of <b>linear constraints</b> (equalities or inequalities) and non-negativity of the variables.</p>
+<div class="eq">Maximize (or minimize) Z = c<sub>1</sub>x<sub>1</sub> + c<sub>2</sub>x<sub>2</sub> + … + c<sub>n</sub>x<sub>n</sub> subject to Σ a<sub>ij</sub>x<sub>j</sub> (≤, =, ≥) b<sub>i</sub>, x<sub>j</sub> ≥ 0.</div>
+<p>Example uses: product mix, diet, blending and resource allocation problems.</p>
+</div>
+
+<div class="ans" data-q="2" data-pages="0.5">
+<h4>Shadow price</h4>
+<p>The <b>shadow price</b> of a resource is the change in the optimal value of the objective function per unit increase in the right-hand side (availability) of that resource's constraint. It is the value of the corresponding <b>dual variable</b> y<sub>i</sub>, and is read from the Z<sub>j</sub> row of the final simplex table under the slack variable of that constraint.</p>
+<p>It tells the manager how much more it is worth paying for one more unit of the resource, as long as the change stays within the range of feasibility. A resource that is not fully used (positive slack) has shadow price 0.</p>
+</div>
+
+<div class="ans" data-q="3" data-pages="0.5">
+<h4>Primal and dual problems</h4>
+<p>Every LP (the <b>primal</b>) has an associated LP (the <b>dual</b>) obtained from the same data.</p>
+<table class="tt"><tr><th>Primal</th><th>Dual</th></tr>
+<tr><td>Maximize Z = c<sup>T</sup>x<br>subject to Ax ≤ b, x ≥ 0</td><td>Minimize W = b<sup>T</sup>y<br>subject to A<sup>T</sup>y ≥ c, y ≥ 0</td></tr>
+<tr><td>n variables, m constraints</td><td>m variables, n constraints</td></tr>
+<tr><td>Objective coefficients c<sub>j</sub></td><td>Right-hand sides of the dual constraints</td></tr>
+<tr><td>Right-hand sides b<sub>i</sub></td><td>Objective coefficients of the dual</td></tr></table>
+<p>The dual of the dual is the primal, and the optimal values of the two problems are equal.</p>
+</div>
+
+<div class="ans" data-q="4" data-pages="0.5">
+<h4>Unbalanced to balanced transportation problem</h4>
+<p>A transportation problem is <b>balanced</b> when total supply = total demand. If it is not:</p>
+<ul><li><b>Total supply &gt; total demand:</b> add a <i>dummy destination</i> with demand equal to (supply − demand) and zero cost (zero profit for maximization) in every cell.</li>
+<li><b>Total demand &gt; total supply:</b> add a <i>dummy source</i> with supply equal to (demand − supply) and zero cost in every cell.</li></ul>
+<p>The balanced problem is then solved in the usual way (VAM and MODI).</p>
+</div>
+
+<div class="ans" data-q="5" data-pages="0.5">
+<h4>Types of integer programming problems</h4>
+<ol><li><b>Pure (all-integer) IPP:</b> all the variables must be integers.</li>
+<li><b>Mixed IPP:</b> only some of the variables must be integers; the others may be continuous.</li>
+<li><b>Zero–one (binary) IPP:</b> every variable can take only the values 0 or 1.</li></ol>
+<p>Methods: Gomory's cutting-plane method and the branch and bound method.</p>
+</div>
+
+<div class="ans" data-q="6" data-pages="0.5">
+<h4>Dynamic programming</h4>
+<p><b>Dynamic programming</b> is a method of solving a <b>multistage decision problem</b> by breaking it into a sequence of smaller, interrelated sub-problems called <i>stages</i>, which are solved one by one using a recursive relation. It is based on Bellman's <b>principle of optimality</b>: whatever the initial state and decision, the remaining decisions must be optimal for the state that results.</p>
+<p>Examples: allocation of limited resources among activities, shortest route and replacement problems.</p>
+</div>
+
+<div class="ans" data-q="7" data-pages="0.5">
+<h4>Kuhn–Tucker conditions</h4>
+<p>For the problem: minimize f(X) subject to g<sub>j</sub>(X) ≤ 0, j = 1, …, m, the <b>Kuhn–Tucker conditions</b> are necessary conditions for X* to be a (local) optimum:</p>
+<div class="eq">∂f/∂x<sub>i</sub> + Σ<sub>j</sub> λ<sub>j</sub> ∂g<sub>j</sub>/∂x<sub>i</sub> = 0 (i = 1, …, n)<br>λ<sub>j</sub> g<sub>j</sub> = 0, g<sub>j</sub> ≤ 0, λ<sub>j</sub> ≥ 0 (j = 1, …, m)</div>
+<p>They are also sufficient when f and every g<sub>j</sub> are convex.</p>
+</div>
+
+<div class="ans" data-q="8" data-pages="0.5">
+<h4>Sufficient conditions on the Hessian matrix</h4>
+<p>Let X<sub>0</sub> be a stationary point, ∇f(X<sub>0</sub>) = 0, and H the Hessian matrix of second derivatives ∂<sup>2</sup>f/∂x<sub>i</sub>∂x<sub>j</sub> at X<sub>0</sub>.</p>
+<table class="tt"><tr><th>Hessian H at X<sub>0</sub></th><th>Conclusion</th></tr>
+<tr><td>Positive definite (all leading principal minors &gt; 0)</td><td>X<sub>0</sub> is a (strict) local minimum</td></tr>
+<tr><td>Negative definite (minors alternate in sign, Δ<sub>1</sub> &lt; 0, Δ<sub>2</sub> &gt; 0, …)</td><td>X<sub>0</sub> is a (strict) local maximum</td></tr>
+<tr><td>Indefinite</td><td>X<sub>0</sub> is a saddle point (neither)</td></tr></table>
+<p>For one variable: f″(X<sub>0</sub>) &gt; 0 gives a minimum and f″(X<sub>0</sub>) &lt; 0 a maximum.</p>
+</div>
+
+<div class="ans" data-q="9" data-pages="0.5">
+<h4>Differences between CPM and PERT</h4>
+<table class="tt"><tr><th>Aspect</th><th>CPM</th><th>PERT</th></tr>
+<tr><td>Time estimate</td><td>One deterministic duration for each activity</td><td>Three estimates (optimistic, most likely, pessimistic); probabilistic</td></tr>
+<tr><td>Nature of project</td><td>Repetitive, well-known projects (e.g. construction)</td><td>Non-repetitive, new projects (e.g. research and development)</td></tr>
+<tr><td>Orientation</td><td>Activity-oriented</td><td>Event-oriented</td></tr>
+<tr><td>Emphasis</td><td>Time–cost trade-off (crashing)</td><td>Time; probability of meeting a due date</td></tr></table>
+</div>
+
+<div class="ans" data-q="10" data-pages="0.5">
+<h4>Critical path</h4>
+<p>The <b>critical path</b> is the <b>longest path</b> from the start event to the end event of a project network. Its length is the minimum time in which the project can be completed. The activities on it are <b>critical</b>: they have zero total float, so a delay in any of them delays the whole project.</p>
+<p>It is found by the forward and backward pass: the activities with earliest start = latest start (and earliest finish = latest finish) form the critical path.</p>
+</div>

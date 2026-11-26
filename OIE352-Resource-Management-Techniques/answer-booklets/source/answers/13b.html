@@ -1,0 +1,18 @@
+<div class="ans" data-q="13 (b)" data-pages="4">
+<h4>Formulation as a multistage problem</h4>
+<ul><li><b>Stages:</b> the three courses A, B, C (one stage per course).</li><li><b>State:</b> d = number of study days still available (0 to 3).</li>
+<li><b>Decision:</b> number of days given to the course at that stage.</li><li><b>Return:</b> the grade given by the table.</li></ul>
+<table class="tt"><tr><th>Study days</th><th>A</th><th>B</th><th>C</th></tr><tr><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>2</td><td>1</td><td>3</td><td>3</td></tr><tr><td>3</td><td>3</td><td>4</td><td>3</td></tr></table>
+<p>Let f<sub>1</sub>(d) = best total grade from course A alone with d days, f<sub>2</sub>(d) = best from A and B together, f<sub>3</sub>(d) = best from A, B and C together. The recursion (the principle of optimality) is</p>
+<div class="eq">f<sub>1</sub>(d) = max<sub>a ≤ d</sub> A(a)<br>f<sub>2</sub>(d) = max<sub>b ≤ d</sub> [ B(b) + f<sub>1</sub>(d − b) ]<br>f<sub>3</sub>(d) = max<sub>c ≤ d</sub> [ C(c) + f<sub>2</sub>(d − c) ]</div>
+<h4>Stage 1 (course A)</h4>
+<table class="tt"><tr><th>d</th><th>f<sub>1</sub>(d)</th><th>best a</th></tr><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td></tr><tr><td>2</td><td>1</td><td>1, 2</td></tr><tr><td>3</td><td>3</td><td>3</td></tr></table>
+<h4>Stage 2 (courses A and B): B(b) + f<sub>1</sub>(d − b)</h4>
+<table class="tt"><tr><th>d</th><th>b = 0</th><th>b = 1</th><th>b = 2</th><th>b = 3</th><th>f<sub>2</sub>(d)</th><th>best b</th></tr><tr><td>0</td><td>1</td><td>–</td><td>–</td><td>–</td><td>1</td><td>0</td></tr><tr><td>1</td><td>2</td><td>1</td><td>–</td><td>–</td><td>2</td><td>0</td></tr><tr><td>2</td><td>2</td><td>2</td><td>3</td><td>–</td><td>3</td><td>2</td></tr><tr><td>3</td><td>4</td><td>2</td><td>4</td><td>4</td><td>4</td><td>0, 2, 3</td></tr></table>
+<h4>Stage 3 (courses A, B and C): C(c) + f<sub>2</sub>(3 − c) for d = 3 days</h4>
+<table class="tt"><tr><th>d</th><th>c = 0</th><th>c = 1</th><th>c = 2</th><th>c = 3</th><th>f<sub>3</sub>(d)</th><th>best c</th></tr><tr><td>3</td><td>4</td><td>4</td><td>5</td><td>4</td><td>5</td><td>2</td></tr></table>
+<h4>Backward recovery of the plan</h4>
+<ol><li>Stage 3: best c = 2 days for course C, leaving 3 − 2 = 1 day.</li><li>Stage 2 with d = 1: best b = 0 days for course B, leaving 1 day.</li><li>Stage 1 with d = 1: a = 1 day for course A.</li></ol>
+<p>Total grade = A(1) + B(0) + C(2) = 1 + 1 + 3 = 5.</p>
+<div class="result">He should study course A for 1 day, course B for 0 days and course C for 2 days; the maximum total grade is 5.</div>
+</div>
