@@ -5,6 +5,7 @@
 | MA3354 Discrete Mathematics | [PDF](MA3354_Exam_Pattern_Analysis.pdf) | this page (below) |
 | CS3551 Distributed Computing | [PDF](CS3551-Distributed-Computing/CS3551_Exam_Pattern_Analysis.pdf) | [CS3551-Distributed-Computing/](CS3551-Distributed-Computing/) |
 | OIE352 Resource Management Techniques | [PDF](OIE352-Resource-Management-Techniques/OIE352_Exam_Pattern_Analysis.pdf) | [OIE352-Resource-Management-Techniques/](OIE352-Resource-Management-Techniques/) |
+| CCS334 Big Data Analytics | not yet (handwritten answers only) | [CCS334-Big-Data-Analytics/](CCS334-Big-Data-Analytics/) |
 
 ---
 
